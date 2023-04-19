@@ -14,3 +14,4 @@ This section contains topics related to some of the more advanced features of th
 * [Iridium/RockBlock Satellite Communication System](../advanced_features/satcom_roadblock.md)
 * [Precision Landing](../advanced_features/precland.md)
 * [RTK GPS](../advanced_features/rtk-gps.md)
+* [Throw Launch](../advanced_features/throw_launch.md)

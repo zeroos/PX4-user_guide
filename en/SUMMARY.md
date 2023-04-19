@@ -124,6 +124,7 @@
   * [Precision Landing](advanced_features/precland.md)
   * [RTK GPS Positioning/Heading](advanced_features/rtk-gps.md)
   * [RockBlock SatCom System](advanced_features/satcom_roadblock.md)
+  * [Throw Launch](advanced_features/throw_launch.md)
   * [Video Streaming](companion_computer/video_streaming.md)
 * [Advanced Configuration](advanced_config/README.md)
   * [Finding/Updating Parameters](advanced_config/parameters.md)
