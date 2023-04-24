@@ -20,10 +20,10 @@ neglect any safety measures.
 :::
 
 1. Wear safety equipment. Eye protection and safety work gloves are recommended.
-1. Have an easily accessible [killswitch](../config/flight_mode.md) and remind
-   the operator to be attentive and use it if needed. We found the latter part
-   to be particularly important as pilots tend to try to save the aircraft even
-   in hard situations. 
+1. Have an easily accessible [killswitch](../config/safety.md#kill-switch), test
+   it, and remind the operator to be attentive and use it if needed. We found the
+   latter part to be particularly important as pilots tend to try to save the
+   aircraft even in hard situations. 
 1. Test as much as possible without propellers. Make sure the tools to dismount
    the propellers are easily accessible not to neglect this step.
 1. Test this feature with at least two people --- one handling the aircraft, the
@@ -43,8 +43,8 @@ and for the operator to understand what to expect during the flight.
 1. Set [COM_THROW_EN](../advanced_config/parameter_reference.md#COM_THROW_EN) to Enabled.
 1. Arm the aircraft. The engines should not spin, but the vehicle should be
    armed and keep playing the arming tune.
-1. Throw the aircraft into the air around 2 m up. It is possible to start lower
-   and gradually increase the altitude until the engines turn on.
+1. Throw the aircraft into the air around 2 m up. If the aircraft is not thrown
+   high enough, the motors will not turn on.
 1. The engines should start just after crossing the apex.
 1. Engage the kill switch (ideally a second person operating the RC should do it).
 1. Catch the drone. Use safety gloves.
@@ -63,7 +63,10 @@ usual takeoff.
    the speed of
    [COM_THROW_SPEED](../advanced_config/parameter_reference.md#COM_THROW_SPEED),
    which by default is set to 5 m/s. To achieve that, throwing it to around 2 m
-   altitude and 2 m away should suffice.
+   altitude and 2 m away should suffice. If this speed is not achieved, the
+   aircraft will fall down with the motors off. Try to avoid excessive rotation
+   during the throw, as this might cause the drone to fail or behave
+   unpredictably.
 1. After the downward velocity is detected (the vehicle starts falling down),
    the motors should turn on and the vehicle will start flying according to the
    mode it is in.
@@ -71,6 +74,13 @@ usual takeoff.
 
 The throw launch was primarily tested in the POSITION mode, but should also work
 in other modes.
+
+:::warning
+Do not try to use this feature on a moving platform (e.g., throwing a drone from
+a moving car). It was not designed with such scenario in mind and the implemented
+safety mechanism assumes that the drone does not move before the throw.
+Otherwise, the drone might turn on the motors prematurely.
+:::
 
 ## Parameters
 
