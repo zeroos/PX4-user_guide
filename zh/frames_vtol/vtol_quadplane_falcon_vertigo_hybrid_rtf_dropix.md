@@ -24,8 +24,8 @@ Almost everything you need is provided in the RTF kit (the links next to compone
 
 * Pre laminated EPP wings
 * Wingtips and full hardware
-* [Dropix](https://store-drotek.com/888-dropix.html) flight controller with
-  * [GPS u-blox M8N](https://store-drotek.com/876-DP0105.html)
+* Dropix flight controller (discontinued) with
+  * GPS u-blox M8N
   * Power Sensor
   * [Airspeed Sensor](https://store-drotek.com/793-digital-differential-airspeed-sensor-kit-.html)
 * Quad power set  [Tiger Motor MT-2216-11 900kv V2](https://www.getfpv.com/tiger-motor-mt-2216-11-900kv-v2.html) (discontinued)
@@ -37,7 +37,7 @@ Almost everything you need is provided in the RTF kit (the links next to compone
 * Carbon fiber tubes and mounts
 * G10 motor mounts
 * 1 x [3700mah 4S 30C Lipo battery](https://www.overlander.co.uk/batteries/lipo-batteries/power-packs/3700mah-4s-14-8v-25c-lipo-battery-overlander-sport.html)
-* [Power distribution board and cable](https://store-drotek.com/453-apm-power-source-xt60.html)
+* Dropix power distribution board and cable
 
 The kit does not come with a radio receiver or (optional) telemetry modules. For this build we used the following components:
 
@@ -110,8 +110,6 @@ This is very important because the white mark indicates the center of gravity.
 
 1. Repeat these steps for the other wing.
 
-
-
 ### Step 3: Connect the electronics
 
 This kit includes Dropix flight controller with most of the required electronics pre-connected (if you use another Pixhawk-compatible flight controller the connections are similar).
@@ -132,14 +130,15 @@ General information about connecting Dropix can be found in [Dropix Flight Contr
    <img src="../../assets/airframes/vtol/falcon_vertigo/falcon_vertigo_27_gps_esc_servo_connections.jpg" width="500px" title="GPS, ESC, Servo connections" />
 
 
-
 #### Motor Wiring
 
-The outputs of Dropix should be wired using the standard QuadPlane configuration (orientation as if "sitting in the plane").
+Motor and servo wiring is nearly entirely up to you, but should match the [Generic Standard VTOL](../airframes/airframe_reference.md#vtol_standard_vtol_generic_standard_vtol) configuration, as shown in the airframe reference. The geometry and output assignment can be configured in the [Actuators Configuration](../config/actuators.md#actuator-outputs)
+
+For example, you might wire it up like this example (orientation as if "sitting in the plane"):
 
 | Port   | 接口定义                   |
 | ------ | ---------------------- |
-| MAIN 1 | Front right motor, CCW |
+| MAIN 1 | Front right motor, CCW |
 | MAIN 2 | Back left motor, CCW   |
 | MAIN 3 | Front left motor, CW   |
 | MAIN 4 | Back right motor, CW   |
@@ -150,8 +149,7 @@ The outputs of Dropix should be wired using the standard QuadPlane configuration
 | AUX  5 | 油门                     |
 
 
-
-<span id="dropix_back"></span>
+<a id="dropix_back"></a>
 
 #### Flight Controller Connections: Motors, Servos, RC receiver, current sensor
 
@@ -170,7 +168,7 @@ The image below shows back of the dropix flight controller, highlighting the out
 1. Connect the receiver (RC IN).
 
 
-<span id="dropix_front"></span>
+<a id="dropix_front"></a>
 
 #### Flight Controller Connections: Telemetry, Airspeed Sensor, GPS, Buzzer and Safety Switch
 
@@ -230,7 +228,8 @@ It is important that nothing obstructs airflow to the Pitot tube. This is critic
    <img src="../../assets/airframes/vtol/falcon_vertigo/falcon_vertigo_51_telemetry_module_mounting.jpg" width="500px" title="Paste telemetry module" />
 
 
-<span id="compass_gps"></span>
+<a id="compass_gps"></a>
+
 #### GPS/Compass module
 
 The GPS/Compass module is already mounted on the wing, in the default orientation. You don't need to have to do anything extra for this!
@@ -238,7 +237,8 @@ The GPS/Compass module is already mounted on the wing, in the default orientatio
 <img src="../../assets/airframes/vtol/falcon_vertigo/falcon_vertigo_gps_compass.jpg" width="500px" title="GPS/Compass" />
 
 
-<span id="flight_controller_orientation"></span>
+<a id="flight_controller_orientation"></a>
+
 #### Mount and orient the flight controller
 
 1. Set your flight controller orientation to 270 degrees.
@@ -257,7 +257,7 @@ The final assembly step is to check the vehicle is stable and that the motors ha
    <img src="../../assets/airframes/vtol/falcon_vertigo/falcon_vertigo_35_quad_motor_directions.png" width="200px" title="Quad motor order/directions" />
 
 :::note
-If necessary the servo direction can be reversed using the [PWM_MAIN_REVn](../advanced_config/parameter_reference.md#PWM_MAIN_REV1) parameters in the `PWM_OUTPUT` group of QGroundControl (cogwheel tab, last item in the left menu). :::
+If necessary the servo direction can be reversed using the `Rev Range (for servos)` checkbox associated with each servo output in the QGroundControl [Actuator Output](../config/actuators.md#actuator-outputs) configuration (for servos only) (this sets the [PWM_AUX_REV](../advanced_config/parameter_reference.md#PWM_AUX_REV) or [PWM_AUX_MAIN](../advanced_config/parameter_reference.md#PWM_MAIN_REV) parameter). :::
 
 1. Check the vehicle is balanced around the expected centre of gravity
 
@@ -276,15 +276,15 @@ Perform the normal [Basic Configuration](../config/README.md).
 
 Notes:
 
-1. For [Airframe](../config/airframe.md) select the vehicle group/type as *Standard VTOL* and the specific vehicle as *Generic quad delta VTOL* as shown below.
+1. For [Airframe](../config/airframe.md) select the vehicle group/type as *Standard VTOL* and the specific vehicle as [Generic Standard VTOL](../airframes/airframe_reference.md#vtol_standard_vtol_generic_standard_vtol) as shown below.
 
-   ![QGroundControl Select Frame](../../assets/airframes/vtol/falcon_vertigo/airframe_px4_vtol_generic_quad_delta_vtol.jpg)
+   ![QCG - Select Generic Standard VTOL](../../assets/qgc/setup/airframe/px4_frame_generic_standard_vtol.png)
 
 1. Set the [Autopilot Orientation](../config/flight_controller_orientation.md) to `ROTATION_YAW_270` as the autopilot is mounted [sideways](#flight_controller_orientation) with respect to the front of the vehicle. The compass is oriented forward, so you can leave that at the default (`ROTATION_NONE`).
-1. The default parameters are sufficient for stable flight. For more detailed tuning information see [Standard VTOL Wiring and Configuration](../config_vtol/vtol_quad_configuration.md).
+1. Configure the outputs and geometry following the instructions in [Actuators Configuration](../config/actuators.md)
+1. The default parameters are often sufficient for stable flight. For more detailed tuning information see [Standard VTOL Wiring and Configuration](../config_vtol/vtol_quad_configuration.md).
 
 After you finish calibration the VTOL is ready to fly.
-
 
 ## 视频
 
@@ -292,7 +292,4 @@ After you finish calibration the VTOL is ready to fly.
 
 ## 技术支持
 
-If you have any questions regarding your VTOL conversion or configuration please visit <https://discuss.px4.io/c/px4/vtol>.
-
-
-
+If you have any questions regarding your VTOL conversion or configuration please visit <https://discuss.px4.io/c/px4/vtol>.

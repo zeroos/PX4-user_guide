@@ -12,7 +12,7 @@ This vehicle was chosen to understand how a Pixhawk could be used for wheeled pl
   * 3DR 433MHz Telemetry Module (EU)
 * [Spektrum Dxe Controller](http://www.spektrumrc.com/Products/Default.aspx?ProdId=SPM1000) or other PX4-compatible remotes
 * [Spektrum Quad Race Serial Receiver w/Diversity](http://www.spektrumrc.com/Products/Default.aspx?ProdID=SPM4648)
-* [PX4Flow](../sensor/px4flow.md)
+* [PX4Flow](../sensor/px4flow.md) (Deprecated)
 
 
 ## Assembly
@@ -45,7 +45,7 @@ It is **HIGHLY RECOMMENDED** to set the ESC in training mode (see Traxxas Stampe
 | MAIN4      | Throttle (ESC input) |
 
 :::note
-As documented in the [Airframe reference here](../airframes/airframe_reference.md#rover_rover_generic_ground_vehicle).
+As documented in the Airframe Reference: [Generic ground vehicle (Ackermann)](../airframes/airframe_reference.md#rover_rover_generic_ground_vehicle_(ackermann)).
 :::
 
 ## Configuration

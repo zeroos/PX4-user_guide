@@ -18,6 +18,8 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [Airspeed](Airspeed.md)
 - [AirspeedValidated](AirspeedValidated.md)
 - [AirspeedWind](AirspeedWind.md)
+- [ArmingCheckReply](ArmingCheckReply.md)
+- [ArmingCheckRequest](ArmingCheckRequest.md)
 - [AutotuneAttitudeControlStatus](AutotuneAttitudeControlStatus.md)
 - [BatteryStatus](BatteryStatus.md)
 - [ButtonEvent](ButtonEvent.md)
@@ -27,8 +29,11 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [CellularStatus](CellularStatus.md)
 - [CollisionConstraints](CollisionConstraints.md) — Local setpoint constraints in NED frame setting something to NaN means that no limit is provided
 - [CollisionReport](CollisionReport.md)
+- [ConfigOverrides](ConfigOverrides.md) — Configurable overrides by (external) modes or mode executors
 - [ControlAllocatorStatus](ControlAllocatorStatus.md)
 - [Cpuload](Cpuload.md)
+- [DatamanRequest](DatamanRequest.md)
+- [DatamanResponse](DatamanResponse.md)
 - [DebugArray](DebugArray.md)
 - [DebugKeyValue](DebugKeyValue.md)
 - [DebugValue](DebugValue.md)
@@ -54,6 +59,7 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [Event](Event.md) — Events interface
 - [FailsafeFlags](FailsafeFlags.md) — Input flags for the failsafe state machine set by the arming & health checks.
 - [FailureDetectorStatus](FailureDetectorStatus.md)
+- [FigureEightStatus](FigureEightStatus.md)
 - [FollowTarget](FollowTarget.md)
 - [FollowTargetEstimator](FollowTargetEstimator.md)
 - [FollowTargetStatus](FollowTargetStatus.md)
@@ -67,6 +73,10 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [GimbalManagerSetAttitude](GimbalManagerSetAttitude.md)
 - [GimbalManagerSetManualControl](GimbalManagerSetManualControl.md)
 - [GimbalManagerStatus](GimbalManagerStatus.md)
+- [GpioConfig](GpioConfig.md) — GPIO configuration
+- [GpioIn](GpioIn.md) — GPIO mask and state
+- [GpioOut](GpioOut.md) — GPIO mask and state
+- [GpioRequest](GpioRequest.md) — Request GPIO mask to be read
 - [GpsDump](GpsDump.md) — This message is used to dump the raw gps communication to the log. Set the parameter GPS_DUMP_COMM to 1 to use this.
 - [GpsInjectData](GpsInjectData.md)
 - [Gripper](Gripper.md) — # Used to command an actuation in the gripper, which is mapped to a specific output in the control allocation module
@@ -92,6 +102,8 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [ManualControlSwitches](ManualControlSwitches.md)
 - [MavlinkLog](MavlinkLog.md)
 - [MavlinkTunnel](MavlinkTunnel.md) — MAV_TUNNEL_PAYLOAD_TYPE enum
+- [MessageFormatRequest](MessageFormatRequest.md)
+- [MessageFormatResponse](MessageFormatResponse.md)
 - [Mission](Mission.md)
 - [MissionResult](MissionResult.md)
 - [ModeCompleted](ModeCompleted.md) — Mode completion result, published by an active mode. Note that this is not always published (e.g. when a user switches modes or on failsafe activation)
@@ -123,6 +135,8 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [RateCtrlStatus](RateCtrlStatus.md)
 - [RcChannels](RcChannels.md)
 - [RcParameterMap](RcParameterMap.md)
+- [RegisterExtComponentReply](RegisterExtComponentReply.md)
+- [RegisterExtComponentRequest](RegisterExtComponentRequest.md) — Request to register an external component
 - [Rpm](Rpm.md)
 - [RtlTimeEstimate](RtlTimeEstimate.md)
 - [SatelliteInfo](SatelliteInfo.md)
@@ -141,6 +155,7 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [SensorOpticalFlow](SensorOpticalFlow.md)
 - [SensorPreflightMag](SensorPreflightMag.md) — Pre-flight sensor check metrics. The topic will not be updated when the vehicle is armed
 - [SensorSelection](SensorSelection.md) — Sensor ID's for the voted sensors output on the sensor_combined topic. Will be updated on startup of the sensor module and when sensor selection changes
+- [SensorUwb](SensorUwb.md) — UWB distance contains the distance information measured by an ultra-wideband positioning system, such as Pozyx or NXP Rddrone.
 - [SensorsStatus](SensorsStatus.md) — Sensor check metrics. This will be zero for a sensor that's primary or unpopulated.
 - [SensorsStatusImu](SensorsStatusImu.md) — Sensor check metrics. This will be zero for a sensor that's primary or unpopulated.
 - [SystemPower](SystemPower.md)
@@ -159,8 +174,7 @@ This topic lists the UORB messages available in PX4 (some of which may be may be
 - [UavcanParameterValue](UavcanParameterValue.md) — UAVCAN-MAVLink parameter bridge response type
 - [UlogStream](UlogStream.md) — Message to stream ULog data from the logger. Corresponds to the LOGGING_DATA mavlink message
 - [UlogStreamAck](UlogStreamAck.md) — Ack a previously sent ulog_stream message that had the NEED_ACK flag set
-- [UwbDistance](UwbDistance.md) — UWB distance contains the distance information measured by an ultra-wideband positioning system, such as Pozyx or NXP Rddrone.
-- [UwbGrid](UwbGrid.md) — UWB report message contains the grid information measured by an ultra-wideband positioning system, such as Pozyx or NXP Rddrone.
+- [UnregisterExtComponent](UnregisterExtComponent.md)
 - [VehicleAcceleration](VehicleAcceleration.md)
 - [VehicleAirData](VehicleAirData.md)
 - [VehicleAngularAccelerationSetpoint](VehicleAngularAccelerationSetpoint.md)

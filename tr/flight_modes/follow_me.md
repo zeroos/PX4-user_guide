@@ -53,7 +53,7 @@ Follow-me mode is supported by *QGroundControl* on Android devices with a GPS mo
 
 The following flight precautions should be observed:
 - Follow me mode should only be used in wide open areas that are unobstructed by trees, power lines, houses, etc.
-  - Set the [follow-me height](#NAV_MIN_FT_HT) to a value that is well above any surrounding obstructions. By *default* this is 8 metres above the home (arming) position.
+  - Set the [follow-me height](#FLW_TGT_HT) to a value that is well above any surrounding obstructions. By *default* this is 8 metres above the home (arming) position.
 - It is *safer* to manually fly to a safe height before engaging follow-me mode than to engage follow-me mode when landed (even though the mode implements auto take off).
 - Give your vehicle sufficient room to stop, especially when it is moving fast.
 - Be ready to switch back to Position mode if something goes wrong, in particular when using follow-me mode for the first time.
@@ -66,9 +66,9 @@ The following flight precautions should be observed:
 *Follow Me* mode is supported using *QGroundControl* as a target on ground station hardware that has a GPS module. The recommended configuration is a USB OTG-capable Android device with two telemetry radios.
 
 To setup *Follow Me* mode:
-- Connect a telemetry radio to your ground station device and another to the vehicle (this allows positioning information to be relayed between the two radios).
+- Connect a telemetry radio to your ground station device and another to the vehicle (this allows positioning information to be relayed between the two radios).
 - Disable sleep-mode on your Android device:
-  - This setting can usually be found under: **Settings > Display**.
+  - This setting can usually be found under: **Settings > Display**.
   - It is important that you set your Android device to not go to sleep as this could cause the GPS signal to cease being emitted at regular intervals.
 - Takeoff to a height of at least 2-3 metres (recommended even though auto-takeoff is supported).
   - Set the vehicle on the ground, press the safety switch and step back at least 10 meters.
@@ -97,7 +97,7 @@ is not currently recommended, due to a bug ([MAVSDK#1756](https://github.com/mav
 
 ### Altitude Control Mode
 
-![Follow Me Altitude Modes](../../assets/flight_modes/followme_altitude_modes.png)
+![Follow Me Altitude Modes](../../assets/flight_modes/followme_altitude_modes.svg)
 
 The altitude control mode determine whether the vehicle altitude is relative to the home position, terrain height, or the altitude reported by the follow target.
 
@@ -125,7 +125,7 @@ The follow-me behavior can be configured using the following parameters:
 | Parameter                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <a id="FLW_TGT_HT"></a>[FLW_TGT_HT](../advanced_config/parameter_reference.md#FLW_TGT_HT)           | Vehicle follow-me height, in metres. Note that this height is fixed *relative to the home/arming position* (not the target vehicle). Default and minimum height is 8 meters (about 26 ft)                                                                                                                                                                              |
-| <a id="FLW_TGT_DST"></a>[FLW_TGT_DST](../advanced_config/parameter_reference.md#FLW_TGT_DST)         | Vehicle/ground station separation in the *horizontal* (x,y) plane, in metres. Minimum allowed separation is 1 meter. Default distance is 8 meters (about 26 ft).                                                                                                                                                                                                       |
+| <a id="FLW_TGT_DST"></a>[FLW_TGT_DST](../advanced_config/parameter_reference.md#FLW_TGT_DST)         | Vehicle/ground station separation in the *horizontal* (x,y) plane, in metres. Minimum allowed separation is 1 meter. Default distance is 8 meters (about 26 ft).                                                                                                                                                                                                       |
 | <a id="FLW_TGT_FA"></a>[FLW_TGT_FA](../advanced_config/parameter_reference.md#FLW_TGT_FA)           | Follow angle relative to the target's heading, in degrees. If a value out of the range [`-180.0`, `+180.0`] is entered, it will get automatically wrapped and applied (e.g. `480.0` will be converted to `120.0`)                                                                                                                                                      |
 | <a id="FLW_TGT_ALT_M"></a>[FLW_TGT_ALT_M](../advanced_config/parameter_reference.md#FLW_TGT_ALT_M)     | Altitude control mode. <br>- `0` = 2D Tracking (Altitude Fixed) <br>- `1` = 2D Tracking + Terrain Following <br>- `2` = 3D Tracking of the target's GPS altitude **WARNING: [DO NOT USE WITH QGC for Android](#altitude-control-mode)**.                                                                                                             |
 | <a id="FLW_TGT_MAX_VEL"></a>[FLW_TGT_MAX_VEL](../advanced_config/parameter_reference.md#FLW_TGT_MAX_VEL) | Maximum relative velocity for orbital motion around the target, in m/s.<br>- 10 m/s has proven to be a sweet spot for aggressiveness vs smoothness.<br>- Setting it to higher value means the orbit trajectory around the target will move faster, but if the drone is physically not capable of achieving that speed, it leads to an aggressive behavior. |

@@ -111,7 +111,7 @@ is required to set the layout as accurately as possible in the web app.
 
 The attitude (heading/pitch) can be computed from the orientation of the baseline between the main and the aux1 GNSS antennas.
 
-![Multi-antenna attitude determination setup]( ../../assets/hardware/gps/septentrio_sbf/multi-antenna_attitude_setup.png)
+![Multi-antenna attitude determination setup](../../assets/hardware/gps/septentrio_sbf/multi-antenna_attitude_setup.png)
 
 To enable multi-antenna attitude determination, follow the following procedure:
 
@@ -164,7 +164,7 @@ Edit the following parameters in the GPS tab:
 - [GPS_1_GNSS](../advanced_config/parameter_reference.md#GPS_1_GNSS): 31
 - [GPS_1_PROTOCOL](../advanced_config/parameter_reference.md#GPS_1_PROTOCOL): Auto detect (or SBF)
 - [SER_TEL1_BAUD](../advanced_config/parameter_reference.md#SER_TEL1_BAUD): 115200 8N1
-- [EKF2_AID_MASK](../advanced_config/parameter_reference.md#EKF2_AID_MASK): Use GPS & GPS yaw fusion (129)
+- [EKF2_GPS_CTRL](../advanced_config/parameter_reference.md#EKF2_GPS_CTRL): Bit 3 Dual antenna heading
 - [GPS_PITCH_OFFSET](../advanced_config/parameter_reference.md#GPS_PITCH_OFFSET): set according to your setup
 - [GPS_YAW_OFFSET](../advanced_config/parameter_reference.md#GPS_YAW_OFFSET): set according to your setup
 

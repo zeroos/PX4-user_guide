@@ -1,12 +1,10 @@
 # PX4ソフトウェアのビルド
 
-PX4は、シミュレートされたターゲットとハードウェアの両方に対して、コンソールまたはIDEでビルドすることができます。
+PX4 firmware can be built from source code on the console or in an IDE, for both simulated and hardware targets.
 
-:::ノート これらの手順に従う前に、まずホストOSとターゲットハードウェアに [Developer Toolchain](../dev_setup/dev_env.md) をインストールする必要があります。
-:::
+You need to build PX4 in order to use [simulators](../simulation/README.md), or if you want to modify PX4 and create a custom build. If you just want to try out PX4 on real hardware then [load the prebuilt binaries](../config/firmware.md) using QGroundControl (there is no need to follow these instructions).
 
-:::tip
-一般的なビルド問題の解決策については、以下の [トラブルシューティング](#troubleshooting) を参照してください。
+:::ノート これらの手順に従う前に、まずホストOSとターゲットハードウェアに [Developer Toolchain](../dev_setup/dev_env.md) をインストールする必要があります。 If you have any problems after following these steps see the [Troubleshooting](#troubleshooting) section below.
 :::
 
 ## PX4ソースコードをダウンロードする
@@ -26,7 +24,7 @@ git clone https://github.com/PX4/PX4-Autopilot.git --recursive
 
 最初に、ホストOS上で機体のシミュレーションをビルドします。 これにより、実際にハードウェアとIDEで設定する前にシステムを検証することができます。
 
-**PX4-Autopilot** ディレクトリに移動し、次のコマンドを使用して [jMAVSim](../simulation/jmavsim.md) を起動します。
+Navigate into the **PX4-Autopilot** directory and start [jMAVSim](../sim_jmavsim/README.md) using the following command:
 ```sh
 make px4_sitl jmavsim
 ```
@@ -51,7 +49,7 @@ QGroundControlでシミュレーションすることは、車両の実際の動
 
 ![QGroundControl GoTo](../../assets/toolchain/qgc_goto.jpg)
 
-:::tip PX4 can be used with a number of other [Simulators](../simulation/README.md), including [Gazebo](../sim_gazebo_gz/README.md), [Gazebo Classic](../sim_gazebo_classic/README.md) and [AirSim](../simulation/airsim.md). これらも *make*で起動されます。
+:::tip PX4 can be used with a number of other [Simulators](../simulation/README.md), including [Gazebo](../sim_gazebo_gz/README.md), [Gazebo Classic](../sim_gazebo_classic/README.md) and [AirSim](../sim_airsim/README.md). これらも *make*で起動されます。
 
 ```
 make px4_sitl gazebo-classic
@@ -65,21 +63,30 @@ make px4_sitl gazebo-classic
 NuttX-またはPixhawkベースのボード用に構築する **PX4-Autopilot** ディレクトリに移動し、 `make` をビルドターゲットに対して使用します．
 
 たとえば、 [Pixhawk 4](../flight_controller/pixhawk4.md) ハードウェア用にビルドするには、次のコマンドを使用します。
+
 ```sh
 cd PX4-Autopilot
 make px4_fmu-v5_default
 ```
 
 実行が成功すると、次のような出力で終了します。
+
 ```sh
 -- Build files have been written to: /home/youruser/src/PX4-Autopilot/build/px4_fmu-v4_default
 [954/954] Creating /home/youruser/src/PX4-Autopilot/build/px4_fmu-v4_default/px4_fmu-v4_default.px4
 ```
 
-ビルドターゲット `px4_fmu-v4` の最初の部分は、特定のフライトコントローラハードウェアのファームウェアを示します。 次のリストは、 [Pixhawk 標準](../flight_controller/autopilot_pixhawk_standard.md) ボードのビルドコマンドを示しています。
+The first part of the build target `px4_fmu-v4` indicates the target flight controller hardware for the firmware. The suffix, in this case `_default`, indicates a firmware _configuration_, such as supporting or omitting particular features.
+
+:::note
+The `_default` suffix is optional. For example, `make px4_fmu-v5` and `px4_fmu-v5_default` result in the same firmware.
+:::
+
+次のリストは、 [Pixhawk 標準](../flight_controller/autopilot_pixhawk_standard.md) ボードのビルドコマンドを示しています。
 
 - [Holybro Pixhawk 6X (FMUv6X)](../flight_controller/pixhawk6x.md): `make px4_fmu-v6x_default`
 - [Holybro Pixhawk 6C (FMUv6C)](../flight_controller/pixhawk6c.md): `make px4_fmu-v6c_default`
+- [Holybro Pixhawk 6C Mini (FMUv6C)](../flight_controller/pixhawk6c_mini.md): `make px4_fmu-v6c_default`
 - [Holybro Pix32 v6 (FMUv6C)](../flight_controller/holybro_pix32_v6.md): `make px4_fmu-v6c_default`
 - [Holybro Pixhawk 5X (FMUv5X)](../flight_controller/pixhawk5x.md): `make px4_fmu-v5x_default`
 - [Pixhawk 4 (FMUv5)](../flight_controller/pixhawk4.md): `make px4_fmu-v5_default`
@@ -94,14 +101,15 @@ make px4_fmu-v5_default
 - [Holybro pix32 (FMUv2)](../flight_controller/holybro_pix32.md): `make px4_fmu-v2_default`
 - [Pixfalcon (FMUv2)](../flight_controller/pixfalcon.md): `make px4_fmu-v2_default`
 - [Dropix (FMUv2)](../flight_controller/dropix.md): `make px4_fmu-v2_default`
-- [Pixhawk 1 (FMUv2)](../flight_controller/pixhawk.md): `make px4_fmu-v2_default` :::warning You **must** use a supported version of GCC to build this board (e.g. the same as used by [CI/docker](../test_and_ci/docker.md)) or remove modules from the build. Building with an unsupported GCC may fail, as PX4 is close to the board's 1MB flash limit.
+- [Pixhawk 1 (FMUv2)](../flight_controller/pixhawk.md): `make px4_fmu-v2_default`
+
+:::warning
+You **must** use a supported version of GCC to build this board (e.g. the same as used by [CI/docker](../test_and_ci/docker.md)) or remove modules from the build. Building with an unsupported GCC may fail, as PX4 is close to the board's 1MB flash limit.
 :::
 - Pixhawk 1 with 2 MB flash: `make px4_fmu-v3_default`
 
 Pixhawk NuttX 以外のフライトコントローラ(および他のすべてのボード)用のビルドコマンドは、個々の [フライトコントローラボード](../flight_controller/README.md) のドキュメントに記載されています。
 
-:::ノート `_default` サフィックスは、ファームウェアの _設定_ です。 This is optional (i.e. you can also build using `make px4_fmu-v4`, `make bitcraze_crazyflie`, etc.).
-:::
 
 ### ファームウェアのアップロード（ボードへのフラッシュ）
 
@@ -249,7 +257,7 @@ make list_config_targets
 :::
 - **MODEL:** The *vehicle* model to use (e.g. `iris` (*default*), `rover`, `tailsitter`, etc), which will be loaded by the simulator. The environment variable `PX4_SIM_MODEL` will be set to the selected model, which is then used in the [startup script](../simulation/README.md#startup-scripts) to select appropriate parameters.
 - **DEBUGGER:** Debugger to use: `none` (*default*), `ide`, `gdb`, `lldb`, `ddd`, `valgrind`, `callgrind`. For more information see [Simulation Debugging](../debug/simulation_debugging.md).
-- **WORLD:** (Gazebo Classic only). Set the world ([PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo/worlds](https://github.com/PX4/PX4-SITL_gazebo/tree/master/worlds)) that is loaded. Default is [empty.world](https://github.com/PX4/PX4-SITL_gazebo/blob/master/worlds/empty.world). For more information see [Gazebo Classic > Loading a Specific World](../sim_gazebo_classic/README.md#set_world).
+- **WORLD:** (Gazebo Classic only). Set the world ([PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic/worlds](https://github.com/PX4/PX4-SITL_gazebo-classic/tree/main/worlds)) that is loaded. Default is [empty.world](https://github.com/PX4/PX4-SITL_gazebo-classic/blob/main/worlds/empty.world). For more information see [Gazebo Classic > Loading a Specific World](../sim_gazebo_classic/README.md#loading-a-specific-world).
 
 :::tip
 You can get a list of *all* available `VIEWER_MODEL_DEBUGGER_WORLD` options using the command below:

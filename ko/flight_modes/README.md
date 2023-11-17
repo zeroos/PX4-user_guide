@@ -1,8 +1,9 @@
 # 비행 모드
 
-*Flight Modes* define how the autopilot responds to user input and controls vehicle movement. 아래 표는 고정익과 헬리콥터의 비행 모드를 요약 한 것입니다 ([테이블 키는 아래](#key)). 이것은 "고급 수준"의 기본 동작이며 기체 매개변수에 따라 달라질 수 있습니다. 링크된 주제 (사이드 바)는 튜닝 매개 변수를 포함하여 개별 모드에 대한 자세한 정보를 제공합니다.
+_Flight Modes_ define how the autopilot responds to user input and controls vehicle movement. The tables below summarizes flight modes for fixed-wing and copter ([table key is below](#key)). 이것은 "고급 수준"의 기본 동작이며 기체 매개변수에 따라 달라질 수 있습니다. 링크된 주제 (사이드 바)는 튜닝 매개 변수를 포함하여 개별 모드에 대한 자세한 정보를 제공합니다.
 
-**Tip** A *beginner friendly* explanation of all flight modes is provided in [Getting Started > Flight Modes](../getting_started/flight_modes.md). :::
+:::tip
+A _beginner friendly_ explanation of all flight modes is provided in [Getting Started > Flight Modes](../getting_started/flight_modes.md). :::
 
 <!-- Styles used for tables below -->
 <style>
@@ -22,17 +23,9 @@ tr td:nth-last-child(1) {
     text-align:left;
 }
 
-/*
-  .col_summary {
-    width:50px;
-  }
-*/
-
-
 th {
   font-size:1.0rem;
 }
-
 
 @media (min-width: 1500px){
 .page-inner {
@@ -51,10 +44,9 @@ th {
   max-width: 800px;
   }
 }
-
 </style>
 
-## 고정익
+## Fixed-wing
 
 <table>
  <thead>
@@ -64,13 +56,13 @@ th {
      <th class="col_yaw">좌우</th>
      <th class="col_throttle">추진력</th>
      <th class="col_sensor">위치 센서</th>
-     <th class="col_summary">요약</th></tr>
+     <th class="col_summary">요약</th>
    </tr>
  </thead>
 <tbody>
 
 <tr id="position_fw">
- <td><a href="../flight_modes/position_fw.html">위치</a>
+ <td><a href="../flight_modes_mc/position.html">Position</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S<sup>+</sup></td>
@@ -93,9 +85,8 @@ th {
   </td>
 </tr>
 
-
 <tr id="altitude_fw">
- <td><a href="../flight_modes/altitude_fw.html">위치</a>
+ <td><a href="../flight_modes_mc/altitude.html">Altitude</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" /></a></p>
  </td>
  <td><p>S (roll)</p><p>S (roll)</p></td>
@@ -110,6 +101,7 @@ th {
        <li>자동 조종 장치는 날개도 수평을 유지하면서 고도를 유지합니다.</li> 
        <li>스로틀 스틱은 대기 속도 센서가 연결된 경우 기체의 대기 속도를 제어합니다 (대기 속도 센서가 없으면 사용자가 스로틀을 제어할 수 없음).</li>
     </ul>
+    </li>
     <li>센터  외부:
       <ul>
        <li>피치 스틱은 고도를 제어합니다.</li>
@@ -122,9 +114,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="stabilized_fw">
- <td><a href="../flight_modes/stabilized_fw.html">안정화</a>
+ <td><a href="../flight_modes_fw/stabilized.html">Stabilized</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_medium.png" title="중급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -143,7 +134,7 @@ th {
 </tr>
 
 <tr id="acro_fw">
- <td><a href="../flight_modes/acro_fw.html">아크로</a>
+ <td><a href="../flight_modes_mc/acro.html">Acro</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="고급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S<sub>rate</sub></td>
@@ -154,9 +145,8 @@ th {
 <p>RPY 스틱 입력은 자동 조종 장치에 의해 안정화되는 각속도 명령으로 변환됩니다. Throttle is passed directly to control allocation.</p></td>
 </tr>
 
-
 <tr id="manual_fw">
- <td><a href="../flight_modes/manual_fw.html">수동</a>
+ <td><a href="../flight_modes_fw/manual.html">Manual</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="고급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>M</td>
@@ -169,24 +159,22 @@ th {
   </td>
 </tr>
 
-
 <tr id="takeoff_fw">
- <td><a href="../flight_modes/takeoff.html">이륙</a></td>
+ <td><a href="../flight_modes_fw/takeoff.html">이륙</a></td>
  <td colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 <em>투석기/수동 발사 모드</em> 또는 <em>활주로 이륙 모드</em> (현재 방향)를 사용하여 이륙 시퀀스를 시작합니다.</td>
 </tr>
 
-
 <tr id="land_fw">
- <td><a href="../flight_modes/land.html">착륙</a></td>
+ <td><a href="../flight_modes_fw/land.html">착륙</a></td>
  <td class="centred" colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
- <td>차량이 <a href="../flying/fixed_wing_landing.html">고정익 착륙</a> 절차를 시작합니다.</td>
+ <td>Vehicle initiates the <a href="../flight_modes/mission.html#fw-mission-landing">fixed-wing landing</a> sequence.</td>
 </tr>
 
 <tr id="hold_fw">
- <td><a href="../flight_modes/hold.html">대기</a></td>
+ <td><a href="../flight_modes_fw/hold.html">대기</a></td>
  <td colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 현재 고도에서 GPS 유지 위치를 중심으로 선회합니다.</td>
@@ -198,7 +186,6 @@ th {
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 안전 위치로 경로 비행합니다. 반환 동작은 매개 변수 설정에 따라 다르며 임무 경로나 임무 착륙 패턴 (정의 된 경우)을 따라서 동작합니다.</td>
 </tr>
-
 
 <tr id="mission_fw">
  <td><a href="../flight_modes/mission.html">임무</a></td>
@@ -226,14 +213,13 @@ th {
      <th>좌우</th>
      <th>추진력</th>
      <th>위치 센서</th>
-     <th class="col_summary">요약</th></tr>
+     <th class="col_summary">요약</th>
    </tr>
  </thead>
 <tbody>
 
-
 <tr id="position_mc">
- <td><a href="../flight_modes/position_mc.html">위치</a>
+ <td><a href="../flight_modes_mc/position.html">Position</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S<sup>+</sup></td>
@@ -255,15 +241,13 @@ th {
        <li>착륙했을 때 스로틀 스틱을 62.5 % (하단에서 전체 범위) 이상으로 올리면 기체가 이륙합니다.</li>
       </ul>
     </li>
-    </ul>
-  </li>
   </ul>
  </p>
 </td>
 </tr>
 
 <tr id="altitude_mc">
- <td><a href="../flight_modes/altitude_mc.html">고도</a>
+ <td><a href="../flight_modes_mc/altitude.html">Altitude</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -277,6 +261,7 @@ th {
        <li>RPY는 기체 수평을 유지합니다.</li> 
        <li>스로틀(~ 50 %)은 현재 고도를 바람에 대해 일정하게 유지합니다.</li>
     </ul>
+    </li>
     <li>센터  외부:
       <ul>
        <li>롤/피치 스틱은 각각의 방향에서 틸트 각도를 제어하여 해당하는 좌우와 전후 방향으로 이동합니다.</li>
@@ -294,9 +279,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="manual_stabilized_mc">
- <td><a href="../flight_modes/manual_stabilized_mc.html">수동/안정화</a>
+ <td><a href="../flight_modes_mc/manual_stabilized.html">Manual/ Stabilized</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_medium.png" title="중급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -320,7 +304,7 @@ th {
 </tr>
 
 <tr id="acro_mc">
- <td><a href="../flight_modes/acro_mc.html">아크로</a>
+ <td><a href="../flight_modes_mc/acro.html">Acro</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="고급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>S<sub>rate</sub></td>
@@ -332,9 +316,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="orbit_mc">
- <td><a href="../flight_modes/orbit.html">고도</a>
+ <td><a href="../flight_modes_mc/orbit.html">Orbit</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" /></a></p>
  </td>
  <td>-</td>
@@ -347,21 +330,21 @@ th {
 </tr>
 
 <tr id="takeoff_mc">
- <td><a href="../flight_modes/takeoff.html">이륙</a></td>
+ <td><a href="../flight_modes_mc/takeoff.html">이륙</a></td>
  <td colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 이륙 고도까지 상승하고 위치를 유지합니다.</td>
 </tr>
 
 <tr id="land_mc">
- <td><a href="../flight_modes/land.html">착륙</a></td>
+ <td><a href="../flight_modes_mc/land.html">착륙</a></td>
  <td colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 모드 적용된 위치에 착륙합니다.</td>
 </tr>
 
 <tr id="hold_mc">
- <td><a href="../flight_modes/hold.html">대기</a></td>
+ <td><a href="../flight_modes_mc/hold.html">대기</a></td>
  <td colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 현재 GPS 위치와 고도에서 호버링합니다.</td>
@@ -374,7 +357,6 @@ th {
  <td>기체는 안전 위치로 경로 비행합니다. 반환 동작은 매개 변수 설정에 따라 다르며 임무 경로나 임무 착륙 패턴 (정의 된 경우)을 따라서 동작합니다.</td>
 </tr>
 
-
 <tr id="mission_mc">
  <td><a href="../flight_modes/mission.html">임무</a></td>
  <td colspan="3">자동</td>
@@ -383,7 +365,7 @@ th {
 </tr>
 
 <tr id="followme_mc">
- <td><a href="../flight_modes/follow_me.html">따라다니기</a></td>
+ <td><a href="../flight_modes_mc/follow_me.html">따라다니기</a></td>
  <td colspan="3">자동</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" /></a></td>
  <td>기체는 QGC를 실행하는 Android 휴대 전화/태블릿을 사용하는 사용자를 자동으로 추적합니다.</td>
@@ -404,21 +386,20 @@ VTOL 기체는 현재 차량 모드 (MC 또는 FW)를 기반으로 실행되는 
 
 VTOL은 두 구성 모두에서 [오프 보드](../flight_modes/offboard.md) 모드를 지원합니다.
 
-
 ## 요점
 
 핵심 사항들은 다음과 같습니다.
 
-| 기호                                                                                                                                                                                                                                                                                                                                                                          | 설명                                                                         |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| M                                                                                                                                                                                                                                                                                                                                                                           | RC 스틱을 통한 수동 제어. RC input is sent directly to control allocation.          |
-| S                                                                                                                                                                                                                                                                                                                                                                           | 자세를 안정시키기위한 자동조종장치의 지원. RC 입력이 필요합니다. RC 스틱의 위치는 차량의 방향에 매핑됩니다.            |
-| S<sub>rate</sub>                                                                                                                                                                                                                                                                                                                                                            | 자세를 안정시키기위한 자동조종장치의 지원. RC 입력이 필요합니다. RC 스틱의 위치는 해당 방향에서 차량의 회전 속도에 매핑됩니다. |
-| S<sup>+</sup>                                                                                                                                                                                                                                                                                                                                                               | 바람에 대한 위치 또는 고도를 유지하기위한 자동조종장치의 지원. RC 입력이 필요합니다.                          |
-| 자동                                                                                                                                                                                                                                                                                                                                                                          | 이 모드는 자동입니다 (RC 제어는 모드 변경을 제외하고 기본적으로 비활성화 됨).                             |
-| <span id="key_position_fixed"></span><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" />                                                                                                                                                                                                                              | 필요한 위치와 높이를 측정하는 센서 (예 : 광학 흐름, GPS + 기압계, 시각 관성 주행 거리계)                   |
-| <span id="altitude_only"></span><img src="../../assets/site/altitude_icon.svg" title="필요한 고도 (예 : 기압계, 거리계)" width="20px" />                                                                                                                                                                                                                               | 필요한 높이와 고도를 측정하는 센서 (예 : 기압계, 거리계)                                         |
-| <span id="key_difficulty"></span>[<img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" />&nbsp;<img src="../../assets/site/difficulty_medium.png" title="중급 난이도 비행" width="20px" />&nbsp;<img src="../../assets/site/difficulty_hard.png" title="고급 난이도 비행" width="20px" />](#key_difficulty) | 비행 모드 난이도 (초급/중급/고급).                                                      |
+| 기호                                                                                                                                                                                                                                                                                                                                                                  | 설명                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| M                                                                                                                                                                                                                                                                                                                                                                   | RC 스틱을 통한 수동 제어. RC input is sent directly to control allocation.          |
+| S                                                                                                                                                                                                                                                                                                                                                                   | 자세를 안정시키기위한 자동조종장치의 지원. RC 입력이 필요합니다. RC 스틱의 위치는 차량의 방향에 매핑됩니다.            |
+| S<sub>rate</sub>                                                                                                                                                                                                                                                                                                                                                    | 자세를 안정시키기위한 자동조종장치의 지원. RC 입력이 필요합니다. RC 스틱의 위치는 해당 방향에서 차량의 회전 속도에 매핑됩니다. |
+| S<sup>+</sup>                                                                                                                                                                                                                                                                                                                                                       | 바람에 대한 위치 또는 고도를 유지하기위한 자동조종장치의 지원. RC 입력이 필요합니다.                          |
+| 자동                                                                                                                                                                                                                                                                                                                                                                  | 이 모드는 자동입니다 (RC 제어는 모드 변경을 제외하고 기본적으로 비활성화 됨).                             |
+| <a id="key_position_fixed"></a><img src="../../assets/site/position_fixed.svg" title="위치 고정 요구(예, GPS)" width="20px" />                                                                                                                                                                                                                                  | 필요한 위치와 높이를 측정하는 센서 (예 : 광학 흐름, GPS + 기압계, 시각 관성 주행 거리계)                   |
+| <a id="altitude_only"></a><img src="../../assets/site/altitude_icon.svg" title="필요한 고도 (예 : 기압계, 거리계)" width="20px" />                                                                                                                                                                                                                              | 필요한 높이와 고도를 측정하는 센서 (예 : 기압계, 거리계)                                         |
+| <a id="key_difficulty"></a>[<img src="../../assets/site/difficulty_easy.png" title="초급 난이도 비행" width="20px" />&nbsp;<img src="../../assets/site/difficulty_medium.png" title="중급 난이도 비행" width="20px" />&nbsp;<img src="../../assets/site/difficulty_hard.png" title="고급 난이도 비행" width="20px" />](#key_difficulty) | 비행 모드 난이도 (초급/중급/고급).                                                      |
 
 
 약어

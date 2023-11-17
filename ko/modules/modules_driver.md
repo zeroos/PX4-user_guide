@@ -10,6 +10,37 @@
 - [Optical Flow](modules_driver_optical_flow.md)
 - [Magnetometer](modules_driver_magnetometer.md)
 
+## MCP23009
+Source: [drivers/gpio/mcp23009](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/gpio/mcp23009)
+
+<a id="MCP23009_usage"></a>
+
+### 사용법
+```
+MCP23009 <command> [arguments...]
+ Commands:
+   start
+     [-I]        Internal I2C bus(es)
+     [-X]        External I2C bus(es)
+     [-b <val>]  board-specific bus (default=all) (external SPI: n-th bus
+                 (default=1))
+     [-f <val>]  bus frequency in kHz
+     [-q]        quiet startup (no message if no device found)
+     [-a <val>]  I2C address
+                 default: 37
+     [-D <val>]  Direction
+                 default: 0
+     [-O <val>]  Output
+                 default: 0
+     [-P <val>]  Pullups
+                 default: 0
+     [-U <val>]  Update Interval [ms]
+                 default: 0
+
+   stop
+
+   status        print status info
+```
 ## adc
 소스: [drivers/adc/board_adc](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/adc/board_adc)
 
@@ -35,6 +66,16 @@ adc <command> [arguments...]
 ```
 ## ads1115
 소스: [drivers/adc/ads1115](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/adc/ads1115)
+
+
+### 설명
+
+Driver to enable an external [ADS1115](https://www.adafruit.com/product/1085) ADC connected via I2C.
+
+The driver is included by default in firmware for boards that do not have an internal analog to digital converter, such as [PilotPi](../flight_controller/raspberry_pi_pilotpi.md) or [CUAV Nora](../flight_controller/cuav_nora.md) (search for `CONFIG_DRIVERS_ADC_ADS1115` in board configuration files).
+
+It is enabled/disabled using the [ADC_ADS1115_EN](../advanced_config/parameter_reference.md#ADC_ADS1115_EN) parameter, and is disabled by default. If enabled, internal ADCs are not used.
+
 
 <a id="ads1115_usage"></a>
 
@@ -400,11 +441,16 @@ gimbal test pitch -45 yaw 30
 
 <a id="gimbal_usage"></a>
 
-### 사용법
+### Usage
 ```
 gimbal <command> [arguments...]
  Commands:
    start
+
+   status
+
+   primary-control Set who is in control of gimbal
+     <sysid> <compid> MAVLink system ID and MAVLink component ID
 
    test          Test the output: set a fixed angle for one or multiple axes
                  (gimbal must be running)
@@ -418,7 +464,7 @@ gimbal <command> [arguments...]
 Source: [drivers/gps](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/gps)
 
 
-### 설명
+### Description
 GPS driver module that handles the communication with the device and publishes the position via uORB. It supports multiple protocols (device vendors) and by default automatically selects the correct one.
 
 The module supports a secondary GPS device, specified via `-e` parameter. The position will be published on the second uORB topic instance, but it's currently not used by the rest of the system (however the data will be logged, so that it can be used for comparisons).
@@ -476,7 +522,7 @@ Source: [modules/simulation/gz_bridge](https://github.com/PX4/PX4-Autopilot/tree
 
 <a id="gz_bridge_usage"></a>
 
-### Usage
+### 설명
 ```
 gz_bridge <command> [arguments...]
  Commands:
@@ -495,7 +541,7 @@ gz_bridge <command> [arguments...]
 Source: [drivers/power_monitor/ina220](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/power_monitor/ina220)
 
 
-### Description
+### 예
 Driver for the INA220 power monitor.
 
 Multiple instances of this driver can run simultaneously, if each instance has a separate bus OR I2C address.
@@ -507,7 +553,7 @@ If the INA220 module is not powered, then by default, initialization of the driv
 
 <a id="ina220_usage"></a>
 
-### 설명
+### 사용법
 ```
 ina220 <command> [arguments...]
  Commands:
@@ -534,7 +580,7 @@ ina220 <command> [arguments...]
 Source: [drivers/power_monitor/ina226](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/power_monitor/ina226)
 
 
-### 예
+### 설명
 Driver for the INA226 power monitor.
 
 Multiple instances of this driver can run simultaneously, if each instance has a separate bus OR I2C address.
@@ -583,7 +629,7 @@ If the INA228 module is not powered, then by default, initialization of the driv
 
 <a id="ina228_usage"></a>
 
-### 사용법
+### 구현
 ```
 ina228 <command> [arguments...]
  Commands:
@@ -608,7 +654,7 @@ ina228 <command> [arguments...]
 Source: [drivers/power_monitor/ina238](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/power_monitor/ina238)
 
 
-### 설명
+### Description
 Driver for the INA238 power monitor.
 
 Multiple instances of this driver can run simultaneously, if each instance has a separate bus OR I2C address.
@@ -620,7 +666,7 @@ If the INA238 module is not powered, then by default, initialization of the driv
 
 <a id="ina238_usage"></a>
 
-### 구현
+### Usage
 ```
 ina238 <command> [arguments...]
  Commands:
@@ -645,7 +691,7 @@ ina238 <command> [arguments...]
 Source: [drivers/telemetry/iridiumsbd](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/telemetry/iridiumsbd)
 
 
-### Description
+### 설명
 IridiumSBD driver.
 
 Creates a virtual serial port that another module can use for communication (e.g. mavlink).
@@ -695,7 +741,7 @@ irlock <command> [arguments...]
 Source: [drivers/linux_pwm_out](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/linux_pwm_out)
 
 
-### 설명
+### Description
 Linux PWM output driver with board-specific backend implementation.
 
 <a id="linux_pwm_out_usage"></a>
@@ -739,7 +785,7 @@ lsm303agr <command> [arguments...]
 Source: [drivers/actuators/modal_io](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/actuators/modal_io)
 
 
-### Description
+### 설명
 This module is responsible for...
 
 ### Implementation
@@ -754,7 +800,7 @@ todo
 
 <a id="modal_io_usage"></a>
 
-### Usage
+### 사용법
 ```
 modal_io <command> [arguments...]
  Commands:
@@ -814,7 +860,7 @@ msp_osd
 
 <a id="msp_osd_usage"></a>
 
-### 사용법
+### Usage
 ```
 msp_osd <command> [arguments...]
  Commands:
@@ -838,7 +884,7 @@ To drive all available leds.
 
 <a id="newpixel_usage"></a>
 
-### 사용법
+### Usage
 ```
 newpixel <command> [arguments...]
  Commands:
@@ -851,7 +897,7 @@ Source: [drivers/optical_flow/paa3905](https://github.com/PX4/PX4-Autopilot/tree
 
 <a id="paa3905_usage"></a>
 
-### Usage
+### 사용법
 ```
 paa3905 <command> [arguments...]
  Commands:
@@ -901,20 +947,18 @@ Source: [drivers/pca9685_pwm_out](https://github.com/PX4/PX4-Autopilot/tree/mast
 
 
 ### 설명
-This module is responsible for generate pwm pulse with PCA9685 chip.
+This is a PCA9685 PWM output driver.
 
-It listens on the actuator_controls topics, does the mixing and writes the PWM outputs.
+It runs on I2C workqueue which is asynchronous with FC control loop, fetching the latest mixing result and write them to PCA9685 at its scheduling ticks.
 
-### Implementation
-This module depends on ModuleBase and OutputModuleInterface. IIC communication is based on CDev::I2C
+It can do full 12bits output as duty-cycle mode, while also able to output precious pulse width that can be accepted by most ESCs and servos.
 
 ### 예
 It is typically started with:
 ```
-pca9685_pwm_out start -a 64 -b 1
+pca9685_pwm_out start -a 0x40 -b 1
 ```
 
-The number X can be acquired by executing `pca9685_pwm_out status` when this driver is running.
 
 <a id="pca9685_pwm_out_usage"></a>
 
@@ -923,12 +967,30 @@ The number X can be acquired by executing `pca9685_pwm_out status` when this dri
 pca9685_pwm_out <command> [arguments...]
  Commands:
    start         Start the task
-     [-a <val>]  device address on this bus
-                 default: 64
+     [-a <val>]  7-bits I2C address of PCA9685
+                 values: <addr>, default: 0x40
      [-b <val>]  bus that pca9685 is connected to
                  default: 1
-     [-r <val>]  schedule rate limit
-                 default: 400
+
+   stop
+
+   status        print status info
+```
+## pm_selector_auterion
+Source: [drivers/power_monitor/pm_selector_auterion](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/power_monitor/pm_selector_auterion)
+
+
+### 설명
+Driver for starting and auto-detecting different power monitors.
+
+
+<a id="pm_selector_auterion_usage"></a>
+
+### 사용법
+```
+pm_selector_auterion <command> [arguments...]
+ Commands:
+   start
 
    stop
 
@@ -939,7 +1001,7 @@ Source: [drivers/optical_flow/pmw3901](https://github.com/PX4/PX4-Autopilot/tree
 
 <a id="pmw3901_usage"></a>
 
-### Usage
+### 사용법
 ```
 pmw3901 <command> [arguments...]
  Commands:
@@ -1142,6 +1204,66 @@ rgbled <command> [arguments...]
 
    status        print status info
 ```
+## rgbled_is31fl3195
+Source: [drivers/lights/rgbled_is31fl3195](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/lights/rgbled_is31fl3195)
+
+<a id="rgbled_is31fl3195_usage"></a>
+
+### 사용법
+```
+rgbled_is31fl3195 <command> [arguments...]
+ Commands:
+   start
+     [-I]        Internal I2C bus(es)
+     [-X]        External I2C bus(es)
+     [-b <val>]  board-specific bus (default=all) (external SPI: n-th bus
+                 (default=1))
+     [-f <val>]  bus frequency in kHz
+     [-q]        quiet startup (no message if no device found)
+     [-a <val>]  I2C address
+                 default: 84
+     [-o <val>]  RGB PWM Assignment
+                 default: 123
+     [-i <val>]  Current Band
+                 default: 0.5
+
+   stop
+
+   status        print status info
+```
+## rgbled_lp5562
+Source: [drivers/lights/rgbled_lp5562](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/lights/rgbled_lp5562)
+
+
+### 설명
+Driver for [LP5562](https://www.ti.com/product/LP5562) LED driver connected via I2C.
+
+This used in some GPS modules by Holybro for [PX4 status notification](../getting_started/led_meanings.md)
+
+The driver is included by default in firmware (KConfig key DRIVERS_LIGHTS_RGBLED_LP5562) and is always enabled.
+
+<a id="rgbled_lp5562_usage"></a>
+
+### 사용법
+```
+rgbled_lp5562 <command> [arguments...]
+ Commands:
+   start
+     [-I]        Internal I2C bus(es)
+     [-X]        External I2C bus(es)
+     [-b <val>]  board-specific bus (default=all) (external SPI: n-th bus
+                 (default=1))
+     [-f <val>]  bus frequency in kHz
+     [-q]        quiet startup (no message if no device found)
+     [-a <val>]  I2C address
+                 default: 48
+     [-u <val>]  Current in mA
+                 default: 17.5
+
+   stop
+
+   status        print status info
+```
 ## safety_button
 Source: [drivers/safety_button](https://github.com/PX4/PX4-Autopilot/tree/master/src/drivers/safety_button)
 
@@ -1296,8 +1418,6 @@ uwb <command> [arguments...]
                  values: <file:dev>
      -b <val>    Baudrate for serial communication
                  values: <int>
-     -p <val>    Position Debug: displays errors in Multilateration
-                 values: <int>
 
    stop
 
@@ -1327,4 +1447,26 @@ voxlpm [arguments...]
    stop
 
    status        print status info
+```
+## zenoh
+Source: [modules/zenoh](https://github.com/PX4/PX4-Autopilot/tree/main/src/modules/zenoh)
+
+
+### 설명
+
+Zenoh demo bridge
+
+<a id="zenoh_usage"></a>
+
+### 사용법
+```
+zenoh <command> [arguments...]
+ Commands:
+   start
+
+   stop
+
+   status
+
+   config
 ```

@@ -2,7 +2,7 @@
 
 *Optical Flow* uses a downward facing camera and a downward facing distance sensor for velocity estimation.
 
-@[youtube](https://youtu.be/aPQKgUof3Pc) *Video: PX4 holding position using the ARK Flow sensor for velocity estimation (in [Position Mode](../flight_modes/position_mc.md)).* 
+@[youtube](https://youtu.be/aPQKgUof3Pc) *Video: PX4 holding position using the ARK Flow sensor for velocity estimation (in [Position Mode](../flight_modes_mc/position.md)).* 
 <!-- ARK Flow with PX4 Optical Flow Position Hold: 20210605 -->
 
 ## 设置
@@ -32,10 +32,6 @@ Sensor data from the optical flow device is fused with other velocity data sourc
 
 
 ## Flow Sensors/Cameras
-
-### PX4Flow
-
-[PX4Flow](../sensor/px4flow.md) is an optical flow camera that works indoors and in low outdoor light conditions without the need for an illumination LED. It is one of the easiest and most established ways to calculate the optical flow.
 
 ### ARK Flow
 
@@ -69,17 +65,15 @@ Optical Flow based navigation is enabled by both the availableestimators: EKF2 a
 
 ### Extended Kalman Filter (EKF2)
 
-For optical flow fusion using EKF2, set the use optical flow flag in the [EKF2_AID_MASK](../advanced_config/parameter_reference.md#EKF2_AID_MASK) parameter, as shown using QGroundControl below:
-
-![QGroundControl - Calibrate Sensors](../../assets/ekf2/qgc_ekf2_enable_flow.png)
+For optical flow fusion using EKF2, set [EKF2_OF_CTRL](../advanced_config/parameter_reference.md#EKF2_OF_CTRL).
 
 If your optical flow sensor is offset from the vehicle centre, you can set this using the following parameters.
 
-| 参数                                                                                                         | 描述                                                                      |
-| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| <span id="EKF2_OF_POS_X"></span>[EKF2_OF_POS_X](../advanced_config/parameter_reference.md#EKF2_OF_POS_X) | X position of optical flow focal point in body frame (default is 0.0m). |
-| <span id="EKF2_OF_POS_Y"></span>[EKF2_OF_POS_Y](../advanced_config/parameter_reference.md#EKF2_OF_POS_Y) | Y position of optical flow focal point in body frame (default is 0.0m). |
-| <span id="EKF2_OF_POS_Z"></span>[EKF2_OF_POS_Z](../advanced_config/parameter_reference.md#EKF2_OF_POS_Z) | Z position of optical flow focal point in body frame (default is 0.0m). |
+| 参数                                                                                                  | 描述                                                                      |
+| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| <a id="EKF2_OF_POS_X"></a>[EKF2_OF_POS_X](../advanced_config/parameter_reference.md#EKF2_OF_POS_X) | X position of optical flow focal point in body frame (default is 0.0m). |
+| <a id="EKF2_OF_POS_Y"></a>[EKF2_OF_POS_Y](../advanced_config/parameter_reference.md#EKF2_OF_POS_Y) | Y position of optical flow focal point in body frame (default is 0.0m). |
+| <a id="EKF2_OF_POS_Z"></a>[EKF2_OF_POS_Z](../advanced_config/parameter_reference.md#EKF2_OF_POS_Z) | Z position of optical flow focal point in body frame (default is 0.0m). |
 
 
 

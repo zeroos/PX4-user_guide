@@ -48,7 +48,7 @@ adis16470 <command> [arguments...]
    status        print status info
 ```
 ## adis16477
-Source: [drivers/imu/adis16477](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/adis16477)
+Source: [drivers/imu/analog_devices/adis16477](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/analog_devices/adis16477)
 
 <a id="adis16477_usage"></a>
 ### Usage
@@ -72,7 +72,7 @@ adis16477 <command> [arguments...]
    status        print status info
 ```
 ## adis16497
-Source: [drivers/imu/adis16497](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/adis16497)
+Source: [drivers/imu/analog_devices/adis16497](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/analog_devices/adis16497)
 
 <a id="adis16497_usage"></a>
 ### Usage
@@ -248,7 +248,7 @@ bmi270 <command> [arguments...]
    status        print status info
 ```
 ## fxas21002c
-Source: [drivers/imu/fxas21002c](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/fxas21002c)
+Source: [drivers/imu/nxp/fxas21002c](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/nxp/fxas21002c)
 
 <a id="fxas21002c_usage"></a>
 ### Usage
@@ -280,7 +280,7 @@ fxas21002c <command> [arguments...]
    status        print status info
 ```
 ## fxos8701cq
-Source: [drivers/imu/fxos8701cq](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/fxos8701cq)
+Source: [drivers/imu/nxp/fxos8701cq](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/nxp/fxos8701cq)
 
 <a id="fxos8701cq_usage"></a>
 ### Usage
@@ -602,8 +602,34 @@ iim42652 <command> [arguments...]
 
    status        print status info
 ```
+## iim42653
+Source: [drivers/imu/invensense/iim42653](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/invensense/iim42653)
+
+<a id="iim42653_usage"></a>
+### Usage
+```
+iim42653 <command> [arguments...]
+ Commands:
+   start
+     [-s]        Internal SPI bus(es)
+     [-S]        External SPI bus(es)
+     [-b <val>]  board-specific bus (default=all) (external SPI: n-th bus
+                 (default=1))
+     [-c <val>]  chip-select pin (for internal SPI) or index (for external SPI)
+     [-m <val>]  SPI mode
+     [-f <val>]  bus frequency in kHz
+     [-q]        quiet startup (no message if no device found)
+     [-R <val>]  Rotation
+                 default: 0
+     [-C <val>]  Input clock frequency (Hz)
+                 default: 0
+
+   stop
+
+   status        print status info
+```
 ## l3gd20
-Source: [drivers/imu/l3gd20](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/l3gd20)
+Source: [drivers/imu/st/l3gd20](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/st/l3gd20)
 
 <a id="l3gd20_usage"></a>
 ### Usage
@@ -631,7 +657,7 @@ l3gd20 <command> [arguments...]
    status        print status info
 ```
 ## lsm303d
-Source: [drivers/imu/lsm303d](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/lsm303d)
+Source: [drivers/imu/st/lsm303d](https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/imu/st/lsm303d)
 
 <a id="lsm303d_usage"></a>
 ### Usage

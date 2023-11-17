@@ -1,6 +1,6 @@
-# Fixed-wing PID Tuning Guide
+# Fixed-wing Rate/Attitude Controller Tuning Guide
 
-This guide explains how to manually tune the fixed wing PID loop.
+This guide explains how to manually tune the fixed-wing PID loop.
 It is intended for advanced users / experts, as incorrect PID tuning may crash your aircraft.
 
 :::note
@@ -13,7 +13,7 @@ Manual tuning is recommended for frames where autotuning does not work, or where
 - Trims must be configured first (before PID turning).
   The [Fixed-Wing Trimming Guide](../config_fw/trimming_guide_fixedwing.md) explains how.
 - Incorrectly set gains during tuning can make attitude control unstable.
-  A pilot tuning gains should therefore be able to fly and land the plane in [manual](../flight_modes/manual_fw.md) (override) control.
+  A pilot tuning gains should therefore be able to fly and land the plane in [manual](../flight_modes_fw/manual.md) (override) control.
 - Excessive gains (and rapid servo motion) can violate the maximum forces of your airframe - increase gains carefully.
 - Roll and pitch tuning follow the same sequence.
   The only difference is that pitch is more sensitive to trim offsets, so [trimming](../config_fw/trimming_guide_fixedwing.md) has to be done carefully and integrator gains need more attention to compensate this.
@@ -26,18 +26,17 @@ Even if you can't note all the quantities immediately on paper, the log file wil
 
 :::note
 All these quantities will be automatically logged.
- You only need to take notes if you want to directly move on to tuning without looking at the log files.
-  
+You only need to take notes if you want to directly move on to tuning without looking at the log files.
+
 - Fly level with a convenient airspeed.
   Note throttle stick position and airspeed (example: 70% → 0.7 throttle, 15 m/s airspeed).
 - Climb with maximum throttle and sufficient airspeed for 10-30 seconds (example: 12 m/s airspeed, climbed 100 m in 30 seconds).
 - Descend with zero throttle and reasonable airspeed for 10-30 seconds (example: 18 m/s airspeed, descended 80 m in 30 seconds).
 - Bank hard right with full roll stick until 60 degrees roll, then bank hard left with full roll stick until 60 degrees in the opposite side.
 - Pitch up hard 45 degrees, pitch down hard 45 degrees.
-:::
+  :::
 
 This guide will use these quantities to set some of the controller gains later on.
-
 
 ## Tune Roll
 
@@ -52,7 +51,6 @@ To tune this gain, first set the other gains to their minimum values (nominally 
 
 - [FW_RR_I](../advanced_config/parameter_reference.md#FW_RR_I)
 - [FW_RR_P](../advanced_config/parameter_reference.md#FW_RR_P)
-
 
 #### Gains to tune
 
@@ -87,7 +85,7 @@ To tune this gain, set the other gains to their minimum values.
 #### Gains to tune
 
 - [FW_PR_FF](../advanced_config/parameter_reference.md#FW_PR_FF) - start with a value of 0.4.
-  Increase this value (doubling each  time) until the plane pitches satisfactory and reaches the setpoint.
+  Increase this value (doubling each time) until the plane pitches satisfactory and reaches the setpoint.
   Back down the gain 20% at the end of the process.
 
 ### Tuning the Rate Gain
@@ -95,12 +93,11 @@ To tune this gain, set the other gains to their minimum values.
 - [FW_PR_P](../advanced_config/parameter_reference.md#FW_PR_P) - start with a value of 0.04.
   Increase this value (doubling each time) until the system starts to wobble / twitch.
   Then reduce value by 50%.
-    
+
 ### Tuning the Trim Offsets with the Integrator Gain
 
 - [FW_PR_I](../advanced_config/parameter_reference.md#FW_PR_I) - start with a value of 0.01.
   Increase this value (doubling each time) until there is no offset between commanded and actual pitch value (this will most likely require looking at a log file).
-
 
 ## Adjusting the Time Constant of the Outer Loop
 
@@ -109,7 +106,6 @@ The default of 0.5 seconds should be fine for normal fixed-wing setups and usual
 
 - [FW_P_TC](../advanced_config/parameter_reference.md#FW_P_TC) - set to a default of 0.5 seconds, increase to make the Pitch response softer, decrease to make the response harder.
 - [FW_R_TC](../advanced_config/parameter_reference.md#FW_R_TC) - set to a default of 0.5 seconds, increase to make the Roll response softer, decrease to make the response harder.
-
 
 ## Other Tuning Parameters
 

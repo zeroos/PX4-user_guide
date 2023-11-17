@@ -19,7 +19,7 @@ This topic provide an overview of the tools and methods that can be used to anal
 
 If a log file ends mid-air, two main causes are possible: a power failure _or_ a hard fault of the operating system.
 
-On autopilots based on the [STM32 series](http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html?querycriteria=productId=SC1169), hard faults are logged to the SD card. These are located on the top level of the SD card and named _fault\_date.log_, e.g. **fault\_2017\_04\_03\_00\_26\_05.log**. You should check for the presence of this file if a flight log ends abruptly.
+On autopilots based on the [STM32 series](http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html), hard faults are logged to the SD card. These are located on the top level of the SD card and named _fault\_date.log_, e.g. **fault\_2017\_04\_03\_00\_26\_05.log**. You should check for the presence of this file if a flight log ends abruptly.
 
 ## 分析工具
 
@@ -30,7 +30,7 @@ On autopilots based on the [STM32 series](http://www.st.com/en/microcontrollers/
 主要特性：
 
 * 基于 web，非常适合终端用户。
-* 用户可以上传、下载、并且与他人分享报告。
+* Users can upload logs through the web interface, and then share report with others (bulk upload is supported using the [upload_log.py](https://github.com/PX4/PX4-Autopilot/blob/main/Tools/upload_log.py) script)
 * 交互式绘图。
 
 ![Flight Review Charts](../../assets/flight_log_analysis/flight_review/flight-review-example.png)

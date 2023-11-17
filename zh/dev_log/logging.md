@@ -1,38 +1,48 @@
 # 日志记录
 
-The [system logger](../modules/modules_system.md#logger) is able to log any ORB topic with all included fields. Everything necessary is generated from the `.msg` file, so that only the topic name needs to be specified. An optional interval parameter specifies the maximum logging rate of a certain topic. 所有主题的实例将会被记录。
+[系统记录器](../modules/modules_system.md#logger) 能够记录任何 ORB 单元及其所有包含的字段。 Everything necessary is generated from the `.msg` file, so that only the topic name needs to be specified. An optional interval parameter specifies the maximum logging rate of a certain topic. 所有主题的实例将会被记录。
 
 输出的日志格式是 [Ulog](../log/ulog_file_format.md)。
 
 ## 用法
+
 By default, logging is automatically started when arming, and stopped when disarming. 每次解锁后的飞行对话将会在 SD 卡上生成一个新的日志文件。 To display the current state, use `logger status` on the console. If you want to start logging immediately, use `logger on`. This overrides the arming state, as if the system was armed. `log off` 取消日志记录。
 
-使用
+如果日志因为写错误停止，或者达到[最大文件大小](#file-size-limitations)PX4将自动重新开始记录一个新文件。
+
+对于所有支持的记录器命令和参数的列表，使用：
+
 ```
 logger help
 ```
-列举所有支持的日志命令和参数。
 
 
 ## 配置
 
-The logging system is configured by default to collect sensible logs for use with [Flight Review](http://logs.px4.io).
+The logging system is configured by default to collect sensible logs for [flight reporting](../getting_started/flight_reporting.md) with [Flight Review](http://logs.px4.io).
 
 The `<interval>` is optional, and if specified, defines the minimum interval in ms between two logged messages of this topic. If not specified, the topic is logged at full rate. The parameters you are most likely to change are listed below.
 
-| SD 卡                                                                     | Description                                                                                                                                                          |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [SDLOG_MODE](../advanced_config/parameter_reference.md#SDLOG_MODE)       | 461                                                                                                                                                                  |
-| [SDLOG_PROFILE](../advanced_config/parameter_reference.md#SDLOG_PROFILE) | Logging profile. Use this to enable less common logging/analysis (e.g. for EKF2 replay, high rate logging for PID & filter tuning, thermal temperature calibration). |
-| [SDLOG_MISSION](../advanced_config/parameter_reference.md#SDLOG_MISSION) | 212                                                                                                                                                                  |
+| SD 卡                                                                     | Description                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [SDLOG_MODE](../advanced_config/parameter_reference.md#SDLOG_MODE)       | 日志模式 定义什么时候日志开始记录和停止。<br />-`1`：日志禁用。<br />-`0`：日志从装备开始到解除装备为止（默认）。<br />-`1`：日志从引导到解除装备为止。<br />-`2`：日志从引导直到关机为止。<br />-`3`：日志基于[AUX1 RC 通道](../advanced_config/parameter_reference.md#RC_MAP_AUX1)。<br />-`4`：日志从第一次装备直到关机为止。 |
+| [SDLOG_PROFILE](../advanced_config/parameter_reference.md#SDLOG_PROFILE) | Logging profile. Use this to enable less common logging/analysis (e.g. for EKF2 replay, high rate logging for PID & filter tuning, thermal temperature calibration).                                                                                                |
+| [SDLOG_MISSION](../advanced_config/parameter_reference.md#SDLOG_MISSION) | Create very small additional "Mission Log".<br>This log can *not* be used with [Flight Review](../log/flight_log_analysis.md#flight-review-online-tool), but is useful when you need a small log for geotagging or regulatory compliance.                     |
 
-:::note
-*Developers* can further configure what information is logged via the [logger](../modules/modules_system.md#logger) module (you would use this, for example, if you want to log your own topics). For more information see: [Logging](../dev_log/logging.md).
-:::
+
+Useful settings for specific cases:
+
+- Raw sensor data for comparison: [SDLOG_MODE=1](../advanced_config/parameter_reference.md#SDLOG_MODE) and [SDLOG_PROFILE=64](../advanced_config/parameter_reference.md#SDLOG_PROFILE).
+- Disabling logging altogether: [SDLOG_MODE=`-1`](../advanced_config/parameter_reference.md#SDLOG_MODE)
+
+### Logger module
+
+_Developers_ can further configure what information is logged via the [logger](../modules/modules_system.md#logger) module. This allows, for example, logging of your own uORB topics.
+
 
 ### 诊断
 
-Separately, the list of logged topics can also be customized with a file on the SD card. Create a file `etc/logging/logger_topics.txt` on the card with a list of topics (For SITL, it's `build/px4_sitl_default/tmp/rootfs/fs/microsd/etc/logging/logger_topics.txt`):
+Separately, the list of logged topics can also be customized with a file on the SD card. Create a file `etc/logging/logger_topics.txt` on the card with a list of topics (For SITL, it's `build/px4_sitl_default/rootfs/fs/microsd/etc/logging/logger_topics.txt`):
 ```
 <topic_name>, <interval>
 ```
@@ -43,22 +53,29 @@ The `<instance>` is optional, and if specified, defines the instance to log. If 
 The topics in this file replace all of the default logged topics.
 
 By far the best card we know so far is the **SanDisk Extreme U3 32GB**. This card is recommended, because it does not exhibit write time spikes (and thus virtually no dropouts). Different card sizes might work equally well, but the performance is usually different.
+
 ```
 sensor_accel 0 0
 sensor_accel 100 1
 sensor_gyro 200
 sensor_mag 200 1
 ```
+
 This configuration will log sensor_accel 0 at full rate, sensor_accel 1 at 10Hz, all sensor_gyro instances at 5Hz and sensor_mag 1 at 5Hz.
 
-
-
 ## 脚本
+
 There are several scripts to analyze and convert logging files in the [pyulog](https://github.com/PX4/pyulog) repository.
 
 
+## File size limitations
+
+The maximum file size depends on the file system and OS. The size limit on NuttX is currently around 2GB.
+
 ## 丢帧
+
 Logging dropouts are undesired and there are a few factors that influence the amount of dropouts:
+
 - Most SD cards we tested exhibit multiple pauses per minute. This shows itself as a several 100 ms delay during a write command. It causes a dropout if the write buffer fills up during this time. This effect depends on the SD card (see below). This shows itself as a several 100 ms delay during a write command. It causes a dropout if the write buffer fills up during this time. This effect depends on the SD card (see below).
 - 格式化 SD 卡有助于避免丢帧。
 - 增大日志缓存也有效。
@@ -101,9 +118,11 @@ There are different clients that support ulog streaming:
 - [MAVGCL](https://github.com/ecmnet/MAVGCL)
 
 ### Diagnostics
+
 - If log streaming does not start, make sure the `logger` is running (see above), and inspect the console output while starting.
 - If it still does not work, make sure that Mavlink 2 is used. Enforce it by setting `MAV_PROTO_VER` to 2. Enforce it by setting `MAV_PROTO_VER` to 2.
 - Log streaming uses a maximum of 70% of the configured mavlink rate (`-r` parameter). If more is needed, messages are dropped. The currently used percentage can be inspected with `mavlink status` (1.8% is used in this example): 如果需要更大的速率，数据会丢失。 The currently used percentage can be inspected with `mavlink status` (1.8% is used in this example):
+
   ```
   instance #0:
           GCS heartbeat:  160955 us ago
@@ -120,4 +139,5 @@ There are different clients that support ulog streaming:
           MAVLink version: 2
           transport protocol: UDP (14556)
   ```
+
   同时确保 `txerr` 一直是 0。 Also make sure `txerr` stays at 0. If this goes up, either the NuttX sending buffer is too small, the physical link is saturated or the hardware is too slow to handle the data.

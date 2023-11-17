@@ -1,12 +1,13 @@
-# VTOL Airframes
+# VTOLs
 
 PX4 uses the term VTOL to refer to vehicles that support both forward flight like a fixed-wing aircraft ("airplane") and vertical take off and landing like a helicopter or multicopter.
 
 ![Vertical Technologies: Deltaquad QuadPlane VTOL](../../assets/airframes/vtol/vertical_technologies_deltaquad/hero.jpg)
 
 VTOL vehicles offer the benefits of both multicopter and fixed-wing flight:
+
 - **Vertical takeoff and landing:** Even inexperienced pilots can take off and land virtually anywhere.
-- **Fast and efficient fixed wing flight:** Faster, further, and longer missions, carrying heavier payloads.
+- **Fast and efficient fixed-wing flight:** Faster, further, and longer missions, carrying heavier payloads.
 - **Hovering:** Steady platform for photography, structure scans etc.
 
 This section describes the VTOL types and configurations supported by PX4, and provides high-level directions for assembly, configuration, and flight.
@@ -19,7 +20,7 @@ PX4 supports the three most important/main VTOL types.
   <div class="grid_item">
     <div class="grid_item_heading"><a href="tailsitter.html" title="Tailsitter"><big>Tailsitter</big></a></div>
     <div class="grid_text">
-    Rotors permanently in fixed wing-position.
+    Rotors permanently in fixed-wing position.
     Takes off and lands on tail. Whole vehicle tilts forward to enter forward flight.
     <img src="../../assets/airframes/vtol/wingtraone/hero.jpg" title="wingtraone" />
     <ul>
@@ -60,15 +61,16 @@ PX4 supports the three most important/main VTOL types.
 
 In general, as mechanical complexity increases the vehicles are easier to fly, but the cost and weight increase. Each type has advantages and disadvantages, and there are successful commercial ventures based on all of them.
 
-Within each of the main "types" above, there are many possible variations—for example, the number of motors, motor geometry, flight surfaces, etc. PX4 provides *airframe configurations* for many of the more common vehicle setups. The supported set is listed in [Airframes Reference > VTOL](../airframes/airframe_reference.md#vtol).
+Within each of the main "types" above, there are many possible variations—for example, the number of motors, motor geometry, flight surfaces, etc. PX4 provides _airframe configurations_ for many of the more common vehicle setups. The supported set is listed in [Airframes Reference > VTOL](../airframes/airframe_reference.md#vtol).
 
 :::note
+
 - If the vehicle setup you need is not supported you may need to [Add an Airframe](../dev_airframes/adding_a_new_frame.md) (requires some [PX4 Development](../development/development.md) expertise).
 - The VTOL codebase is the same codebase as for all other airframes and just adds additional control logic, in particular for transitions. :::
 
 ## Flying and Flight Modes
 
-A VTOL aircraft can fly as either a multicopter or as fixed-wing vehicle. Multicopter mode is mainly used for take off and landing while the fixed wing mode is used for efficient travel and/or mission execution.
+A VTOL aircraft can fly as either a multicopter or as fixed-wing vehicle. Multicopter mode is mainly used for take off and landing while the fixed-wing mode is used for efficient travel and/or mission execution.
 
 The flight modes for VTOL vehicles are the same as for [multicopter](../getting_started/flight_modes.md#mc_flight_modes) when flying in MC mode and [fixed-wing](../getting_started/flight_modes.md#fw_flight_modes) when flying in FW mode.
 
@@ -86,6 +88,7 @@ The flight controller outputs are connected to the vehicle motor ESCs and/or fli
 The mapping between flight controller outputs and specific controls/motors depends on the vehicle frame used, and is specified in the [Airframes Reference > VTOL](../airframes/airframe_reference.md#vtol).
 
 Assembly information is covered in several sections:
+
 - [Basic Assembly](../assembly/README.md) contains topics shows the setup of core components for a number of popular [flight controllers](../flight_controller/README.md). Flight controllers for which we do not have guides are usually set up in much the same way (and almost always include similar setup guides).
 - [Peripherals](../peripherals/README.md) contains information about other peripherals, including [Airspeed Sensors](../sensor/airspeed.md).
 - [Airframes Reference > VTOL](../airframes/airframe_reference.md#vtol) explains which flight controller outputs must be connected to different flight controls for each airframe configuration:
@@ -97,27 +100,27 @@ In addition, build logs showing how others have set up different types of vehicl
 ## Configuration
 
 VTOL configuration is covered in a number of sections:
+
 - [Basic Configuration](../config/README.md) - Configuration that is common to all vehicle types (sensors, safety systems, batteries etc).
 - [VTOL Specific Configuration](../config_vtol/README.md)
 - [Peripheral Hardware](../peripherals/README.md) - Configuration for optional hardware and sensors.
 - [Advanced Configuration](../advanced_config/README.md): Additional configuration covering factory tuning and advanced and optional configuration.
 
-
 ## Videos
 
 ### Educational
+
 VTOL Control & Airspeed Fault Detection (PX4 Developer Summit 2019)
 
 @[youtube](https://youtu.be/37BIBAzD6fE)
+
 <!-- 20190704 -->
 
 ### Tailsitter
 
-
 [UAV Works VALAQ Patrol Tailsitter](https://www.valaqpatrol.com/valaq_patrol_technical_data/)
 
 @[youtube](https://youtu.be/pWt6uoqpPIw)
-
 
 [TBS Caipiroshka](../frames_vtol/vtol_tailsitter_caipiroshka_pixracer.md)
 
@@ -135,11 +138,9 @@ VTOL Control & Airspeed Fault Detection (PX4 Developer Summit 2019)
 
 @[youtube](https://www.youtube.com/watch?v=4K8yaa6A0ks&vq=hd720)
 
-
 [Falcon Vertigo QuadPlane](../frames_vtol/vtol_quadplane_falcon_vertigo_hybrid_rtf_dropix.md)
 
 @[youtube](https://youtu.be/h7OHTigtU0s)
-
 
 [Ranger QuadPlane](../frames_vtol/vtol_quadplane_volantex_ranger_ex_pixhawk.md)
 

@@ -10,13 +10,12 @@ Whenever a camera is triggered, the MAVLink [CAMERA_TRIGGER](https://mavlink.io/
 
 Cameras can also (optionally) signal PX4 at the exact moment that a photo/frame is taken using a camera capture pin. 이를 통하여 지오 태깅을위한 GPS 위치 또는 VIO 동기화를 위한 올바른 IMU 샘플 등에 이미지를 보다 정확하게 매핑할 수 있습니다.
 
-
 <!-- Camera trigger driver: https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/camera_trigger -->
 <!-- Camera capture driver: https://github.com/PX4/PX4-Autopilot/tree/main/src/drivers/camera_capture -->
 
 ## 트리거 설정
 
-Camera triggering is usually configured from the *QGroundControl* [Vehicle Setup > Camera](https://docs.qgroundcontrol.com/master/en/SetupView/Camera.html#px4-camera-setup) section.
+Camera triggering is usually configured from the _QGroundControl_ [Vehicle Setup > Camera](https://docs.qgroundcontrol.com/master/en/SetupView/Camera.html#px4-camera-setup) section.
 
 ![트리거 핀](../../assets/camera/trigger_pins.png)
 
@@ -53,19 +52,20 @@ The different [trigger modes](#trigger-modes), [backend interfaces](#trigger-int
 | 3  | MAVLink 인터페이스를 사용합니다. 이 모드에서는 실제 하드웨어 출력이 사용되지 않습니다. `CAMERA_TRIGGER` MAVLink 메시지는 자동 조종 장치에 의해 전송됩니다 (MAVLink 응용 프로그램이 `온보드` 모드인 경우 기본적으로). 그렇지 않으면, 사용자 정의 스트림을 활성화하여야 합니다.                                                                                                                                                                                                                               |
 | 4  | 범용 PWM 인터페이스를 사용합니다. [적외선 트리거](https://hobbyking.com/en_us/universal-remote-control-infrared-shutter-ir-rc-1g.html) 또는 서보가 카메라를 트리거 할 수 있습니다.                                                                                                                                                                                                                                                               |
 
-
 ### Trigger Output Pin Configuration
 
-Camera trigger pins are set in the *QGroundControl* [Actuators](../config/actuators.md) configuration screen.
+Camera trigger pins are set in the _QGroundControl_ [Actuators](../config/actuators.md) configuration screen.
 
 The trigger pins can be set by assigning the `Camera_Trigger` function on any FMU output. If using trigger setup that requires two pins (e.g. Seagull MAP2) you can assign to any two outputs.
 
-Note however that once an output has been used for camera triggering, the whole PWM group cannot be used for anything else (you can't use another output in the group for an actuator or motor, say).
+Note however that if a _PWM_ output has been used for camera triggering (such as Seagull MAP2), the whole PWM group cannot be used for anything else (you can't use another output in the group for an actuator, motor, or camera capture, because the timer has already been used).
 
 :::note
 At time of writing triggering only works on FMU pins:
+
 - On a Pixhawk flight controller that has both FMU and I/O boards FMU pins map to `AUX` outputs (e.g. Pixhawk 4, CUAV v5+) .
 - A controller that only has an FMU, the pins map to `MAIN` outputs (e.g. Pixhawk 4 mini, CUAV v5 nano).
+
 :::
 
 ### 기타 매개변수
@@ -82,12 +82,16 @@ At time of writing triggering only works on FMU pins:
 
 Cameras can also (optionally) use a camera capture pin to signal the exact moment when a photo/frame is taken. 이를 통하여 지오 태깅을위한 GPS 위치 또는 VIO 동기화를 위한 올바른 IMU 샘플 등에 이미지를 보다 정확하게 매핑할 수 있습니다.
 
-PX4에서 [CAM_CAP_FBACK=1](../advanced_config/parameter_reference.md#CAM_CAP_FBACK)을 설정하면 카메라 캡처/피드백이 활성화됩니다. The pin used for camera capture is then set in the *QGroundControl* [Actuators](../config/actuators.md) configuration screen by assigning the `Camera_Capture` function on any FMU output.
+PX4에서 [CAM_CAP_FBACK=1](../advanced_config/parameter_reference.md#CAM_CAP_FBACK)을 설정하면 카메라 캡처/피드백이 활성화됩니다. The pin used for camera capture is then set in the _QGroundControl_ [Actuators](../config/actuators.md) configuration screen by assigning the `Camera_Capture` function on any FMU output.
+
+Note that if a _PWM output_ is used as a camera capture input, the whole PWM group cannot be used for anything else (you can't use another output in the group for an actuator, motor, or camera trigger, because the timer has already been used).
 
 :::note
 At time of writing camera capture only works on FMU pins:
+
 - On a Pixhawk flight controller that has both FMU and I/O boards FMU pins map to `AUX` outputs (e.g. Pixhawk 4, CUAV v5+).
 - A controller that only has an FMU, the pins map to `MAIN` outputs (e.g. Pixhawk 4 mini, CUAV v5 nano).
+
 :::
 
 PX4는 카메라 캡처 핀에서 적절한 전압 레벨로 상승 에지를 감지합니다 (Pixhawk 비행 콘트롤러의 경우 일반적으로 3.3V). If the camera isn't outputting an appropriate voltage, then additional circuitry will be required to make the signal compatible.
@@ -141,7 +145,6 @@ MAVLink cameras are recommended because directly connected cameras only support 
 
 
 
-
 ## 트리거 기능 테스트
 
 :::warning
@@ -157,7 +160,7 @@ The following sections are out of date and need retesting.
    ```
 
 
-1. *QGroundControl* 에서:
+1. From _QGroundControl_:
    
    기본 계기판에서 **트리거 카메라**를 클릭합니다. 이러한 샷은 위치 정보 태그 지정을 위하여 기록되거나 계산되지 않습니다.
    
@@ -177,9 +180,9 @@ The following sections are out of date and need retesting.
 
 권장되는 카메라 설정은 다음과 같습니다.
 
-* `TRIG_INTERFACE=2` (Seagull MAP2).
-* `TRIG_MODE=4` (임무 제어).
-* 나머지 매개 변수는 기본값으로 설정합니다.
+- `TRIG_INTERFACE=2` (Seagull MAP2).
+- `TRIG_MODE=4` (임무 제어).
+- 나머지 매개 변수는 기본값으로 설정합니다.
 
 You will need to connect the Seagull MAP2 to FMU pins on your autopilot. MAP2 케이블의 다른 쪽 끝은 QX-1의 "MULTI" 포트에 연결합니다.
 
@@ -191,11 +194,11 @@ You will need to connect the Seagull MAP2 to FMU pins on your autopilot. MAP2 �
 
 카메라가 트리거시 자동 초점과 측광 지연을 방지하려면 다음 지침을 따르십시오.
 
-* 수동으로 초점을 무한대로 설정합니다.
-* 카메라를 연속 촬영 모드로 설정합니다.
-* 노출과 조리개를 수동으로 설정합니다.
-* ISO는 가능한 한 낮게 설정합니다.
-* 풍경에 적합한 수동 화이트 밸런스를 설정합니다.
+- 수동으로 초점을 무한대로 설정합니다.
+- 카메라를 연속 촬영 모드로 설정합니다.
+- 노출과 조리개를 수동으로 설정합니다.
+- ISO는 가능한 한 낮게 설정합니다.
+- 풍경에 적합한 수동 화이트 밸런스를 설정합니다.
 
 
 
@@ -235,9 +238,9 @@ You will need to connect the Seagull MAP2 to FMU pins on your autopilot. MAP2 �
 
 다음 다이어그램은 이미지에 정확한 타임스탬프를 찍기 위하여 발생하는 일련의 이벤트를 나타냅니다.
 
-[![Mermaid sequence diagram](https://mermaid.ink/img/pako:eNqNUs9rwjAU_lceOW-3nXIQpBYRrI7ayQ6F8myebViTuCR1iPi_L9Eq6Dzs9kK-H3lfviOrjSDGmaPvnnRNE4mNRVVqgIXxBFY2rQezhffPN-BQSEXgDrqGH-lbULi3xoF0IIwmwN4bhV7W2HWHKBFJr6PRFcchQUUWoQiyDVmwhOLw16u-oISV-wC6sYbzxhjvALWIvjeFe86d6WWolGsc54lRKnCHFyRGe2u6KDDAI_OyazZez6X-4jwMVZJNqsmyKvLZdJrmVbJcFPlyHnmdMTtIg-kB4m01WxRpvh7PQcmuk45qo4V7GsbNIBlnaT6-ij885jGM-21QzbKPlUe1ex7CIztDX7dw_W3QvdqQ_R_17AJSYUPn9Hf9JuzXshcWcAqlCDU6RqmS-ZYUlYyHUdAW-86XrNSnAO13Aj2lQnpjGd9i5-iFxd6sQqkY97anK2io4oA6_QK-Kelj)](https://mermaid-js.github.io/mermaid-live-editor/edit#pako:eNqNUs9rwjAU_lceOW-3nXIQpBYRrI7ayQ6F8myebViTuCR1iPi_L9Eq6Dzs9kK-H3lfviOrjSDGmaPvnnRNE4mNRVVqgIXxBFY2rQezhffPN-BQSEXgDrqGH-lbULi3xoF0IIwmwN4bhV7W2HWHKBFJr6PRFcchQUUWoQiyDVmwhOLw16u-oISV-wC6sYbzxhjvALWIvjeFe86d6WWolGsc54lRKnCHFyRGe2u6KDDAI_OyazZez6X-4jwMVZJNqsmyKvLZdJrmVbJcFPlyHnmdMTtIg-kB4m01WxRpvh7PQcmuk45qo4V7GsbNIBlnaT6-ij885jGM-21QzbKPlUe1ex7CIztDX7dw_W3QvdqQ_R_17AJSYUPn9Hf9JuzXshcWcAqlCDU6RqmS-ZYUlYyHUdAW-86XrNSnAO13Aj2lQnpjGd9i5-iFxd6sQqkY97anK2io4oA6_QK-Kelj)
+[![Mermaid sequence diagram](https://mermaid.ink/img/pako:eNqNUs9rwjAU_lceOW-3nXIQpIoIVkftZIdCeTbPNqxJXJI6ivi_L1Er6Dzs9kK-H3lfviOrjCDGmaPvjnRFE4m1RVVogKXxBFbWjQezg_fPN-CQS0Xgel3Bj_QNKDxY40A6EEYTYOeNQi8rbNs-SkTS62g04DgkqMgi5EG2JguWUPR_vaoLSlh5CKAb63reGuMdoBbR96Zwz7kzvQylcrXjPDFKBe71BYnR3po2ClzhkXnZNR1vFlJ_cR6GMkkn5WRV5tl8NptmZbJa5tlqEXmtMXuYBtMe4m05X-bTbDNegJJtKx1VRgv3NIybQTJOp9l4EH94zGMY99ugmqcfa49q_zyER3aKvmpg-G3QndqS_R_17AJSYU3n9PfdNuzXFJq0YC8sgBVKEbp0jHoF8w0pKhgPo6Addq0vWKFPARp7sg4lYtzbjl5Ytxfoh-oxvsPW0ekXb8TjxQ?type=png)](https://mermaid.live/edit#pako:eNqNUs9rwjAU_lceOW-3nXIQpIoIVkftZIdCeTbPNqxJXJI6ivi_L1Er6Dzs9kK-H3lfviOrjCDGmaPvjnRFE4m1RVVogKXxBFbWjQezg_fPN-CQS0Xgel3Bj_QNKDxY40A6EEYTYOeNQi8rbNs-SkTS62g04DgkqMgi5EG2JguWUPR_vaoLSlh5CKAb63reGuMdoBbR96Zwz7kzvQylcrXjPDFKBe71BYnR3po2ClzhkXnZNR1vFlJ_cR6GMkkn5WRV5tl8NptmZbJa5tlqEXmtMXuYBtMe4m05X-bTbDNegJJtKx1VRgv3NIybQTJOp9l4EH94zGMY99ugmqcfa49q_zyER3aKvmpg-G3QndqS_R_17AJSYU3n9PfdNuzXFJq0YC8sgBVKEbp0jHoF8w0pKhgPo6Addq0vWKFPARp7sg4lYtzbjl5Ytxfoh-oxvsPW0ekXb8TjxQ)
 
-<!-- Original 
+<!-- Original
 ![Sequence diag](../../assets/camera/sequence_diagram.jpg)
 {/% mermaid %/}
 sequenceDiagram
@@ -265,11 +268,11 @@ end
 
 이 예제의 목적을 위하여 30 FPS에서 실행되는 Point Grey Firefly MV 카메라와 함께 작동하도록 트리거를 설정합니다.
 
-* `TRIG_INTERVAL`: 33.33 ms
-* `TRIG_POLARITY`: 0 (active low)
-* `TRIG_ACT_TIME`: 0.5 ms. 매뉴얼에는 최소 1 마이크로 초면 충분하다고 명시되어 있습니다.
+- `TRIG_INTERVAL`: 33.33 ms
+- `TRIG_POLARITY`: 0 (active low)
+- `TRIG_ACT_TIME`: 0.5 ms. 매뉴얼에는 최소 1 마이크로 초면 충분하다고 명시되어 있습니다.
 
-* `TRIG_MODE` : 1, 트리거 시작전에 카메라 드라이버가 이미지를 수신할 준비가 되는 것이 좋습니다. 이것은 일련 번호를 처리에 필수적입니다.
+- `TRIG_MODE` : 1, 트리거 시작전에 카메라 드라이버가 이미지를 수신할 준비가 되는 것이 좋습니다. 이것은 일련 번호를 처리에 필수적입니다.
 
 
 

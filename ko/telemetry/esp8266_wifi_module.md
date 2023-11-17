@@ -20,7 +20,8 @@ ESP8266 모듈은 여러 곳에서 쉽게 구매할 수 있습니다. 몇 군데
 * [AlphaUAVLink](https://www.banggood.com/MAVLink-Wifi-Bridge-2_4G-Wireless-Wifi-Telemetry-Module-with-Antenna-for-Pixhawk-APM-Flight-Controller-p-1428590.html) (Banggood)
 
 
-<span id="px4_config"></span>
+<a id="px4_config"></a>
+
 ## Pixhawk/PX4 설정
 
 :::tip
@@ -87,7 +88,7 @@ Wi-Fi가 활성화된 *QGroundControl* 지상국 컴퓨터/태블릿에서 ESP82
 ![Wi-Fi 브리지 QGC 요약](../../assets/qgc/summary/wifi_bridge.png)
 
 :::tip
-If you have any problem connecting, see [QGC Installation/Configuration Problems](https://docs.qgroundcontrol.com/master/en/Support/troubleshooting_qgc.html#waiting_for_connection).
+If you have any problem connecting, see [QGC Usage Problems](https://docs.qgroundcontrol.com/master/en/troubleshooting/qgc_usage.html).
 :::
 
 

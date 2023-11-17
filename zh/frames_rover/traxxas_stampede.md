@@ -12,7 +12,7 @@
   * 3DR 433MHz Telemetry Module (EU)
 * [Spektrum Dxe Controller](http://www.spektrumrc.com/Products/Default.aspx?ProdId=SPM1000) 或其他 PX4 兼容的遥控器
 * [Spektrum Quad Race 系列接收机 w/Diversity](http://www.spektrumrc.com/Products/Default.aspx?ProdID=SPM4648)
-* [PX4光流](../sensor/px4flow.md)
+* [PX4Flow](../sensor/px4flow.md) (Deprecated)
 
 
 ## 组装
@@ -45,7 +45,7 @@ It is **HIGHLY RECOMMENDED** to set the ESC in training mode (see Traxxas Stampe
 | MAIN4  | 油门 (ESC输入) |
 
 :::note
-正如机架文档所述 [Airframe ](../airframes/airframe_reference.md#rover_rover_generic_ground_vehicle) 。
+As documented in the Airframe Reference: [Generic ground vehicle (Ackermann)](../airframes/airframe_reference.md#rover_rover_generic_ground_vehicle_(ackermann)).
 :::
 
 ## 配置

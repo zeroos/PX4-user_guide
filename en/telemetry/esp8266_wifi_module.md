@@ -23,7 +23,8 @@ Modules that accept 5.0V supply:
 * [AlphaUAVLink](https://www.banggood.com/MAVLink-Wifi-Bridge-2_4G-Wireless-Wifi-Telemetry-Module-with-Antenna-for-Pixhawk-APM-Flight-Controller-p-1428590.html) (Banggood)
 
 
-<span id="px4_config"></span>
+<a id="px4_config"></a>
+
 ## Pixhawk/PX4 Setup & Configuration
 
 :::tip
@@ -96,7 +97,7 @@ You should now see HUD movement on your QGC computer via wireless link and be ab
 ![QGC Summary showing Wifi Bridge](../../assets/qgc/summary/wifi_bridge.png)
 
 :::tip
-If you have any problem connecting, see [QGC Installation/Configuration Problems](https://docs.qgroundcontrol.com/master/en/Support/troubleshooting_qgc.html#waiting_for_connection).
+If you have any problem connecting, see [QGC Usage Problems](https://docs.qgroundcontrol.com/master/en/troubleshooting/qgc_usage.html).
 :::
 
 

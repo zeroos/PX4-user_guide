@@ -52,7 +52,7 @@ The configuration file consists of several main blocks:
 - Documentation (used in the [Airframes Reference](../airframes/airframe_reference.md) and *QGroundControl*). Airframe-specific parameter settings
   - The configuration and geometry using [control allocation](../concept/control_allocation.md) parameters
   - [Tuning gains](#tuning-gains)
-- The controllers and apps it should start, such as multicopter or fixed wing controllers, land detectors etc.
+- The controllers and apps it should start, such as multicopter or fixed-wing controllers, land detectors etc.
 
 These aspects are mostly independent, which means that many configurations share the same physical layout of the airframe, start the same applications and differ most in their tuning gains.
 
@@ -194,9 +194,6 @@ param set-default MPC_Z_VEL_MAX_UP 2
 
 param set-default NAV_ACC_RAD 3
 
-param set-default PWM_MAIN_DIS3 1000
-param set-default PWM_MAIN_MIN3 1120
-
 param set-default SENS_BOARD_ROT 4
 
 param set-default VT_ARSP_BLEND 10
@@ -252,6 +249,7 @@ param set-default PWM_MAIN_FUNC8 104
 param set-default PWM_MAIN_TIM0 50
 param set-default PWM_MAIN_DIS1 1500
 param set-default PWM_MAIN_DIS2 1500
+param set-default PWM_MAIN_DIS3 1000
 param set-default PWM_MAIN_DIS4 1500
 ```
 
@@ -301,7 +299,7 @@ The following topics explain how to tune the parameters that will be specified i
 
 * [Autotuning](../config/autotune.md)
 * [Multicopter PID Tuning Guide](../config_mc/pid_tuning_guide_multicopter.md)
-* [Fixed Wing PID Tuning Guide](../config_fw/pid_tuning_guide_fixedwing.md)
+* [Fixed-wing PID Tuning Guide](../config_fw/pid_tuning_guide_fixedwing.md)
 * [VTOL Configuration](../config_vtol/README.md)
 
 

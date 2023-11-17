@@ -101,7 +101,8 @@ KISS ESC는 성능이 우수하지만, 두 가지의 단점도 있습니다.
 
 ![모터 테스트](../../assets/airframes/multicopter/qav_r_5_kiss_esc_racer/motor-test.jpg)
 
-<span id="mounting"></span>
+<a id="mounting"></a>
+
 ## 전자 부품 조립
 
 :::tip
@@ -241,9 +242,3 @@ Ideally you should also do:
 Airframe selection sets *default* autopilot parameters for the frame. These are good enough to fly with, but it is a good idea to tune the parameters for a specific frame build.
 
 For instructions on how, start from [Autotune](../config/autotune.md).
-
-## 조립 예제
-
-[FPV 아크로 비행 로그(최대 값 : 108km/h 속도, 85A 총 전류 소모량)](https://logs.px4.io/plot_app?log=9c311942-bc7c-4b0c-8be8-eeb64fa8192c)
-
-[전체 배터리에 대해 (대부분) 수동 LOS 비행에 관한 로그입니다.](https://logs.px4.io/plot_app?log=6de8b8cd-74f9-4eae-ad2f-76867e916f4f)

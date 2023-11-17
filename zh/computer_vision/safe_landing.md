@@ -1,12 +1,11 @@
-# 安全着陆
+# Safe Landing (Multicopter + Companion Computer)
 
-The *Safe Landing* feature ensures that vehicles only land on flat terrain.
+The *Safe Landing* computer-vision feature ensures that multicopter vehicles only land on flat terrain.
 
-这个功能可以在多旋翼的[降落模式](../flight_modes/land.md)和[任务模式](../flight_modes/mission.md)中使能，多旋翼可以连接运行计算机视觉软件的机载计算机。 也可以在VTOL(垂起无人机)的MC模式下使用。
+The feature can be enabled in both [Land mode](../flight_modes_mc/land.md) and [Mission mode](../flight_modes/mission.md) on multicopter vehicles that have a companion computer running the appropriate vision software. 也可以在VTOL(垂起无人机)的MC模式下使用。
 
 如果降落，无人机首先降落到距离表面可以测量的高度（机载计算机`loiter_height`参数）。 如果降落的区域不够平坦，无人机会以正方形螺旋状向外移动，并定期检查地形，以寻找相对平坦的降落点。
 
-@{% youtube %}https://youtu.be/9SuJYcT0Mgc{% endyoutube %}
 
 ## 局限/能力
 
@@ -36,7 +35,8 @@ This covers the common setup for obstacle avoidance and collision prevention, an
 配置信息除了其他外，还包括使用不同的相机怎样设置安全着陆，无人机大小和决定是否降落的高度。
 
 
-<span id="interface"></span>
+<a id="interface"></a>
+
 ## 安全着陆接口
 
 PX4 使用 [Path Planning Offboard Interface](../computer_vision/path_planning_interface.md) 集成机载计算机中的路径规划服务（包括 [任务中自主避障](../computer_vision/obstacle_avoidance.md#mission_mode)，[安全着陆](../computer_vision/safe_landing.md)以及更多的服务）。

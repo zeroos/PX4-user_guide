@@ -1,12 +1,11 @@
-# 안전 착륙
+# Safe Landing (Multicopter + Companion Computer)
 
-*안전 착륙* 기능은 비행기가 평평한 곳에 착륙할 수 있게 합니다.
+The *Safe Landing* computer-vision feature ensures that multicopter vehicles only land on flat terrain.
 
-이 기능은 적절한 비전 소프트웨어를 실행하는 보조 컴퓨터가있는 멀티콥터의 [착륙 모드](../flight_modes/land.md) 및 [임무 모드](../flight_modes/mission.md)에서 활성화 할 수 있습니다. 멀티콥터 모드의 VTOL에서도 사용할 수 있습니다.
+The feature can be enabled in both [Land mode](../flight_modes_mc/land.md) and [Mission mode](../flight_modes/mission.md) on multicopter vehicles that have a companion computer running the appropriate vision software. 멀티콥터 모드의 VTOL에서도 사용할 수 있습니다.
 
 착륙 명령을 받으면 기체는 먼저 표면을 측정할 수있는 높이로 하강합니다 (보조 컴퓨터 `loiter_height` 매개 변수). 착륙 영역이 충분히 평평하지 않은 경우에는 비행기는 정사각형 나선형 패턴으로 바깥쪽으로 이동하여 주기적으로 정지하여 너무 거칠지 않은 착륙 지점을 다시 검색합니다.
 
-@[유투브](https://youtu.be/9SuJYcT0Mgc)
 
 ## 제약 사항과 성능
 
@@ -36,7 +35,8 @@ Companion-side setup and configuration is provided in the [PX4/PX4-Avoidance](ht
 구성 정보에는 다양한 카메라, 차량 크기 및 착륙 여부를 결정하는 높이에 대한 안전 착륙을 설정 방법이 포함하고 있습니다.
 
 
-<span id="interface"></span>
+<a id="interface"></a>
+
 ## 안전 착륙 인터페이스
 
 PX4는 [임무중 장애물 회피](../computer_vision/obstacle_avoidance.md#mission_mode), [안전 착륙](../computer_vision/safe_landing.md) 및 향후 서비스를 포함하여 보조 컴퓨터의 경로 계획 서비스를 통합하기 위하여 [경로 계획 오프 보드 인터페이스](../computer_vision/path_planning_interface.md)를 사용합니다.

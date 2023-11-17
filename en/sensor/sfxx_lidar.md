@@ -51,7 +51,7 @@ Connect the Lidar the autopilot I2C port as shown below (in this case, for the [
 :::note
 Some older revisions cannot be used with PX4. 
 Specifically they may be miss-configured to have an I2C address equal to `0x55`, which conflicts with `rgbled` module. 
-On Linux systems you may be able to determine the address using [i2cdetect](http://manpages.ubuntu.com/manpages/bionic/en/man8/i2cdetect.8.html).
+On Linux systems you may be able to determine the address using [i2cdetect](https://linux.die.net/man/8/i2cdetect).
 If the I2C address is equal to `0x66` the sensor can be used with PX4.
 :::
 
@@ -84,4 +84,5 @@ Then set the [SENS_EN_SF0X](../advanced_config/parameter_reference.md#SENS_EN_SF
 
 ## Further Information
 
-- [Modules Reference: Distance Sensor (Driver) : sf1xx](../modules/modules_driver_distance_sensor.md#sf1xx) 
+- [Modules Reference: Distance Sensor (Driver) : lightware_laser_i2c](../modules/modules_driver_distance_sensor.md#lightware-laser-i2c)
+- [Modules Reference: Distance Sensor (Driver) : lightware_laser_serial](../modules/modules_driver_distance_sensor.md#lightware-laser-serial)

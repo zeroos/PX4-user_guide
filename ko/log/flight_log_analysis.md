@@ -19,7 +19,7 @@ This topic provide an overview of the tools and methods that can be used to anal
 
 If a log file ends mid-air, two main causes are possible: a power failure _or_ a hard fault of the operating system.
 
-On autopilots based on the [STM32 series](http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html?querycriteria=productId=SC1169), hard faults are logged to the SD card. [STM32 시리즈](http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html?querycriteria=productId=SC1169) 기반 자동 조종 장치에서는 운영 체제의 하드 오류가 SD 카드에 기록됩니다. You should check for the presence of this file if a flight log ends abruptly.
+On autopilots based on the [STM32 series](http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html), hard faults are logged to the SD card. [STM32 시리즈](http://www.st.com/en/microcontrollers/stm32-32-bit-arm-cortex-mcus.html?querycriteria=productId=SC1169) 기반 자동 조종 장치에서는 운영 체제의 하드 오류가 SD 카드에 기록됩니다. You should check for the presence of this file if a flight log ends abruptly.
 
 ## 분석 도구
 
@@ -30,7 +30,7 @@ On autopilots based on the [STM32 series](http://www.st.com/en/microcontrollers/
 주요 기능:
 
 * 웹 기반으로 되어 있어며, 일반 사용자에게 적합합니다.
-* 사용자는 보고서를 업로드하고 다른 사람과 공유 할 수 있습니다.
+* Users can upload logs through the web interface, and then share report with others (bulk upload is supported using the [upload_log.py](https://github.com/PX4/PX4-Autopilot/blob/main/Tools/upload_log.py) script)
 * 대화형 플롯.
 
 ![비행 검토 차트](../../assets/flight_log_analysis/flight_review/flight-review-example.png)

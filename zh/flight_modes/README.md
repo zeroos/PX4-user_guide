@@ -1,9 +1,9 @@
 # 飞行模式
 
-*Flight Modes* define how the autopilot responds to user input and controls vehicle movement. 下表总结了固定机翼和直升机的飞行模式 （[表键如下](#key)）。 请注意，这是 "上层" 默认行为，可能因机体参数而异。 链接的主题（侧边栏）提供了有关各个模式的详细信息，包括它们的调整参数。
+_Flight Modes_ define how the autopilot responds to user input and controls vehicle movement. The tables below summarizes flight modes for fixed-wing and copter ([table key is below](#key)). 请注意，这是 "上层" 默认行为，可能因机体参数而异。 链接的主题（侧边栏）提供了有关各个模式的详细信息，包括它们的调整参数。
 
 :::tip
-A *beginner friendly* explanation of all flight modes is provided in [Getting Started > Flight Modes](../getting_started/flight_modes.md). :::
+A _beginner friendly_ explanation of all flight modes is provided in [Getting Started > Flight Modes](../getting_started/flight_modes.md). :::
 
 <!-- Styles used for tables below -->
 <style>
@@ -23,17 +23,9 @@ tr td:nth-last-child(1) {
     text-align:left;
 }
 
-/*
-  .col_summary {
-    width:50px;
-  }
-*/
-
-
 th {
   font-size:1.0rem;
 }
-
 
 @media (min-width: 1500px){
 .page-inner {
@@ -52,10 +44,9 @@ th {
   max-width: 800px;
   }
 }
-
 </style>
 
-## 固定翼
+## Fixed-wing
 
 <table>
  <thead>
@@ -65,13 +56,13 @@ th {
      <th class="col_yaw">偏航</th>
      <th class="col_throttle">油门</th>
      <th class="col_sensor">位置传感器</th>
-     <th class="col_summary">概要</th></tr>
+     <th class="col_summary">概要</th>
    </tr>
  </thead>
 <tbody>
 
 <tr id="position_fw">
- <td><a href="../flight_modes/position_fw.html">位置</a>
+ <td><a href="../flight_modes_mc/position.html">Position</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" /></a></p>
  </td>
  <td>S<sup>+</sup></td>
@@ -94,9 +85,8 @@ th {
   </td>
 </tr>
 
-
 <tr id="altitude_fw">
- <td><a href="../flight_modes/altitude_fw.html">高度</a>
+ <td><a href="../flight_modes_mc/altitude.html">Altitude</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" /></a></p>
  </td>
  <td><p>S（滚转）</p><p>S<sup>+</sup>(俯仰)</p></td>
@@ -111,6 +101,7 @@ th {
        <li>自动驾驶仪保持高度稳定和机翼水平。</li> 
        <li>如果连接了空速传感器，油门控制飞机的空速（如果没有空速传感器，用户就无法控制油门）。</li>
     </ul>
+    </li>
     <li>中心以外：
       <ul>
        <li>俯仰摇杆控制高度。</li>
@@ -123,9 +114,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="stabilized_fw">
- <td><a href="../flight_modes/stabilized_fw.html">自稳</a>
+ <td><a href="../flight_modes_fw/stabilized.html">Stabilized</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_medium.png" title="中等飞行难度" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -144,7 +134,7 @@ th {
 </tr>
 
 <tr id="acro_fw">
- <td><a href="../flight_modes/acro_fw.html">特技</a>
+ <td><a href="../flight_modes_mc/acro.html">Acro</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="飞行难度：困难" width="20px" /></a></p>
  </td>
  <td>S<sub>rate</sub></td>
@@ -155,9 +145,8 @@ th {
 <p>RPY摇杆输入被转换为角速度命令，通过自动驾驶仪稳定。 Throttle is passed directly to control allocation.</p></td>
 </tr>
 
-
 <tr id="manual_fw">
- <td><a href="../flight_modes/manual_fw.html">手动</a>
+ <td><a href="../flight_modes_fw/manual.html">Manual</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="飞行难度：困难" width="20px" /></a></p>
  </td>
  <td>M</td>
@@ -170,24 +159,22 @@ th {
   </td>
 </tr>
 
-
 <tr id="takeoff_fw">
- <td><a href="../flight_modes/takeoff.html">起飞</a></td>
+ <td><a href="../flight_modes_fw/takeoff.html">起飞</a></td>
  <td colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>飞机使用 <em>弹射/手持发射模式</em> 或 <em>滑行起飞模式</em> （在当前方向）启动起飞顺序。</td>
 </tr>
 
-
 <tr id="land_fw">
- <td><a href="../flight_modes/land.html">降落</a></td>
+ <td><a href="../flight_modes_fw/land.html">降落</a></td>
  <td class="centred" colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
- <td>飞机启动了 <a href="../flying/fixed_wing_landing.html">固定翼着陆</a> 程序。</td>
+ <td>Vehicle initiates the <a href="../flight_modes/mission.html#fw-mission-landing">fixed-wing landing</a> sequence.</td>
 </tr>
 
 <tr id="hold_fw">
- <td><a href="../flight_modes/hold.html">保持</a></td>
+ <td><a href="../flight_modes_fw/hold.html">保持</a></td>
  <td colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>飞机在当前高度并在 GPS 保持的位置绕圈飞行。</td>
@@ -199,7 +186,6 @@ th {
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>无人机飞向安全位置的明确路径。 返航取决于参数设置，并且可遵循任务路径和/或任务着陆模式（如果已定义）。</td>
 </tr>
-
 
 <tr id="mission_fw">
  <td><a href="../flight_modes/mission.html">任务</a></td>
@@ -227,14 +213,13 @@ th {
      <th>偏航</th>
      <th>油门</th>
      <th>位置传感器</th>
-     <th class="col_summary">概要</th></tr>
+     <th class="col_summary">概要</th>
    </tr>
  </thead>
 <tbody>
 
-
 <tr id="position_mc">
- <td><a href="../flight_modes/position_mc.html">位置</a>
+ <td><a href="../flight_modes_mc/position.html">Position</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" /></a></p>
  </td>
  <td>S<sup>+</sup></td>
@@ -256,15 +241,13 @@ th {
        <li>当机体在地上时，如果油门摇杆抬高至 62.5%（从油门杆最低开始的整个范围），机体将起飞。</li>
       </ul>
     </li>
-    </ul>
-  </li>
   </ul>
  </p>
 </td>
 </tr>
 
 <tr id="altitude_mc">
- <td><a href="../flight_modes/altitude_mc.html">高度</a>
+ <td><a href="../flight_modes_mc/altitude.html">Altitude</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -278,6 +261,7 @@ th {
        <li>RPY摇杆使机体水平。</li> 
        <li>油门（~50%）保持当前高度稳定并抗风。</li>
     </ul>
+    </li>
     <li>中心以外：
       <ul>
        <li>滚转/俯仰摇杆控制各自方向的倾斜角，从而产生相应的左右和前后运动。</li>
@@ -295,9 +279,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="manual_stabilized_mc">
- <td><a href="../flight_modes/manual_stabilized_mc.html">手动/自稳</a>
+ <td><a href="../flight_modes_mc/manual_stabilized.html">Manual/ Stabilized</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_medium.png" title="中等飞行难度" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -321,7 +304,7 @@ th {
 </tr>
 
 <tr id="acro_mc">
- <td><a href="../flight_modes/acro_mc.html">特技</a>
+ <td><a href="../flight_modes_mc/acro.html">Acro</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="飞行难度：困难" width="20px" /></a></p>
  </td>
  <td>S<sub>rate</sub></td>
@@ -333,9 +316,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="orbit_mc">
- <td><a href="../flight_modes/orbit.html">环绕</a>
+ <td><a href="../flight_modes_mc/orbit.html">Orbit</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" /></a></p>
  </td>
  <td>-</td>
@@ -348,21 +330,21 @@ th {
 </tr>
 
 <tr id="takeoff_mc">
- <td><a href="../flight_modes/takeoff.html">起飞</a></td>
+ <td><a href="../flight_modes_mc/takeoff.html">起飞</a></td>
  <td colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>机体上升到起飞高度并保持位置。</td>
 </tr>
 
 <tr id="land_mc">
- <td><a href="../flight_modes/land.html">降落</a></td>
+ <td><a href="../flight_modes_mc/land.html">降落</a></td>
  <td colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>飞机降落在模式指定的位置。</td>
 </tr>
 
 <tr id="hold_mc">
- <td><a href="../flight_modes/hold.html">保持</a></td>
+ <td><a href="../flight_modes_mc/hold.html">保持</a></td>
  <td colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>无人机悬停在当前 GPS 位置和高度。</td>
@@ -375,7 +357,6 @@ th {
  <td>无人机飞向安全位置的明确路径。 返航取决于参数设置，并且可遵循任务路径和/或任务着陆模式（如果已定义）。</td>
 </tr>
 
-
 <tr id="mission_mc">
  <td><a href="../flight_modes/mission.html">任务</a></td>
  <td colspan="3">自动</td>
@@ -384,7 +365,7 @@ th {
 </tr>
 
 <tr id="followme_mc">
- <td><a href="../flight_modes/follow_me.html">跟随</a></td>
+ <td><a href="../flight_modes_mc/follow_me.html">跟随</a></td>
  <td colspan="3">自动</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" /></a></td>
  <td>飞机自动跟随运行 QGC 的安卓手机/平板电脑的用户。</td>
@@ -405,21 +386,20 @@ VTOL飞机支持固定翼和多旋翼模式，根据当前飞行模式（多旋�
 
 VTOL 在两种配置中均支持 [外部](../flight_modes/offboard.md) 模式。
 
-
 ## 关键字
 
 理解该表的关键如下所示：
 
-| 符号                                                                                                                                                                                                                                                                                                                                                                | 参数描述                                                         |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| M                                                                                                                                                                                                                                                                                                                                                                 | 通过遥控摇杆手动控制。 RC input is sent directly to control allocation. |
-| S                                                                                                                                                                                                                                                                                                                                                                 | 自动驾驶仪协助稳定姿态。 遥控输入是必需的。 遥控摇杆的位置映射到机体的对应方向姿态角度。                |
-| S<sub>rate</sub>                                                                                                                                                                                                                                                                                                                                                  | 自动驾驶辅助稳定姿态变化率。 遥控输入是必需的。 摇杆的位置与飞机在该方向上的角速度相对应。               |
-| S<sup>+</sup>                                                                                                                                                                                                                                                                                                                                                     | 在自动驾驶仪的辅助帮助下可以保持位置或高度来抗风。 遥控输入是必需的。                          |
-| 自动                                                                                                                                                                                                                                                                                                                                                                | 该模式是自动控制的（默认情况下禁用遥控控制，除非更改模式）。                               |
-| <span id="key_position_fixed"></span><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" />                                                                                                                                                                                                                         | 测量位置高度所需要的传感器，例如光流、GPS + 气压计、视觉惯性里程计(VIO)。                   |
-| <span id="altitude_only"></span><img src="../../assets/site/altitude_icon.svg" title="需要定高（例如气压计、测距仪）" width="20px" />                                                                                                                                                                                                                           | 测量所需高度的传感器，例如气压计、测距仪。                                        |
-| <span id="key_difficulty"></span>[<img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" />&nbsp;<img src="../../assets/site/difficulty_medium.png" title="中等飞行难度" width="20px" />&nbsp;<img src="../../assets/site/difficulty_hard.png" title="飞行难度：困难" width="20px" />](#key_difficulty) | 飞行模式难度（简单/中等/困难）。                                            |
+| 符号                                                                                                                                                                                                                                                                                                                                                        | 参数描述                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| M                                                                                                                                                                                                                                                                                                                                                         | 通过遥控摇杆手动控制。 RC input is sent directly to control allocation. |
+| S                                                                                                                                                                                                                                                                                                                                                         | 自动驾驶仪协助稳定姿态。 遥控输入是必需的。 遥控摇杆的位置映射到机体的对应方向姿态角度。                |
+| S<sub>rate</sub>                                                                                                                                                                                                                                                                                                                                          | 自动驾驶辅助稳定姿态变化率。 遥控输入是必需的。 摇杆的位置与飞机在该方向上的角速度相对应。               |
+| S<sup>+</sup>                                                                                                                                                                                                                                                                                                                                             | 在自动驾驶仪的辅助帮助下可以保持位置或高度来抗风。 遥控输入是必需的。                          |
+| 自动                                                                                                                                                                                                                                                                                                                                                        | 该模式是自动控制的（默认情况下禁用遥控控制，除非更改模式）。                               |
+| <a id="key_position_fixed"></a><img src="../../assets/site/position_fixed.svg" title="需要定位（例如GPS）" width="20px" />                                                                                                                                                                                                                             | 测量位置高度所需要的传感器，例如光流、GPS + 气压计、视觉惯性里程计(VIO)。                   |
+| <a id="altitude_only"></a><img src="../../assets/site/altitude_icon.svg" title="需要定高（例如气压计、测距仪）" width="20px" />                                                                                                                                                                                                                          | 测量所需高度的传感器，例如气压计、测距仪。                                        |
+| <a id="key_difficulty"></a>[<img src="../../assets/site/difficulty_easy.png" title="易于飞行" width="20px" />&nbsp;<img src="../../assets/site/difficulty_medium.png" title="中等飞行难度" width="20px" />&nbsp;<img src="../../assets/site/difficulty_hard.png" title="飞行难度：困难" width="20px" />](#key_difficulty) | 飞行模式难度（简单/中等/困难）。                                            |
 
 
 缩写：

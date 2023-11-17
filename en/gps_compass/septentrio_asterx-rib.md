@@ -95,7 +95,7 @@ However, if you have a dual antenna setup, you will need to set the layout as ac
 
 The attitude (heading/pitch) can be computed from the orientation of the baseline between the main and the aux1 GNSS antennas.
 
-![Multi-antenna attitude determination setup.]( ../../assets/hardware/gps/septentrio_sbf/multi-antenna_attitude_setup.png)
+![Multi-antenna attitude determination setup](../../assets/hardware/gps/septentrio_sbf/multi-antenna_attitude_setup.png)
 
 To enable multi-antenna attitude determination, follow the following procedure:
 
@@ -120,7 +120,7 @@ The included GNSS receiver control and analysis software [RxTools](https://web.s
 
 The receiver includes an intuitive web user interface for easy operation and monitoring allowing you to control the receiver from any mobile device or computer. The web interface also uses easy-to-read quality indicators ideal to monitor the receiver operation during the job at hand.
 
-![Illustrative image for Septentrio mosaic-H GNSS Receiver Module Web User Interface (WebUI)]( ../../assets/hardware/gps/septentrio_sbf/septentrio_mosaic_a5_h_t_clas_gnss_module_receiverwebui.png)
+![Illustrative image for Septentrio mosaic-H GNSS Receiver Module Web User Interface (WebUI)](../../assets/hardware/gps/septentrio_sbf/septentrio_mosaic_a5_h_t_clas_gnss_module_receiverwebui.png)
 
 ## PX4 setup
 
@@ -132,7 +132,7 @@ The receiver includes an intuitive web user interface for easy operation and mon
 Edit the following parameters in the GPS tab:
 
 - [GPS_1_CONFIG](../advanced_config/parameter_reference.md#GPS_1_CONFIG): TELEM1
-- [GPS_1_GNSS](../advanced_config/parameter_reference.md##GPS_1_GNSS): 31
+- [GPS_1_GNSS](../advanced_config/parameter_reference.md#GPS_1_GNSS): 31
 - [GPS_1_PROTOCOL](../advanced_config/parameter_reference.md#GPS_1_PROTOCOL): Auto detect (
   or SBF)
 - [SER_TEL1_BAUD](../advanced_config/parameter_reference.md#SER_TEL1_BAUD): 115200 8N1
@@ -147,7 +147,7 @@ Edit the following parameters in the GPS tab:
 - [GPS_1_GNSS](../advanced_config/parameter_reference.md#GPS_1_GNSS): 31
 - [GPS_1_PROTOCOL](../advanced_config/parameter_reference.md#GPS_1_PROTOCOL): Auto detect (or SBF)
 - [SER_TEL1_BAUD](../advanced_config/parameter_reference.md#SER_TEL1_BAUD): 115200 8N1
-- [EKF2_AID_MASK](https://docs.px4.io/master/en/advanced_config/parameter_reference.html#EKF2_AID_MASK): Use GPS & GPS yaw fusion (129)
+- [EKF2_GPS_CTRL](../advanced_config/parameter_reference.md#EKF2_GPS_CTRL): Bit 3 Dual antenna heading
 - [GPS_YAW_OFFSET](../advanced_config/parameter_reference.md#GPS_YAW_OFFSET): set according to your setup
 
 Go to **Tools > Reboot Vehicle**

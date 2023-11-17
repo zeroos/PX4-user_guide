@@ -79,7 +79,7 @@ The following parameters must be set to use external position information with E
 
 Parameter | Setting for External Position Estimation
 --- | ---
-[EKF2_AID_MASK](../advanced_config/parameter_reference.md#EKF2_AID_MASK) | Set *vision position fusion*, *vision velocity fusion*, *vision yaw fusion* and *external vision rotation* according to your desired fusion model.
+[EKF2_EV_CTRL](../advanced_config/parameter_reference.md#EKF2_EV_CTRL) | Set *horizontal position fusion*, *vertical vision fusion*, *velocity fusion*, and *yaw fusion*, according to your desired fusion model.
 [EKF2_HGT_REF](../advanced_config/parameter_reference.md#EKF2_HGT_REF) | Set to *Vision* to use the vision as the reference source for altitude estimation.
 [EKF2_EV_DELAY](../advanced_config/parameter_reference.md#EKF2_EV_DELAY) | Set to the difference between the timestamp of the measurement and the "actual" capture time. For more information see [below](#tuning-EKF2_EV_DELAY).
 [EKF2_EV_POS_X](../advanced_config/parameter_reference.md#EKF2_EV_POS_X), [EKF2_EV_POS_Y](../advanced_config/parameter_reference.md#EKF2_EV_POS_Y), [EKF2_EV_POS_Z](../advanced_config/parameter_reference.md#EKF2_EV_POS_Z) | Set the position of the vision sensor (or MoCap markers) with respect to the robot's body frame.
@@ -150,6 +150,15 @@ You may need to set them lower than the allowed minimum and force-save.
 If performance is still poor, try increasing the [LPE_PN_V](../advanced_config/parameter_reference.md#LPE_PN_V) parameter.
 This will cause the estimator to trust measurements more during velocity estimation.
 :::
+
+## Enabling Auto Modes with a Local Position
+
+All PX4 automatic flight modes (such as [Mission](../flight_modes/mission.md), [Return](../flight_modes/return.md), [Land](../flight_modes_mc/land.md), [Hold](../flight_modes_mc/land.md), [Orbit](../flight_modes_mc/orbit.md))) require a _global_ position estimate, which would normally come from a GPS/GNSS system.
+
+Systems that only have a _local_ position estimate (from MOCAP, VIO, or similar) can use the [SET_GPS_GLOBAL_ORIGIN](https://mavlink.io/en/messages/common.html#SET_GPS_GLOBAL_ORIGIN) MAVLink message to set the origin of the EKF to a particular global location.
+EKF will then provide a global position estimate based on origin and local frame position.
+
+This can then be used when planning and executing indoor missions, or to set a local return point, and so on.
 
 ## Working with ROS
 

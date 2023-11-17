@@ -1,12 +1,11 @@
-# Safe Landing
+# Safe Landing (Multicopter + Companion Computer)
 
-The *Safe Landing* feature ensures that vehicles only land on flat terrain.
+The *Safe Landing* computer-vision feature ensures that multicopter vehicles only land on flat terrain.
 
-The feature can be enabled in both [Land mode](../flight_modes/land.md) and [Mission mode](../flight_modes/mission.md) on multicopter vehicles that have a companion computer running the appropriate vision software. It can also be used for VTOL vehicles in MC mode.
+The feature can be enabled in both [Land mode](../flight_modes_mc/land.md) and [Mission mode](../flight_modes/mission.md) on multicopter vehicles that have a companion computer running the appropriate vision software. It can also be used for VTOL vehicles in MC mode.
 
 If commanded to land, the vehicle first descends to a height where it can measure the surface (companion computer `loiter_height` parameter). If the landing area is not sufficiently flat, the vehicle moves outwards in a square-spiral pattern, periodically stopping to re-check the terrain for a landing spot that isn't too rough.
 
-@[youtube](https://youtu.be/9SuJYcT0Mgc)
 
 ## Limitations/Capabilities
 
@@ -36,7 +35,8 @@ This covers the common setup for obstacle avoidance and collision prevention, an
 The configuration information includes, among other things, how to set up safe landing for different cameras, sizes of vehicles, and the height at which the decision to land or not is taken.
 
 
-<span id="interface"></span>
+<a id="interface"></a>
+
 ## Safe Landing Interface
 
 PX4 uses the [Path Planning Interface](../computer_vision/path_planning_interface.md) for integrating path planning services from a companion computer (including [Obstacle Avoidance in missions](../computer_vision/obstacle_avoidance.md#mission_mode), [Safe Landing](../computer_vision/safe_landing.md), and future services).

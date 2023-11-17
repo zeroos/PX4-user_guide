@@ -2,7 +2,7 @@
 
 *광류*는 속도 추정을 위하여 하향 카메라와 하향 거리 센서를 사용합니다.
 
-@[유튜브](https://youtu.be/aPQKgUof3Pc) *동영상: 속도 추정을 위한 ARK Flow 센서를 사용한 PX4 고정 위치([위치 모드](../flight_modes/position_mc.md))* 
+@[youtube](https://youtu.be/aPQKgUof3Pc) *Video: PX4 holding position using the ARK Flow sensor for velocity estimation (in [Position Mode](../flight_modes_mc/position.md)).* 
 <!-- ARK Flow with PX4 Optical Flow Position Hold: 20210605 -->
 
 ## 설정
@@ -32,10 +32,6 @@ If connected to PX4 via MAVLink the Optical Flow device must publish to the [OPT
 
 
 ## 유량 센서/카메라
-
-### PX4Flow
-
-[PX4Flow](../sensor/px4flow.md)는 조명 LED 없이 실내외의 조명이 낮은 환경에서 작동하는 광류 카메라입니다. 광류를 계산하는 간편하고 가장 확립된 방법 중 하나입니다.
 
 ### ARK Flow
 
@@ -69,17 +65,15 @@ If connected to PX4 via MAVLink the Optical Flow device must publish to the [OPT
 
 ### 확장 칼만 필터 (EKF2)
 
-EKF2를 사용하는 광류 융합의 경우 아래 QGroundControl을 사용하여 표시된대로 [EKF2_AID_MASK](../advanced_config/parameter_reference.md#EKF2_AID_MASK) 매개변수에서 광류 플래그 사용을 설정합니다.
-
-![QGroundControl - 센서 보정](../../assets/ekf2/qgc_ekf2_enable_flow.png)
+For optical flow fusion using EKF2, set [EKF2_OF_CTRL](../advanced_config/parameter_reference.md#EKF2_OF_CTRL).
 
 광류 센서가 차량 중앙에서 오프셋된 경우 다음 매개변수를 사용하여 설정합니다.
 
-| 매개변수                                                                                                       | 설명                                |
-| ---------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| <span id="EKF2_OF_POS_X"></span>[EKF2_OF_POS_X](../advanced_config/parameter_reference.md#EKF2_OF_POS_X) | 바디 프레임에서 광류 초점의 X 위치 (기본값은 0.0m). |
-| <span id="EKF2_OF_POS_Y"></span>[EKF2_OF_POS_Y](../advanced_config/parameter_reference.md#EKF2_OF_POS_Y) | 바디 프레임에서 광류 초점의 Y 위치 (기본값은 0.0m). |
-| <span id="EKF2_OF_POS_Z"></span>[EKF2_OF_POS_Z](../advanced_config/parameter_reference.md#EKF2_OF_POS_Z) | 바디 프레임에서 광류 초점의 Z 위치 (기본값은 0.0m). |
+| 매개변수                                                                                                | 설명                                |
+| --------------------------------------------------------------------------------------------------- | --------------------------------- |
+| <a id="EKF2_OF_POS_X"></a>[EKF2_OF_POS_X](../advanced_config/parameter_reference.md#EKF2_OF_POS_X) | 바디 프레임에서 광류 초점의 X 위치 (기본값은 0.0m). |
+| <a id="EKF2_OF_POS_Y"></a>[EKF2_OF_POS_Y](../advanced_config/parameter_reference.md#EKF2_OF_POS_Y) | 바디 프레임에서 광류 초점의 Y 위치 (기본값은 0.0m). |
+| <a id="EKF2_OF_POS_Z"></a>[EKF2_OF_POS_Z](../advanced_config/parameter_reference.md#EKF2_OF_POS_Z) | 바디 프레임에서 광류 초점의 Z 위치 (기본값은 0.0m). |
 
 
 

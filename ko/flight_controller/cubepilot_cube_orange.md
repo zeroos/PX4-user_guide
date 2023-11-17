@@ -9,12 +9,13 @@ The [Cube Orange](https://www.cubepilot.com/#/cube/features) flight controller i
 
 배선을 줄이고 신뢰성을 높이며 조립을 쉽게하기 위해 도메인별 캐리어 보드와 함께 사용하도록 설계되었습니다. 예를 들어, 상용 검사 기체 캐리어보드에는 보조 컴퓨터용 연결이 포함될 수 있는 반면, 레이서 용 캐리어보드는 기체 프레임을 형성하는 ESC를 포함할 수 있습니다.
 
+The ADS-B carrier board includes a customized 1090MHz ADSB-In receiver from uAvionix. This provides attitude and location of commercial manned aircraft within the range of Cube. This is automatically configured and enabled in the default PX4 firmware.
+
 Cube에는 2 개의 IMU에 진동 차단이 포함되어 있으며, 세 번째 고정 IMU는 참조 백업용으로 사용됩니다.
 
 :::note
 제조업체 [Cube 문서](https://docs.cubepilot.org/user-guides/autopilot/the-cube-module-overview)에는 [큐브 색상 간의 차이점](https://docs.cubepilot.org/user-guides/autopilot/the-cube-module-overview#differences-between-cube-colours) 뿐만 아니라 자세한 정보를 제공합니다.
 :::
-
 
 ## 주요 특징
 
@@ -23,13 +24,12 @@ Cube에는 2 개의 IMU에 진동 차단이 포함되어 있으며, 세 번째 �
 - 14 개 PWM/서보 출력(페일세이프 및 수동 오버라이드 포함 8 개, 보조, 고전력 호환 6 개)
 - 추가 주변 장치(UART, I2C, CAN) 다양한 연결 옵션
 - 전용 프로세서와 독립형 전원 공급 장치(고정익 적용)로 비행중 복구 기능과 수동 오버라이드 통합 백업 시스템
-- 백업 시스템은 믹싱을 통합하여 일관된 자동조종장치와 수동 오버라이드 믹싱 모드를 제공합니다(고정익 적용).
+- Backup system integrates mixing, providing consistent autopilot and manual override mixing modes (fixed-wing use)
 - 중복 전원공급장치 및 자동 장애 조치
 - 외부 안전 스위치
 - 다색 LED 주시각 표시기
 - 고전력 멀티톤 피에조 오디오 표시기
 - 장기간 고속 로깅용 microSD 카드
-
 
 <a id="stores"></a>
 
@@ -49,7 +49,7 @@ Cube에는 2 개의 IMU에 진동 차단이 포함되어 있으며, 세 번째 �
   - 1 MB RAM
   - 2MB 플래시 \(완전 액세스 가능\)
 - **장애복구 co-processor:** <!-- inconsistent info on failsafe processor: 32 bit STM32F103 failsafe co-processor http://www.proficnc.com/all-products/191-pixhawk2-suite.html -->
-  - STM32F103 (32비트 *ARM Cortex-M3*)
+  - STM32F103 (32bit _ARM Cortex-M3_)
   - 24 MHz
   - 8 KB SRAM
 - **센서:** (모두 SPI를 통해 연결됨)
@@ -85,17 +85,117 @@ Cube에는 2 개의 IMU에 진동 차단이 포함되어 있으며, 세 번째 �
   - 3.3v ADC 입력
   - 내부 microUSB 포트 및 외부 microUSB 포트 확장
 
-## 핀배열과 회로도
-
-보드 설계도와 문서는 [The Cube Project](https://github.com/proficnc/The-Cube)를 참고하십시오.
-
-
 ## 포트
 
 ### 위쪽(GPS, TELEM 등)
 
 ![큐브 포트-상단 (GPS, TELEM 등) 및 메인/AUX](../../assets/flight_controller/cube/cube_ports_top_main.jpg)
 
+## Pinouts
+
+#### TELEM1, TELEM2 ports
+
+| Pin     | Signal    | Volt  |
+| ------- | --------- | ----- |
+| 1 (red) | VCC       | +5V   |
+| 2 (blk) | TX (OUT)  | +3.3V |
+| 3 (blk) | RX (IN)   | +3.3V |
+| 4 (blk) | CTS (IN)  | +3.3V |
+| 5 (blk) | RTS (OUT) | +3.3V |
+| 6 (blk) | GND       | GND   |
+
+#### GPS1 port
+
+| Pin     | Signal        | Volt  |
+| ------- | ------------- | ----- |
+| 1 (red) | VCC           | +5V   |
+| 2 (blk) | TX (OUT)      | +3.3V |
+| 3 (blk) | RX (IN)       | +3.3V |
+| 4 (blk) | SCL I2C2      | +3.3V |
+| 5 (blk) | SDA I2C2      | +3.3V |
+| 6 (blk) | Safety Button | GND   |
+| 7 (blk) | Button LED    | GND   |
+| 8 (blk) | GND           | GND   |
+
+<!-- check is i2c2 -->
+
+#### GPS2 port
+
+| Pin     | Signal   | Volt  |
+| ------- | -------- | ----- |
+| 1 (red) | VCC      | +5V   |
+| 2 (blk) | TX (OUT) | +3.3V |
+| 3 (blk) | RX (IN)  | +3.3V |
+| 4 (blk) | SCL I2C1 | +3.3V |
+| 5 (blk) | SDA I2C1 | +3.3V |
+| 6 (blk) | GND      | GND   |
+
+#### ADC
+
+| Pin     | Signal | Volt        |
+| ------- | ------ | ----------- |
+| 1 (red) | VCC    | +5V         |
+| 2 (blk) | ADC IN | up to +6.6V |
+| 3 (blk) | GND    | GND         |
+
+#### I2C
+
+| Pin     | Signal | Volt           |
+| ------- | ------ | -------------- |
+| 1 (red) | VCC    | +5V            |
+| 2 (blk) | SCL    | +3.3 (pullups) |
+| 3 (blk) | SDA    | +3.3 (pullups) |
+| 4 (blk) | GND    | GND            |
+
+#### CAN1 & CAN2
+
+| Pin     | Signal | Volt |
+| ------- | ------ | ---- |
+| 1 (red) | VCC    | +5V  |
+| 2 (blk) | CAN_H  | +12V |
+| 3 (blk) | CAN_L  | +12V |
+| 4 (blk) | GND    | GND  |
+
+#### POWER1 & POWER2
+
+| Pin     | Signal          | Volt  |
+| ------- | --------------- | ----- |
+| 1 (red) | VCC             | +5V   |
+| 2 (red) | VCC             | +5V   |
+| 3 (blk) | CURRENT sensing | +3.3V |
+| 4 (blk) | VOLTAGE sensing | +3.3V |
+| 5 (blk) | GND             | GND   |
+| 6 (blk) | GND             | GND   |
+
+#### USB
+
+| Pin     | Signal        | Volt            |
+| ------- | ------------- | --------------- |
+| 1 (red) | VCC           | +5V             |
+| 2 (blk) | OTG_DP1       | +3.3V           |
+| 3 (blk) | OTG_DM1       | +3.3V           |
+| 4 (blk) | GND           | GND             |
+| 5 (blk) | BUZZER        | Battery voltage |
+| 6 (blk) | FMU Error LED |                 |
+
+#### SPKT
+
+| Pin     | Signal | Volt  |
+| ------- | ------ | ----- |
+| 1 (blk) | IN     |       |
+| 2 (blk) | GND    | GND   |
+| 3 (red) | OUT    | +3.3V |
+
+#### TELEM1, TELEM2
+
+| Pin     | Signal    | Volt        |
+| ------- | --------- | ----------- |
+| 1 (red) | VCC       | +5V         |
+| 2 (blk) | TX (OUT)  | +3.3V to 5V |
+| 3 (blk) | RX (IN)   | +3.3V to 5V |
+| 4 (blk) | CTS (OUT) | +3.3V to 5V |
+| 5 (blk) | RTS (IN)  | +3.3V to 5V |
+| 6 (blk) | GND       | GND         |
 
 ## 시리얼 포트 매핑
 
@@ -108,20 +208,17 @@ Cube에는 2 개의 IMU에 진동 차단이 포함되어 있으며, 세 번째 �
 | UART7  | /dev/ttyS4 | CONSOLE/ADSB-IN |
 | UART8  | /dev/ttyS5 | GPS2            |
 
-  
 <!-- Note: Got ports using https://github.com/PX4/PX4-user_guide/pull/672#issuecomment-598198434 -->
 <!-- https://github.com/PX4/PX4-Autopilot/blob/main/boards/cubepilot/cubeorange/default.px4board -->
 <!-- https://github.com/PX4/PX4-Autopilot/blob/main/boards/cubepilot/cubeorange/nuttx-config/nsh/defconfig#L188-L197 -->
-
 
 ### USB/SDCard 포트
 
 ![큐브 USB/SDCard 포트 ](../../assets/flight_controller/cube/cube_ports_usb_sdcard.jpg)
 
-
 ## 펌웨어 빌드
 
-::::tip 대부분의 사용자들은 펌웨어를 빌드할 필요는 없습니다. 하드웨어가 연결되면 *QGroundControl*에 의해 사전 구축되고 자동으로 설치됩니다.
+::::tip 대부분의 사용자들은 펌웨어를 빌드할 필요는 없습니다. It is pre-built and automatically installed by _QGroundControl_ when appropriate hardware is connected.
 :::
 
 이 대상에 대해 [PX4를 빌드](../dev_setup/building_px4.md)하려면 터미널을 열고 다음을 입력하십시오.
@@ -129,6 +226,10 @@ Cube에는 2 개의 IMU에 진동 차단이 포함되어 있으며, 세 번째 �
 ```
 make cubepilot_cubeorange
 ```
+
+## Schematics
+
+보드 설계도와 문서는 [The Cube Project](https://github.com/proficnc/The-Cube)를 참고하십시오.
 
 ## 추가 정보 및 문서
 

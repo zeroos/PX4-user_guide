@@ -296,6 +296,8 @@ PX4 includes a standalone CRSF parser module which supports telemetry and CRSF L
 4. Scroll to highlight `crsf_rc` and press enter to enable it.
 5. Save and exit the PX4 board config tool.
 
+For more information see [TBS Crossfire (CRSF) Telemetry](../telemetry/crsf_telemetry.md).
+
 ### `msp_osd` Module
 
 The `msp_osd` module steams MSP telemetry to a selected serial port. The Caddx Vista Air Unit supports listening to MSP telemetry and will show the received telemetry values in its OSD (on screen display).
@@ -382,9 +384,9 @@ I recommend checking the following items:
 
 I recommend performing the first takeoff in manual mode. Because this airplane has no landing gear, you will either need to throw the airplane yourself, or ideally have a helper throw it. When throwing any airplane, throw at a slightly nose up attitude with full throttle.
 
-It's critical to be ready to give aft stick input to prevent the airplane from impacting the ground if it happens to be trimmed nosedown. Once the airplane is successfully airborne, cruise up to an altitude of a few hundred feet and switch to [Acro mode](../flight_modes/acro_fw.md). This is a good time to use [Autotuning](../config/autotune.md) to tune the airframe.
+It's critical to be ready to give aft stick input to prevent the airplane from impacting the ground if it happens to be trimmed nosedown. Once the airplane is successfully airborne, cruise up to an altitude of a few hundred feet and switch to [Acro mode](../flight_modes_fw/acro.md). This is a good time to use [Autotuning](../config/autotune.md) to tune the airframe.
 
-If the airplane is well behaved in _Acro mode_, switch to [Position mode](../flight_modes/position_fw.md).
+If the airplane is well behaved in _Acro mode_, switch to [Position mode](../flight_modes_fw/position.md).
 
 ## Build Results & Performance
 

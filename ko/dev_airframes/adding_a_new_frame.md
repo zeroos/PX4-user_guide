@@ -11,7 +11,7 @@ You can also "tweak" the current frame configuration using text files on the SD 
 :::
 
 :::note
-구성 파일에서 설정하는 매개변수를 결정하려면, 먼저 일반 기체를 할당하고 차량을 조정한 다음 [`param show-for-airframe`](../modules/modules_command.md#param)을 사용하여 변경된 매개변수를 나열합니다.
+To determine which parameters/values need to be set in the configuration file, you can first assign a generic airframe and tune the vehicle, and then use [`param show-for-airframe`](../modules/modules_command.md#param) to list the parameters that changed.
 :::
 
 ## Developing a Frame Configuration
@@ -52,7 +52,7 @@ The configuration file consists of several main blocks:
 - Documentation (used in the [Airframes Reference](../airframes/airframe_reference.md) and *QGroundControl*). Airframe-specific parameter settings
   - The configuration and geometry using [control allocation](../concept/control_allocation.md) parameters
   - [Tuning gains](#tuning-gains)
-- The controllers and apps it should start, such as multicopter or fixed wing controllers, land detectors etc.
+- The controllers and apps it should start, such as multicopter or fixed-wing controllers, land detectors etc.
 
 이러한 측면은 대부분 독립적이므로, 많은 구성이 기체의 동일한 물리적 레이아웃을 공유하고 동일한 응용 프로그램을 시작하며 튜닝 이득이 가장 차이가 납니다.
 
@@ -194,9 +194,6 @@ param set-default MPC_Z_VEL_MAX_UP 2
 
 param set-default NAV_ACC_RAD 3
 
-param set-default PWM_MAIN_DIS3 1000
-param set-default PWM_MAIN_MIN3 1120
-
 param set-default SENS_BOARD_ROT 4
 
 param set-default VT_ARSP_BLEND 10
@@ -252,6 +249,7 @@ param set-default PWM_MAIN_FUNC8 104
 param set-default PWM_MAIN_TIM0 50
 param set-default PWM_MAIN_DIS1 1500
 param set-default PWM_MAIN_DIS2 1500
+param set-default PWM_MAIN_DIS3 1000
 param set-default PWM_MAIN_DIS4 1500
 ```
 
@@ -264,8 +262,8 @@ Airframe "groups" are used to group similar airframes for selection in [QGroundC
 For a new frame belonging to an existing group, you don't need to do anything more than provide documentation in the airframe description located at [ROMFS/px4fmu_common/init.d](https://github.com/PX4/PX4-Autopilot/tree/main/ROMFS/px4fmu_common/init.d).
 
 기체가 **새 그룹**을 위한 것이라면, 추가로 다음 작업을 수행하여야 합니다.
-1. 그룹에 대한 svg 이미지를 사용자 가이드 문서에 추가합니다(이미지가 제공되지 않은 경우 자리 표시자 이미지가 표시됨): [assets/airframes/types](https://github.com/PX4/px4_user_guide/tree/master/assets/airframes/types)
-1. [srcparser.py](https://github.com/PX4/PX4-Autopilot/blob/master/Tools/px4airframes/srcparser.py) 메소드 `GetImageName()`에서 새 그룹 이름과 이미지 파일 이름 간의 매핑을 추가합니다(아래 패턴을 따릅니다).
+1. Add the svg image for the group into user guide documentation (if no image is provided a placeholder image is displayed): [assets/airframes/types](https://github.com/PX4/PX4-user_guide/tree/master/assets/airframes/types)
+1. Add a mapping between the new group name and image filename in the [srcparser.py](https://github.com/PX4/PX4-Autopilot/blob/main/Tools/px4airframes/srcparser.py) method `GetImageName()` (follow the pattern below):
    ```python
    def GetImageName(self):
        """
@@ -301,7 +299,7 @@ For a new frame belonging to an existing group, you don't need to do anything mo
 
 * [Autotuning](../config/autotune.md)
 * [멀티콥터 PID 튜닝 가이드](../config_mc/pid_tuning_guide_multicopter.md)
-* [고정익 PID 튜닝 가이드](../config_fw/pid_tuning_guide_fixedwing.md)
+* [Fixed-wing PID Tuning Guide](../config_fw/pid_tuning_guide_fixedwing.md)
 * [VTOL 설정](../config_vtol/README.md)
 
 

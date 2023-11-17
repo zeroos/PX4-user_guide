@@ -89,8 +89,9 @@ Request access from dev team. -->
 ## Fixed-Wing Position Controller
 
 ### Total Energy Control System (TECS)
-The PX4 implementation of the Total Energy Control System (TECS) enables simultaneous control of true airspeed and altitude of a fixed wing aircraft.
-The code is implemented as a library which is used in the fixed wing position control module.
+
+The PX4 implementation of the Total Energy Control System (TECS) enables simultaneous control of true airspeed and altitude of a fixed-wing aircraft.
+The code is implemented as a library which is used in the fixed-wing position control module.
 
 ![TECS](../../assets/diagrams/tecs_in_context.svg)
 
@@ -311,7 +312,7 @@ $$\dot{\mathbf{\omega}}_{sp}^b = \frac{V_{I_0}^2}{V_I^2} \dot{\mathbf{\omega}}_{
 
 and implement it directly in the rollrate, pitchrate and yawrate controllers.
 
-In the case of airframes with controls performance that is not dependent directly on airspeed e.g. a rotorcraft like [autogyro](../frames_autogyro/). There is possibility to disable airspeed scaling feature by [FW_ARSP_SCALE_EN](../advanced_config/parameter_reference.md#FW_ARSP_SCALE_EN) parameter.
+In the case of airframes with controls performance that is not dependent directly on airspeed e.g. a rotorcraft like [autogyro](../frames_autogyro/README.md). There is possibility to disable airspeed scaling feature by [FW_ARSP_SCALE_EN](../advanced_config/parameter_reference.md#FW_ARSP_SCALE_EN) parameter.
 
 #### Tuning recommendations
 

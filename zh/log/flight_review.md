@@ -10,11 +10,12 @@
 
 - Plot background color is used to indicate flight mode during recording (where graphs depend on mode): ![飞行模式](../../assets/flight_log_analysis/flight_review/flight_modes.png)
   - **Flight mode:** Background colour on the body of the plot indicates flight mode. 将鼠标悬停在绘图上将显示飞行模式标签。
-  - **VTOL flight mode:** VTOL vehicles additionally show the VTOL mode as background colour in the bottom part of the plot (blue for multicopter, yellow for fixed wing, and red for transition).
+  - **VTOL flight mode:** VTOL vehicles additionally show the VTOL mode as background colour in the bottom part of the plot (blue for multicopter, yellow for fixed-wing, and red for transition).
 - 鼠标在特定的绘图轴上滚动可缩放该轴 (水平或垂直)。
 - 鼠标在图形内滚动可缩放两个轴。
 
-<span id="tracking"></span>
+<a id="tracking"></a>
+
 ## PID 性能跟踪
 
 根据飞行模式, 车辆控制器可能会尝试跟踪位置、速度、高度或速率设定值 (跟踪的设定值取决于模式, 例如: 在稳定模式下没有速度设定值)。
@@ -182,7 +183,8 @@ You should not fly with such high vibration levels.
 ![Exceedingly high vibration in raw accel. 绘图](../../assets/flight_log_analysis/flight_review/vibrations_exceedingly_high_accel.png)
 
 
-<span id="fifo_logging"></span>
+<a id="fifo_logging"></a>
+
 ### Raw High-rate IMU Data Plots
 
 For an in-depth analysis there is an option to log the raw IMU data at full rate (several kHz, depending on the IMU). This allows inspection of much higher frequencies than with normal logging, which can help when selecting vibration mounts or configuring low-pass and notch filters appropriately.
@@ -196,6 +198,7 @@ To use it, some parameters need to be changed:
 :::tip
 See [Logging > SD Cards](../dev_log/logging.md#sd-cards) for a comparison of popular SD card.
 :::
+
 - Enable either the gyro or accel high-rate FIFO profile in [SDLOG_PROFILE](../advanced_config/parameter_reference.md#SDLOG_PROFILE) and disable the rest of the entries. If you are using a really good SD card (seeing few/no dropouts), you can:
   - either enable both accel and gyro profiles
   - or enable accel/gyro plus the default logging profile
@@ -213,7 +216,8 @@ This is mostly only important in cases where IMU's are mounted differently (e.g.
 Do not forget to restore the parameters after testing.
 :::
 
-<span id="solutions"></span>
+<a id="solutions"></a>
+
 ### Fixing Vibration Problems
 
 Often a source of vibration (or combination of multiple sources) cannot be identified from logs alone.

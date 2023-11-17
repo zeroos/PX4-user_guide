@@ -1,6 +1,6 @@
 # Raspberry Pi Companion with Pixhawk
 
-This topic describes how to setup a Raspberry Pi ("RPi") companion companion running [ROS 2](../ros/ros2_comm.md) on Linux Ubuntu OS, connecting to a [Pixhawk](../flight_controller/autopilot_pixhawk_standard.html) flight controller using a serial connection between the Pixhawk `TELEM2` port and the RPi's TX/RX pins.
+This topic describes how to setup a Raspberry Pi ("RPi") companion companion running [ROS 2](../ros/ros2_comm.md) on Linux Ubuntu OS, connecting to a [Pixhawk](../flight_controller/autopilot_pixhawk_standard.md) flight controller using a serial connection between the Pixhawk `TELEM2` port and the RPi's TX/RX pins.
 
 These instructions should be readily extensible to other RPi and flight controller configurations.
 
@@ -78,7 +78,7 @@ During PX4 setup and configuration the USB connection with your ground station l
 
 These instructions rely on PX4 code to support ROS 2 that isn't yet in a release build (arrives in PX4 v1.14). You will therefore need to install a build off the current PX4-Autopilot `main` branch.
 
-Connect the Pixhawk to your laptop/desktop via the `USB` port and use QGroundControl to update the firmware to the "Master" version as described in [Firmware > Installing PX4 Master, Beta or Custom Firmware](../config/firmware.md#installing-px4-master-beta-or-custom-firmware).
+Connect the Pixhawk to your laptop/desktop via the `USB` port and use QGroundControl to update the firmware to the "Master" version as described in [Firmware > Installing PX4 Master, Beta or Custom Firmware](../config/firmware.md#installing-px4-main-beta-or-custom-firmware).
 
 :::note
 You can alternatively [setup a development environment](../dev_setup/dev_env.md), [build](../dev_setup/building_px4.md#building-for-nuttx) and [upload](../dev_setup/building_px4.md#uploading-firmware-flashing-the-board) the firmware manually.
@@ -176,7 +176,7 @@ First check the Pixhawk `TELEM 2` configuration:
 
    ```
    MAV_1_CONFIG = TELEM2
-   XRCE_DDS_CFG = 0 (Disabled)
+   UXRCE_DDS_CFG = 0 (Disabled)
    SER_TEL2_BAUD = 57600
    ```
 
@@ -211,11 +211,11 @@ Note that above we used `/dev/serial0`, but we could equally well have used `/de
 
 MAVProxy on RPi should now connect to the Pixhawk, via RX/TX pins. You should be able to see this in the RPi terminal.
 
-We have now verified that our connection is wired up properly. In the next section we'll set up the both Pixhawk and RPi to use XRCE-DDS and ROS2 instead of MAVLink.
+We have now verified that our connection is wired up properly. In the next section we'll set up the both Pixhawk and RPi to use uXRCE-DDS and ROS2 instead of MAVLink.
 
-## ROS 2 and XRCE-DDS
+## ROS 2 and uXRCE-DDS
 
-The [ROS 2 Guide](../ros/ros2_comm.md) and [XRCE-DDS](../middleware/xrce_dds.md) pages cover the options for setting up the XRCE-DDS and ROS, focussing on ROS 2 "Foxy". This tutorial uses ROS 2 "Humble" and covers the specific setup for working with RPi. It is worth reading both!
+The [ROS 2 Guide](../ros/ros2_comm.md) and [uXRCE-DDS](../middleware/uxrce_dds.md) pages cover the options for setting up the uXRCE-DDS and ROS, focussing on ROS 2 "Foxy". This tutorial uses ROS 2 "Humble" and covers the specific setup for working with RPi. It is worth reading both!
 
 ### Pixhawk/PX4 Setup
 
@@ -228,36 +228,36 @@ The configuration steps are:
 
    ```
    MAV_1_CONFIG = 0 (Disabled)
-   XRCE_DDS_CFG = 102 (TELEM2)
+   UXRCE_DDS_CFG = 102 (TELEM2)
    SER_TEL2_BAUD = 921600
    ```
 
-   [MAV_1_CONFIG=0](../advanced_config/parameter_reference.md#MAV_1_CONFIG) and [XRCE_DDS_CFG=102](../advanced_config/parameter_reference.md#MAV_1_CONFIG) disable MAVLink on TELEM2 and enable the XRCE-DDS client on TELEM2, respectively. The `SER_TEL2_BAUD` rate sets the comms link data rate.   
+   [MAV_1_CONFIG=0](../advanced_config/parameter_reference.md#MAV_1_CONFIG) and [UXRCE_DDS_CFG=102](../advanced_config/parameter_reference.md#UXRCE_DDS_CFG) disable MAVLink on TELEM2 and enable the uXRCE-DDS client on TELEM2, respectively. The `SER_TEL2_BAUD` rate sets the comms link data rate.   
 You could similarly configure a connection to `TELEM1` using either `MAV_1_CONFIG` or `MAV_0_CONFIG`.
 
    :::note
 You will need to reboot the flight controller to apply any changes to these parameters.
 :::
 
-1. Check that the [microdds_client](../modules/modules_system.md#microdds-client) module is now running. YOu can do this by running the following command in the QGroundControl [MAVLink Console](https://docs.qgroundcontrol.com/master/en/analyze_view/mavlink_console.html):
+1. Check that the [uxrce_dds_client](../modules/modules_system.md#uxrce-dds-client) module is now running. YOu can do this by running the following command in the QGroundControl [MAVLink Console](https://docs.qgroundcontrol.com/master/en/analyze_view/mavlink_console.html):
 
    ```
-   microdds_client status
+   uxrce_dds_client status
    ```
 
 :::note
 If the client module is not running you can start it manually in the MAVLink console:
 
 ```
-microdds_client start -t serial -d /dev/ttyS3 -b 921600
+uxrce_dds_client start -t serial -d /dev/ttyS3 -b 921600
 ```
 
-Note that `/dev/ttyS3` is the PX4 port for `TELEM2` on the [Holybro Pixhawk 6c](../flight_controller/pixhawk6c.html#serial-port-mapping). For other flight controllers check the serial port mapping section in their overview page.
+Note that `/dev/ttyS3` is the PX4 port for `TELEM2` on the [Holybro Pixhawk 6c](../flight_controller/pixhawk6c.md#serial-port-mapping). For other flight controllers check the serial port mapping section in their overview page.
 :::
 
 ### ROS Setup on RPi
 
-The steps to setup ROS 2 and the XRCE-DDS Agent on the RPi are:
+The steps to setup ROS 2 and the Micro XRCE-DDS Agent on the RPi are:
 
 1. Install ROS 2 Humble by following the [official tutorial](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debians.html).
 2. Install the git using the RPi terminal:
@@ -265,7 +265,7 @@ The steps to setup ROS 2 and the XRCE-DDS Agent on the RPi are:
    ```bash
    sudo apt install git
    ```
-3. Install the XRCE_DDS agent:
+3. Install the uXRCE_DDS agent:
 
    ```bash
    git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
@@ -278,7 +278,7 @@ The steps to setup ROS 2 and the XRCE-DDS Agent on the RPi are:
    sudo ldconfig /usr/local/lib/
    ```
 
-   See [XRCE-DDS > XRCE-DDS Agent Installation](../middleware/xrce_dds.md#xrce-dds-agent-installation) for alternative ways of installing the agent.
+   See [uXRCE-DDS > Micro XRCE-DDS Agent Installation](../middleware/uxrce_dds.md#micro-xrce-dds-agent-installation) for alternative ways of installing the agent.
 4. Start the agent in the RPi terminal:
 
    ```bash

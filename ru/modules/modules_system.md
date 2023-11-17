@@ -102,7 +102,7 @@ commander <command> [arguments...]
 
    mode          Change flight mode
      manual|acro|offboard|stabilized|altctl|posctl|auto:mission|auto:loiter|auto
-                 :rtl|auto:takeoff|auto:land|auto:precland Flight mode
+                 :rtl|auto:takeoff|auto:land|auto:precland|ext1 Flight mode
 
    pair
 
@@ -132,9 +132,9 @@ Module to provide persistent storage for the rest of the system in form of a sim
 It is used to store structured data of different types: mission waypoints, mission state and geofence polygons. Each type has a specific type and a fixed maximum amount of storage items, so that fast random access is possible.
 
 ### Implementation
-Reading and writing a single item is always atomic. If multiple items need to be read/modified atomically, there is an additional lock per item type via `dm_lock`.
+Reading and writing a single item is always atomic.
 
-**DM_KEY_FENCE_POINTS** and **DM_KEY_SAFE_POINTS** items: the first data element is a `mission_stats_entry_s` struct, which stores the number of items for these types. These items are always updated atomically in one transaction (from the mavlink mission manager). During that time, navigator will try to acquire the geofence item lock, fail, and will not check for geofence violations.
+**DM_KEY_FENCE_POINTS** and **DM_KEY_SAFE_POINTS** items: the first data element is a `mission_stats_entry_s` struct, which stores the number of items for these types. These items are always updated atomically in one transaction (from the mavlink mission manager).
 
 
 <a id="dataman_usage"></a>
@@ -418,51 +418,23 @@ manual_control <command> [arguments...]
 
    status        print status info
 ```
-## microdds_client
-Source: [modules/microdds_client](https://github.com/PX4/PX4-Autopilot/tree/main/src/modules/microdds_client)
-
-
-### Description
-MicroDDS Client used to communicate uORB topics with an Agent over serial or UDP.
-
-### Examples
-```
-microdds_client start -t serial -d /dev/ttyS3 -b 921600
-microdds_client start -t udp -h 127.0.0.1 -p 15555
-```
-
-<a id="microdds_client_usage"></a>
-
-### Usage
-```
-microdds_client <command> [arguments...]
- Commands:
-   start
-     [-t <val>]  Transport protocol
-                 values: serial|udp, default: udp
-     [-d <val>]  serial device
-                 values: <file:dev>
-     [-b <val>]  Baudrate (can also be p:<param_name>)
-                 default: 0
-     [-h <val>]  Agent IP. If not provided, defaults to XRCE_DDS_AG_IP
-                 values: <IP>
-     [-p <val>]  Agent listening port. If not provided, defaults to XRCE_DDS_PRT
-     [-l]        Restrict to localhost (use in combination with
-                 ROS_LOCALHOST_ONLY=1)
-     [-c]        Use custom participant config (profile_name="px4_participant")
-     [-n <val>]  Client DDS namespace
-
-   stop
-
-   status        print status info
-```
 ## netman
 Source: [systemcmds/netman](https://github.com/PX4/PX4-Autopilot/tree/main/src/systemcmds/netman)
 
 
-  ### Description Network configuration manager saves the network settings in non-volatile memory. On boot the `update` option will be run. If a network configuration does not exist. The default setting will be saved in non-volatile and the system rebooted. On Subsequent boots, the `update` option will check for the existence of `net.cfg` in the root of the SD Card.  It will saves the network settings from `net.cfg` in non-volatile memory, delete the file and reboot the system.
+  ### Description Network configuration manager saves the network settings in non-volatile memory. On boot the `update` option will be run. If a network configuration does not exist. The default setting will be saved in non-volatile and the system rebooted.
 
-  The `save` option will `net.cfg` on the SD Card. Use this to edit the settings. The  `show` option will display the network settings  to the console.
+  #### update
+
+  `netman update` is run automatically by [a startup script](../concept/system_startup.md#system-startup). When run, the `update` option will check for the existence of `net.cfg` in the root of the SD Card. It then saves the network settings from `net.cfg` in non-volatile memory, deletes the file and reboots the system.
+
+  #### save
+
+  The `save` option will save settings from non-volatile memory to a file named `net.cfg` on the SD Card filesystem for editing. Use this to edit the settings. Save does not immediately apply the network settings; the user must reboot the flight stack. By contrast, the `update` command is run by the start-up script, commits the settings to non-volatile memory, and reboots the flight controller (which will then use the new settings).
+
+  #### show
+
+  The `show` option will display the network settings in `net.cfg` to the console.
 
   ### Examples $ netman save           # Save the parameters to the SD card. $ netman show           # display current settings. $ netman update -i eth0 # do an update
 
@@ -723,8 +695,9 @@ temperature_compensation <command> [arguments...]
                  sensor_correction topic
 
    calibrate     Run temperature calibration process
-     [-g]        calibrate the gyro
      [-a]        calibrate the accel
+     [-g]        calibrate the gyro
+     [-m]        calibrate the mag
      [-b]        calibrate the baro (if none of these is given, all will be
                  calibrated)
 
@@ -771,6 +744,42 @@ tune_control <command> [arguments...]
    libtest       Test library
 
    stop          Stop playback (use for repeated tunes)
+```
+## uxrce_dds_client
+Source: [modules/uxrce_dds_client](https://github.com/PX4/PX4-Autopilot/tree/main/src/modules/uxrce_dds_client)
+
+
+### Description
+UXRCE-DDS Client used to communicate uORB topics with an Agent over serial or UDP.
+
+### Examples
+```
+uxrce_dds_client start -t serial -d /dev/ttyS3 -b 921600
+uxrce_dds_client start -t udp -h 127.0.0.1 -p 15555
+```
+
+<a id="uxrce_dds_client_usage"></a>
+
+### Usage
+```
+uxrce_dds_client <command> [arguments...]
+ Commands:
+   start
+     [-t <val>]  Transport protocol
+                 values: serial|udp, default: udp
+     [-d <val>]  serial device
+                 values: <file:dev>
+     [-b <val>]  Baudrate (can also be p:<param_name>)
+                 default: 0
+     [-h <val>]  Agent IP. If not provided, defaults to UXRCE_DDS_AG_IP
+                 values: <IP>
+     [-p <val>]  Agent listening port. If not provided, defaults to
+                 UXRCE_DDS_PRT
+     [-n <val>]  Client DDS namespace
+
+   stop
+
+   status        print status info
 ```
 ## work_queue
 Source: [systemcmds/work_queue](https://github.com/PX4/PX4-Autopilot/tree/main/src/systemcmds/work_queue)

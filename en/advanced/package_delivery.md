@@ -15,7 +15,6 @@ The detailed documentation on how to setup a package delivery mission plan can b
 Setup for the `payload_deliverer` module is covered in the documentation for the delivery mechanism, such as [Gripper](../peripherals/gripper.md#px4-configuration).
 :::
 
-
 ## Package Delivery Architecture Diagram
 
 ![Package delivery architecture overview](../../assets/advanced_config/payload_delivery_mission_architecture.png)
@@ -48,7 +47,7 @@ This is possible since all the Mission item has the `MAV_CMD` to execute (e.g. L
 
 In the Mission logic (green box above) if either Gripper/Winch mission item is reached, it implements brake_for_hold functionality (which sets the `valid` flag of the next mission item waypoint to `false`) for rotary wings (e.g. Multicopter) so that the vehicle would hold it's position while the deployment is getting executed.
 
-For fixed wing and other platforms, no special braking condition is considered.
+For fixed-wing and other vehicles, no special braking condition is considered.
 So if you have a loiter mission item for a fixed-wing, it will execute the delivery whilst doing the loiter, and won’t come to a stop (as it’s impossible)
 
 ## Mission Block

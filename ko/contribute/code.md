@@ -4,9 +4,9 @@
 
 PX4 프로젝트는 3가지 Git 분기 모델을 사용합니다.
 
-* [main](https://github.com/PX4/PX4-Autopilot/tree/main) is by default unstable and sees rapid development.
-* [beta](https://github.com/PX4/PX4-Autopilot/tree/beta)는 철저한 테스트를 거쳤습니다. 비행 테스터를 위한 것입니다.
-* [stable](https://github.com/PX4/PX4-Autopilot/tree/stable)은 최신 릴리스를 의미합니다.
+- [main](https://github.com/PX4/PX4-Autopilot/tree/main) is by default unstable and sees rapid development.
+- [beta](https://github.com/PX4/PX4-Autopilot/tree/beta)는 철저한 테스트를 거쳤습니다. 비행 테스터를 위한 것입니다.
+- [stable](https://github.com/PX4/PX4-Autopilot/tree/stable)은 최신 릴리스를 의미합니다.
 
 We try to retain a [linear history through rebases](https://www.atlassian.com/git/tutorials/rewriting-history) and avoid the [Github flow](https://docs.github.com/en/get-started/quickstart/github-flow). 그러나, 전세계의 역동적인 개발팀과 수시로 병합 작업을 진행합니다.
 
@@ -17,6 +17,10 @@ To contribute new functionality, [sign up for Github](https://docs.github.com/en
 ## Code Style
 
 PX4 uses the [Google C++ style guide](https://google.github.io/styleguide/cppguide.html), with the following (minimal) modifications:
+
+:::note
+Not all PX4 source code matches the style guide, but any _new code_ that you write should do so — in both new and existing files. If you update an existing file you are not required to make the whole file comply with the style guide, just the code you've modified.
+:::
 
 ### Tabs
 
@@ -33,11 +37,15 @@ PX4 uses the [Google C++ style guide](https://google.github.io/styleguide/cppgui
 
 ### Function and Method Names
 
-- `lowerCamelCase()` is used for functions and methods to *visually* distinguish them from `ClassConstructors()` and `ClassNames`.
+- `lowerCamelCase()` is used for functions and methods to _visually_ distinguish them from `ClassConstructors()` and `ClassNames`.
+
+### Private Class Member Variable Names
+
+- `_underscore_prefixed_snake_case` is used for private class member variable names, as oppose to `underscore_postfixed_`.
 
 ### Class Privacy Keywords
 
-- *zero* spaces before `public:`, `private:`, or `protected:` keywords.
+- _zero_ spaces before `public:`, `private:`, or `protected:` keywords.
 
 ### Example Code Snippet
 
@@ -53,23 +61,23 @@ public:
          */
         float doSomething(const float input_param) const {
                 const float in_scope_variable = input_param + kConstantFloat;
-                return in_scope_variable * private_member_variable_;
+                return in_scope_variable * _private_member_variable;
         }
 
-        void setPrivateMember(const float private_member_variable) { private_member_variable_ = private_member_variable; }
+        void setPrivateMember(const float private_member_variable) { _private_member_variable = private_member_variable; }
 
         /**
          * @return Whatever we are "getting" [units]
          */
-        float getPrivateMember() const { return private_member_variable_; }
+        float getPrivateMember() const { return _private_member_variable; }
 
 private:
 
         // Clear description of the constant if not completely obvious from the name [units]
-        static constexpr float kConstantFloat = ...;  
+        static constexpr float kConstantFloat = ...;
 
         // Clear description of the variable if not completely obvious from the name [units]
-        float private_member_variable_{...};
+        float _private_member_variable{...};
 };
 ```
 
@@ -83,10 +91,11 @@ PX4 개발자는 소스 내에서 적절한 문서를 작성하는 것이 좋습
 :::
 
 현재 두 가지 소스 기반 문서 유형이 있습니다.
+
 - `PRINT_MODULE_*` 메소드는 두 모듈 런타임과 [모듈 & 이 가이드의 명령 참조](../modules/modules_main.md) 사용 지침에 모두 사용됩니다.
   - API는 [여기 소스 코드](https://github.com/PX4/PX4-Autopilot/blob/v1.8.0/src/platforms/px4_module.h#L381)에 문서화되어 있습니다.
   - 좋은 예제로는 [응용 프로그램/모듈 템플릿](../modules/module_template.md)과 모듈 참조에서 링크된 파일이 있습니다.
-- *가치가 추가되거나 중복되지 않는* 다른 소스 문서를 권장합니다.
+- We encourage other in-source documentation _where it adds value/is not redundant_.
 
   :::tip
 개발자는 목적을 유추할 수 있도록 C++ 엔터티(클래스, 함수, 변수 등)의 이름을 지정하여 명시적 문서의 필요성을 줄일 수 있습니다.
@@ -119,6 +128,7 @@ static constexpr float kMaxYawRate = math::radians(30.0f);
 ```
 
 and update the source implementation.
+
 ```cpp
 if (fabsf(yaw_stick_normalized_input) < kYawStickDeadzone) {
         yaw_rate_setpoint = 0.0f;
@@ -130,9 +140,9 @@ else {
 
 ## 커밋과 커밋 메시지
 
-사소한 변경에 대하여도 자세한 설명한 여러 단락 커밋 메시지를 기록하십시오. 쉽게 이해할 수 있는 한 줄 요약과 자세한 세부정보도 기록하십시오.
+Use descriptive, multi-paragraph commit messages for all non-trivial changes. 쉽게 이해할 수 있는 한 줄 요약과 자세한 세부정보도 기록하십시오.
 
-```
+```plain
 컴포넌트: 변경 사항을 한 문장으로 설명하십시오. Fixes #1234
 
 요약 시작 부분에 소프트웨어 구성 요소를 추가합니다.
@@ -153,7 +163,7 @@ else {
 
 ****`git commit -s`**를 사용하여 모든 커밋을 승인합니다. ** 이렇게 하면 `signed-off-by:`가 추가됩니다. 마지막 줄에 이름과 이메일을 입력합니다.
 
-이 커밋 가이드는 Linux 커널과 Linus Torvalds가 관리하는 [프로젝트](https://github.com/torvalds/subsurface/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88-L115)에 대한 모범 사례들을 참고로 작성되었습니다.
+This commit guide is based on best practices for the Linux Kernel and other [projects maintained](https://github.com/torvalds/subsurface-for-dirk/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88-L115) by Linus Torvalds.
 
 ## Pull Requests
 
@@ -162,7 +172,8 @@ Github [Pull Requests (PRs)](https://docs.github.com/en/pull-requests/collaborat
 They include the new set of [commits](#commits-and-commit-messages) in your branch (relative the main branch), and a description of the changes.
 
 The description should include:
+
 - An overview of what the changes deliver; enough to understand the broad purpose of the code
 - Links to related issues or supporting information.
-- Information about what testing of the PR funcitonality has been done, with links to flight logs.
+- Information about what testing of the PR functionality has been done, with links to flight logs.
 - Where possible, the results from general [Test Flights](../test_and_ci/test_flights.md) both before and after the change.

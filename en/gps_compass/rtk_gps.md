@@ -1,11 +1,13 @@
 # RTK GPS
 
-*RTK GPS* devices can be accurate to centimeter-level, allowing PX4 to be used in applications like precision surveying (where pinpoint accuracy is essential).
+[Real Time Kinematic (RTK)](https://en.wikipedia.org/wiki/Real_Time_Kinematic) GNSS/GPS systems provide centimeter-level accuracy, allowing PX4 to be used in applications like precision surveying (where pinpoint accuracy is essential).
+
+This feature requires *QGroundControl* running on a laptop/PC and a vehicle with a WiFi or Telemetry radio link to the ground station laptop.
 
 :::note
-GPS can also be used as a source of yaw/heading information:
+Some RTK GPS setups can provide yaw/heading information, as an alternative to the compass:
 - [RTK GPS Heading with Dual u-blox F9P](../gps_compass/u-blox_f9p_heading.md).
-- Some GPS output yaw (see table below).
+- GPS directly output yaw (see table below).
 :::
 
 
@@ -23,18 +25,19 @@ GPS | Yaw Output | [Dual F9P GPS Heading](../gps_compass/u-blox_f9p_heading.md) 
 [CUAV C-RTK GPS](../gps_compass/rtk_gps_cuav_c-rtk.md) | | | |
 [CUAV C-RTK2 ](../gps_compass/rtk_gps_cuav_c-rtk2.md) | | | | &check;
 [CUAV C-RTK 9Ps GPS](../gps_compass/rtk_gps_cuav_c-rtk-9ps.md) | | &check; | | 
-[Drotek XL RTK GPS](../gps_compass/rtk_gps_drotek_xl.md) | | | |
 [Femtones MINI2 Receiver](../gps_compass/rtk_gps_fem_mini2.md) | | | |
 [Freefly RTK GPS](../gps_compass/rtk_gps_freefly.md) (F9P) | | | |
 [CubePilot Here3](https://www.cubepilot.org/#/here/here3) | | | &check; |
-[Holybro H-RTK F9P Helical or Base](../gps_compass/rtk_gps_holybro_h-rtk-f9p.md) | |&check; | |
+[Holybro H-RTK F9P Helical or Base](../gps_compass/rtk_gps_holybro_h-rtk-f9p.md) | | &check; | |
+[Holybro DroneCAN H-RTK F9P Helical](https://holybro.com/products/dronecan-h-rtk-f9p-helical) | | &check; | &check; |
 [Holybro H-RTK F9P Rover Lite](../gps_compass/rtk_gps_holybro_h-rtk-f9p.md) | | | |
+[Holybro DroneCAN H-RTK F9P Rover](https://holybro.com/products/dronecan-h-rtk-f9p-rover) | | | &check; |
 [Holybro H-RTK M8P GNSS](../gps_compass/rtk_gps_holybro_h-rtk-m8p.md) | | | |
-[Holybro Unicore GPS](../gps_compass/gps_holybro_unicore.md) | &check; | | |
+[Holybro H-RTK UM982 GPS](../gps_compass/rtk_gps_holybro_unicore_um982.md) | &check; | | |
 [LOCOSYS Hawk R1](../gps_compass/rtk_gps_locosys_r1.md) | | | |
 [LOCOSYS Hawk R2](../gps_compass/rtk_gps_locosys_r2.md) | &check; | | |
-[Septentrio AsteRx-RIB](../gps_compass/septentrio_asterx-rib.md) |  &check;   |Septentrio dual antenna heading | |&check;
-[Septentrio mosaic-go](../gps_compass/septentrio_mosaic-go.md) |  &check;   |Septentrio dual antenna heading | |&check;
+[Septentrio AsteRx-RIB](../gps_compass/septentrio_asterx-rib.md) |  &check;   |Septentrio dual antenna heading | | &check;
+[Septentrio mosaic-go](../gps_compass/septentrio_mosaic-go.md) |  &check;   |Septentrio dual antenna heading | | &check;
 [SparkFun GPS-RTK2 Board - ZED-F9P](https://www.sparkfun.com/products/15136) | | &check; | |
 [SIRIUS RTK GNSS ROVER (F9P)](https://store-drotek.com/911-sirius-rtk-gnss-rover-f9p.html) | | &check; | |
 [mRo u-blox ZED-F9 RTK L1/L2 GPS](https://store.mrobotics.io/product-p/m10020d.htm) | | &check; | |

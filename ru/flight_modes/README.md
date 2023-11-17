@@ -1,9 +1,9 @@
 # Flight Modes
 
-*Flight Modes* define how the autopilot responds to user input and controls vehicle movement. The tables below summarizes flight modes for fixed wing and copter ([table key is below](#key)). Note that this is the "high level" default behaviour, and may vary based on vehicle parameters. The linked topics (sidebar) provide more detailed information about individual modes, including their tuning parameters.
+_Flight Modes_ define how the autopilot responds to user input and controls vehicle movement. The tables below summarizes flight modes for fixed-wing and copter ([table key is below](#key)). Note that this is the "high level" default behaviour, and may vary based on vehicle parameters. The linked topics (sidebar) provide more detailed information about individual modes, including their tuning parameters.
 
 :::tip
-A *beginner friendly* explanation of all flight modes is provided in [Getting Started > Flight Modes](../getting_started/flight_modes.md). :::
+A _beginner friendly_ explanation of all flight modes is provided in [Getting Started > Flight Modes](../getting_started/flight_modes.md). :::
 
 <!-- Styles used for tables below -->
 <style>
@@ -23,17 +23,9 @@ tr td:nth-last-child(1) {
     text-align:left;
 }
 
-/*
-  .col_summary {
-    width:50px;
-  }
-*/
-
-
 th {
   font-size:1.0rem;
 }
-
 
 @media (min-width: 1500px){
 .page-inner {
@@ -52,10 +44,9 @@ th {
   max-width: 800px;
   }
 }
-
 </style>
 
-## Fixed Wing
+## Fixed-wing
 
 <table>
  <thead>
@@ -65,13 +56,13 @@ th {
      <th class="col_yaw">Yaw</th>
      <th class="col_throttle">Throttle</th>
      <th class="col_sensor">Position Sensors</th>
-     <th class="col_summary">Summary</th></tr>
+     <th class="col_summary">Summary</th>
    </tr>
  </thead>
 <tbody>
 
 <tr id="position_fw">
- <td><a href="../flight_modes/position_fw.html">Position</a>
+ <td><a href="../flight_modes_mc/position.html">Position</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" /></a></p>
  </td>
  <td>S<sup>+</sup></td>
@@ -94,9 +85,8 @@ th {
   </td>
 </tr>
 
-
 <tr id="altitude_fw">
- <td><a href="../flight_modes/altitude_fw.html">Altitude</a>
+ <td><a href="../flight_modes_mc/altitude.html">Altitude</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" /></a></p>
  </td>
  <td><p>S (roll)</p><p>S<sup>+</sup>(pitch)</p></td>
@@ -111,6 +101,7 @@ th {
        <li>Autopilot maintains altitude with wings also level.</li> 
        <li>Throttle stick controls the airspeed of the aircraft if an airspeed sensor is connected (without airspeed sensor, the user cannot control throttle).</li>
     </ul>
+    </li>
     <li>Outside center:
       <ul>
        <li>Pitch stick controls altitude.</li>
@@ -123,9 +114,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="stabilized_fw">
- <td><a href="../flight_modes/stabilized_fw.html">Stabilized</a>
+ <td><a href="../flight_modes_fw/stabilized.html">Stabilized</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -144,7 +134,7 @@ th {
 </tr>
 
 <tr id="acro_fw">
- <td><a href="../flight_modes/acro_fw.html">Acro</a>
+ <td><a href="../flight_modes_mc/acro.html">Acro</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="Hard to fly" width="20px" /></a></p>
  </td>
  <td>S<sub>rate</sub></td>
@@ -155,9 +145,8 @@ th {
 <p>RPY stick inputs are translated to angular rate commands that are stabilized by autopilot. Throttle is passed directly to control allocation.</p></td>
 </tr>
 
-
 <tr id="manual_fw">
- <td><a href="../flight_modes/manual_fw.html">Manual</a>
+ <td><a href="../flight_modes_fw/manual.html">Manual</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="Hard to fly" width="20px" /></a></p>
  </td>
  <td>M</td>
@@ -170,24 +159,22 @@ th {
   </td>
 </tr>
 
-
 <tr id="takeoff_fw">
- <td><a href="../flight_modes/takeoff.html">Takeoff</a></td>
+ <td><a href="../flight_modes_fw/takeoff.html">Takeoff</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle initiates the takeoff sequence using either <em>catapult/hand-launch mode</em> or <em>runway takeoff mode</em> (in the current direction).</td>
 </tr>
 
-
 <tr id="land_fw">
- <td><a href="../flight_modes/land.html">Land</a></td>
+ <td><a href="../flight_modes_fw/land.html">Land</a></td>
  <td class="centred" colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
- <td>Vehicle initiates the <a href="../flying/fixed_wing_landing.html">fixed-wing landing</a> sequence.</td>
+ <td>Vehicle initiates the <a href="../flight_modes/mission.html#fw-mission-landing">fixed-wing landing</a> sequence.</td>
 </tr>
 
 <tr id="hold_fw">
- <td><a href="../flight_modes/hold.html">Hold</a></td>
+ <td><a href="../flight_modes_fw/hold.html">Hold</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle circles around the GPS hold position at the current altitude.</td>
@@ -199,7 +186,6 @@ th {
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle flies a clear path to a safe location. The return behaviour depends on parameter settings, and may follow a mission path and/or mission landing pattern (if defined).</td>
 </tr>
-
 
 <tr id="mission_fw">
  <td><a href="../flight_modes/mission.html">Mission</a></td>
@@ -227,14 +213,13 @@ th {
      <th>Yaw</th>
      <th>Throttle</th>
      <th>Position Sensors</th>
-     <th class="col_summary">Summary</th></tr>
+     <th class="col_summary">Summary</th>
    </tr>
  </thead>
 <tbody>
 
-
 <tr id="position_mc">
- <td><a href="../flight_modes/position_mc.html">Position</a>
+ <td><a href="../flight_modes_mc/position.html">Position</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" /></a></p>
  </td>
  <td>S<sup>+</sup></td>
@@ -256,15 +241,13 @@ th {
        <li>When landed, the vehicle will take off if the throttle stick is raised above 62.5% percent (of the full range from bottom).</li>
       </ul>
     </li>
-    </ul>
-  </li>
   </ul>
  </p>
 </td>
 </tr>
 
 <tr id="altitude_mc">
- <td><a href="../flight_modes/altitude_mc.html">Altitude</a>
+ <td><a href="../flight_modes_mc/altitude.html">Altitude</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -278,6 +261,7 @@ th {
        <li>RPY sticks levels vehicle.</li> 
        <li>Throttle (~50%) holds current altitude steady against wind.</li>
     </ul>
+    </li>
     <li>Outside center:
       <ul>
        <li>Roll/Pitch sticks control tilt angle in respective orientations, resulting in corresponding left-right and forward-back movement.</li>
@@ -295,9 +279,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="manual_stabilized_mc">
- <td><a href="../flight_modes/manual_stabilized_mc.html">Manual/ Stabilized</a>
+ <td><a href="../flight_modes_mc/manual_stabilized.html">Manual/ Stabilized</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="20px" /></a></p>
  </td>
  <td>S</td>
@@ -321,7 +304,7 @@ th {
 </tr>
 
 <tr id="acro_mc">
- <td><a href="../flight_modes/acro_mc.html">Acro</a>
+ <td><a href="../flight_modes_mc/acro.html">Acro</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_hard.png" title="Hard to fly" width="20px" /></a></p>
  </td>
  <td>S<sub>rate</sub></td>
@@ -333,9 +316,8 @@ th {
  </td>
 </tr>
 
-
 <tr id="orbit_mc">
- <td><a href="../flight_modes/orbit.html">Orbit</a>
+ <td><a href="../flight_modes_mc/orbit.html">Orbit</a>
  <p><a href="#key_difficulty"><img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" /></a></p>
  </td>
  <td>-</td>
@@ -348,21 +330,21 @@ th {
 </tr>
 
 <tr id="takeoff_mc">
- <td><a href="../flight_modes/takeoff.html">Takeoff</a></td>
+ <td><a href="../flight_modes_mc/takeoff.html">Takeoff</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle ascends to takeoff altitude and holds position.</td>
 </tr>
 
 <tr id="land_mc">
- <td><a href="../flight_modes/land.html">Land</a></td>
+ <td><a href="../flight_modes_mc/land.html">Land</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle lands at the position where the mode was engaged.</td>
 </tr>
 
 <tr id="hold_mc">
- <td><a href="../flight_modes/hold.html">Hold</a></td>
+ <td><a href="../flight_modes_mc/hold.html">Hold</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle hovers at the current GPS position and altitude.</td>
@@ -375,7 +357,6 @@ th {
  <td>Vehicle flies a clear path to a safe location. The return behaviour depends on parameter settings, and may follow a mission path and/or mission landing pattern (if defined).</td>
 </tr>
 
-
 <tr id="mission_mc">
  <td><a href="../flight_modes/mission.html">Mission</a></td>
  <td colspan="3">Auto</td>
@@ -384,7 +365,7 @@ th {
 </tr>
 
 <tr id="followme_mc">
- <td><a href="../flight_modes/follow_me.html">Follow Me</a></td>
+ <td><a href="../flight_modes_mc/follow_me.html">Follow Me</a></td>
  <td colspan="3">Auto</td>
  <td><a href="#key_position_fixed"><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" /></a></td>
  <td>Vehicle autonomously follows a user using an Android phone/tablet running QGC.</td>
@@ -405,21 +386,20 @@ VTOL vehicles support both fixed-wing and multicopter flight modes, executing th
 
 VTOL supports [Offboard](../flight_modes/offboard.md) mode in either configuration.
 
-
 ## Key
 
 Key for understanding the table is as follows:
 
-| Symbol                                                                                                                                                                                                                                                                                                                                                                                         | Description                                                                                                                                                       |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| M                                                                                                                                                                                                                                                                                                                                                                                              | Manual control via RC sticks. RC input is sent directly to control allocation.                                                                                    |
-| S                                                                                                                                                                                                                                                                                                                                                                                              | Assistance from autopilot to stabilize the attitude. RC input is required. Position of RC stick maps to the orientation of vehicle.                               |
-| S<sub>rate</sub>                                                                                                                                                                                                                                                                                                                                                                               | Assistance from autopilot to stabilize the attitude rate. RC input is required. Position of RC stick maps to the rate of rotation of vehicle in that orientation. |
-| S<sup>+</sup>                                                                                                                                                                                                                                                                                                                                                                                  | Assistance from autopilot to hold position or altitude against wind. RC input is required.                                                                        |
-| Auto                                                                                                                                                                                                                                                                                                                                                                                           | This mode is automatic (RC control is disabled by default except to change modes).                                                                                |
-| <span id="key_position_fixed"></span><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" />                                                                                                                                                                                                                                 | Sensor(s) that measures position/height needed e.g. optical flow, GPS+barometer, visual-inertial odometry.                                                        |
-| <span id="altitude_only"></span><img src="../../assets/site/altitude_icon.svg" title="Altitude fix required (e.g. barometer, rangefinder)" width="20px" />                                                                                                                                                                                                                    | Sensor(s) that measures height/altitude needed e.g. barometer, rangefinder.                                                                                       |
-| <span id="key_difficulty"></span>[<img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" />&nbsp;<img src="../../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="20px" />&nbsp;<img src="../../assets/site/difficulty_hard.png" title="Hard to fly" width="20px" />](#key_difficulty) | Flight mode difficulty (easy/medium/hard).                                                                                                                        |
+| Symbol                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M                                                                                                                                                                                                                                                                                                                                                                                      | Manual control via RC sticks. RC input is sent directly to control allocation.                                                                                    |
+| S                                                                                                                                                                                                                                                                                                                                                                                      | Assistance from autopilot to stabilize the attitude. RC input is required. Position of RC stick maps to the orientation of vehicle.                               |
+| S<sub>rate</sub>                                                                                                                                                                                                                                                                                                                                                                       | Assistance from autopilot to stabilize the attitude rate. RC input is required. Position of RC stick maps to the rate of rotation of vehicle in that orientation. |
+| S<sup>+</sup>                                                                                                                                                                                                                                                                                                                                                                          | Assistance from autopilot to hold position or altitude against wind. RC input is required.                                                                        |
+| Auto                                                                                                                                                                                                                                                                                                                                                                                   | This mode is automatic (RC control is disabled by default except to change modes).                                                                                |
+| <a id="key_position_fixed"></a><img src="../../assets/site/position_fixed.svg" title="Position fix required (e.g. GPS)" width="20px" />                                                                                                                                                                                                                                     | Sensor(s) that measures position/height needed e.g. optical flow, GPS+barometer, visual-inertial odometry.                                                        |
+| <a id="altitude_only"></a><img src="../../assets/site/altitude_icon.svg" title="Altitude fix required (e.g. barometer, rangefinder)" width="20px" />                                                                                                                                                                                                                   | Sensor(s) that measures height/altitude needed e.g. barometer, rangefinder.                                                                                       |
+| <a id="key_difficulty"></a>[<img src="../../assets/site/difficulty_easy.png" title="Easy to fly" width="20px" />&nbsp;<img src="../../assets/site/difficulty_medium.png" title="Medium difficulty to fly" width="20px" />&nbsp;<img src="../../assets/site/difficulty_hard.png" title="Hard to fly" width="20px" />](#key_difficulty) | Flight mode difficulty (easy/medium/hard).                                                                                                                        |
 
 
 Abbreviations:

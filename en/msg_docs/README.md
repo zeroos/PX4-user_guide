@@ -19,6 +19,8 @@ Graphs showing how these are used [can be found here](../middleware/uorb_graph.m
 - [Airspeed](Airspeed.md)
 - [AirspeedValidated](AirspeedValidated.md)
 - [AirspeedWind](AirspeedWind.md)
+- [ArmingCheckReply](ArmingCheckReply.md)
+- [ArmingCheckRequest](ArmingCheckRequest.md)
 - [AutotuneAttitudeControlStatus](AutotuneAttitudeControlStatus.md)
 - [BatteryStatus](BatteryStatus.md)
 - [ButtonEvent](ButtonEvent.md)
@@ -29,8 +31,11 @@ Graphs showing how these are used [can be found here](../middleware/uorb_graph.m
 - [CollisionConstraints](CollisionConstraints.md) — Local setpoint constraints in NED frame
 setting something to NaN means that no limit is provided
 - [CollisionReport](CollisionReport.md)
+- [ConfigOverrides](ConfigOverrides.md) — Configurable overrides by (external) modes or mode executors
 - [ControlAllocatorStatus](ControlAllocatorStatus.md)
 - [Cpuload](Cpuload.md)
+- [DatamanRequest](DatamanRequest.md)
+- [DatamanResponse](DatamanResponse.md)
 - [DebugArray](DebugArray.md)
 - [DebugKeyValue](DebugKeyValue.md)
 - [DebugValue](DebugValue.md)
@@ -58,6 +63,7 @@ scale errors, in-run bias and thermal drift (if thermal compensation is enabled 
 - [Event](Event.md) — Events interface
 - [FailsafeFlags](FailsafeFlags.md) — Input flags for the failsafe state machine set by the arming & health checks.
 - [FailureDetectorStatus](FailureDetectorStatus.md)
+- [FigureEightStatus](FigureEightStatus.md)
 - [FollowTarget](FollowTarget.md)
 - [FollowTargetEstimator](FollowTargetEstimator.md)
 - [FollowTargetStatus](FollowTargetStatus.md)
@@ -71,6 +77,10 @@ scale errors, in-run bias and thermal drift (if thermal compensation is enabled 
 - [GimbalManagerSetAttitude](GimbalManagerSetAttitude.md)
 - [GimbalManagerSetManualControl](GimbalManagerSetManualControl.md)
 - [GimbalManagerStatus](GimbalManagerStatus.md)
+- [GpioConfig](GpioConfig.md) — GPIO configuration
+- [GpioIn](GpioIn.md) — GPIO mask and state
+- [GpioOut](GpioOut.md) — GPIO mask and state
+- [GpioRequest](GpioRequest.md) — Request GPIO mask to be read
 - [GpsDump](GpsDump.md) — This message is used to dump the raw gps communication to the log.
 Set the parameter GPS_DUMP_COMM to 1 to use this.
 - [GpsInjectData](GpsInjectData.md)
@@ -98,6 +108,8 @@ These are the externally visible LED's, not the board LED's
 - [ManualControlSwitches](ManualControlSwitches.md)
 - [MavlinkLog](MavlinkLog.md)
 - [MavlinkTunnel](MavlinkTunnel.md) — MAV_TUNNEL_PAYLOAD_TYPE enum
+- [MessageFormatRequest](MessageFormatRequest.md)
+- [MessageFormatResponse](MessageFormatResponse.md)
 - [Mission](Mission.md)
 - [MissionResult](MissionResult.md)
 - [ModeCompleted](ModeCompleted.md) — Mode completion result, published by an active mode.
@@ -132,6 +144,8 @@ This are the three next waypoints (or just the next two or one).
 - [RateCtrlStatus](RateCtrlStatus.md)
 - [RcChannels](RcChannels.md)
 - [RcParameterMap](RcParameterMap.md)
+- [RegisterExtComponentReply](RegisterExtComponentReply.md)
+- [RegisterExtComponentRequest](RegisterExtComponentRequest.md) — Request to register an external component
 - [Rpm](Rpm.md)
 - [RtlTimeEstimate](RtlTimeEstimate.md)
 - [SatelliteInfo](SatelliteInfo.md)
@@ -155,6 +169,8 @@ the field 'timestamp' is for the position & velocity (microseconds)
 The topic will not be updated when the vehicle is armed
 - [SensorSelection](SensorSelection.md) — Sensor ID's for the voted sensors output on the sensor_combined topic.
 Will be updated on startup of the sensor module and when sensor selection changes
+- [SensorUwb](SensorUwb.md) — UWB distance contains the distance information measured by an ultra-wideband positioning system,
+such as Pozyx or NXP Rddrone.
 - [SensorsStatus](SensorsStatus.md) — Sensor check metrics. This will be zero for a sensor that's primary or unpopulated.
 - [SensorsStatusImu](SensorsStatusImu.md) — Sensor check metrics. This will be zero for a sensor that's primary or unpopulated.
 - [SystemPower](SystemPower.md)
@@ -181,10 +197,7 @@ then the frequency, duration are used otherwise those values are ignored.
 mavlink message
 - [UlogStreamAck](UlogStreamAck.md) — Ack a previously sent ulog_stream message that had
 the NEED_ACK flag set
-- [UwbDistance](UwbDistance.md) — UWB distance contains the distance information measured by an ultra-wideband positioning system,
-such as Pozyx or NXP Rddrone.
-- [UwbGrid](UwbGrid.md) — UWB report message contains the grid information measured by an ultra-wideband positioning system,
-such as Pozyx or NXP Rddrone.
+- [UnregisterExtComponent](UnregisterExtComponent.md)
 - [VehicleAcceleration](VehicleAcceleration.md)
 - [VehicleAirData](VehicleAirData.md)
 - [VehicleAngularAccelerationSetpoint](VehicleAngularAccelerationSetpoint.md)

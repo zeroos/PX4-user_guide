@@ -15,7 +15,7 @@ Distance sensors provide distance measurement that can be used for [terrain foll
 
 ### Holybro ST VL53L1X 激光雷达
 
-[VL53L1X](http://www.holybro.com/product/vl53l1x/)是最先进的飞行时间（ToF）激光测距传感器，增强了ST FlightSense™ 产品系列。 它是市场上速度最快的微型 ToF 传感器，精确测距可达 4 m，快速测距频率可达 50 Hz。
+The [VL53L1X](https://holybro.com/products/st-vl53l1x-lidar) is a state-of-the-art, Time-of-Flight (ToF), laser-ranging sensor, enhancing the ST FlightSense™ product family. 它是市场上速度最快的微型 ToF 传感器，精确测距可达 4 m，快速测距频率可达 50 Hz。
 
 它带有一个 JST GHR 4 针连接器，与 [Pixhawk 4](../flight_controller/pixhawk4.md)、[Pixhawk 5X](../flight_controller/pixhawk5x.md)和其他遵循 [Pixhawk 连接器标准](https://github.com/pixhawk/Pixhawk-Standards/blob/master/DS-009%20Pixhawk%20Connector%20Standard.pdf) 的飞行控制器上的 I2C 端口兼容。
 
@@ -34,6 +34,8 @@ MaxBotix [I2CXL-MaxSonar-EZ](https://www.maxbotix.com/product-category/i2cxl-max
 [Lightware SFxx Lidar](../sensor/sfxx_lidar.md) 提供一个宽范围的轻量级激光高度计，适用于许多无人机应用。
 
 PX4 支持: SF11/c 和 SF/LW20. PX4 也可用于一下停产的型号: SF02, SF10/a, SF10/b, SF10/c.
+
+PX4 also supports the [LightWare LiDAR SF45 Rotating Lidar](https://www.lightwarelidar.com/shop/sf45-b-50-m/) for [collision prevention](../computer_vision/collision_prevention.md#lightware-lidar-sf45-rotating-lidar) applications.
 
 ### TeraRanger 测距仪
 
@@ -65,7 +67,8 @@ The [Lanbao PSK-CM8JL65-CC5 ToF Infrared Distance Measuring Sensor](../sensor/cm
 
 The [Avionics Anonymous UAVCAN Laser Altimeter Interface](../dronecan/avanon_laser_interface.md) allows several common rangefinders (e.g. [Lightware SF11/c, SF30/D](../sensor/sfxx_lidar.md), etc) to be connected to the [CAN](../can/README.md) bus via [DroneCAN](../dronecan/README.md), a more robust interface than I2C.
 
-<span id="configuration"></span>
+<a id="configuration"></a>
+
 ## 配置/设置
 
 测距仪通常连接到串口(PWM)或者 I2C 接口(取决于设备驱动），并通过设置特定的参数在端口上启用。
@@ -136,7 +139,7 @@ make px4_sitl gazebo-classic_typhoon_h480
 
 如果你需要使用一个不同的车辆，你可以在它的配置文件中包含此模型。 你可以看到如何在相应的 Iris 和 Typhoon 配置文件：
 
-- [iris_opt_flow.sdf](https://github.com/PX4/PX4-SITL_gazebo/blob/master/models/iris_opt_flow/iris_opt_flow.sdf)
+- [iris_opt_flow.sdf](https://github.com/PX4/PX4-SITL_gazebo-classic/blob/main/models/iris_opt_flow/iris_opt_flow.sdf)
   ```xml
     <include>
       <uri>model://lidar</uri>
@@ -154,7 +157,7 @@ make px4_sitl gazebo-classic_typhoon_h480
       </axis>
     </joint>
    ```
-- [typhoon_h480.sdf](https://github.com/PX4/PX4-SITL_gazebo/blob/main/models/typhoon_h480/typhoon_h480.sdf.jinja#L1131-L1145)
+- [typhoon_h480.sdf](https://github.com/PX4/PX4-SITL_gazebo-classic/blob/main/models/typhoon_h480/typhoon_h480.sdf.jinja#L1131-L1145)
   ```xml
     <include>
       <uri>model://sonar</uri>
